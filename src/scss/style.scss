@@ -1,0 +1,16 @@
+// src/scss/style.scss
+
+// 1. Variáveis e Configurações Globais
+@forward 'variables';
+
+// 2. Mixins e Funções
+@use 'mixins';
+
+// 3. Base e Reset
+@use 'base';
+
+// 4. Layout Geral
+@use 'layout';
+
+// 5. Melhorias para Experiência Móvel (Mobile UX)
+@use 'mobile-ux';

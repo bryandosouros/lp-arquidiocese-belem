@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arquidiocese de Belém do Pará - Habbo</title>
+    <meta name="description" content="Site oficial da Arquidiocese de Belém do Pará - Informações, documentos e recursos pastorais">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/header.css">
+    <link rel="stylesheet" href="css/index-new.css">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#0c4a6e">
+    <link rel="icon" type="image/x-icon" href="images/logo-arquidiocese-belem.png">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <a href="index.html">
+                        <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém">
+                        <div class="header-logo-texto">
+                            <span>Arquidiocese de<br></span>
+                            <span>Belém do Pará</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <ul class="nav-list">
+                        <li><a href="index.html" class="active">Início</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle">Documentos <i class="fas fa-chevron-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="celebracao_da_palavra.html">Celebração da Palavra</a></li>
+                                <li><a href="#">Orientações Litúrgicas</a></li>
+                                <li><a href="#">Cartas Pastorais</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <a href="login.html" class="curia-digital-btn">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Cúria Digital</span>
+                    </a>
+                </div>
+                
+                <button class="mobile-menu-btn" id="mobile-menu-btn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main">
+        <!-- Hero Section com Carrossel -->
+        <section class="hero">
+            <div class="hero-slides-container">
+                <!-- Slide 1 -->
+                <div class="hero-slide slide-ativo">
+                    <div class="container">
+                        <h1>Arquidiocese de Belém do Pará</h1>
+                        <p>Fé, comunidade e serviço pastoral para todos os fiéis belenenses</p>
+                        <div class="hero-actions">
+                            <a href="#sobre" class="botao">Conheça Nossa História</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 2 -->
+                <div class="hero-slide">
+                    <div class="container">
+                        <h1>Nossa Senhora de Nazaré</h1>
+                        <p>Sob a proteção materna de Maria, caminhamos juntos na fé</p>
+                        <div class="hero-actions">
+                            <a href="#contato" class="botao">Oração e Comunidade</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 3 -->
+                <div class="hero-slide">
+                    <div class="container">
+                        <h1>Palavra de Deus</h1>
+                        <p>Levando a Boa Nova a todos os cantos de Belém</p>
+                        <div class="hero-actions">
+                            <a href="#" class="botao">Evangelização</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Slide 4 -->
+                <div class="hero-slide">
+                    <div class="container">
+                        <h1>Comunidade Unida</h1>
+                        <p>Juntos na missão de construir o Reino de Deus</p>
+                        <div class="hero-actions">
+                            <a href="#contato" class="botao">Participe</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Controles do Carrossel -->
+            <div class="hero-controls">
+                <span class="hero-indicator ativo" data-slide="0"></span>
+                <span class="hero-indicator" data-slide="1"></span>
+                <span class="hero-indicator" data-slide="2"></span>
+                <span class="hero-indicator" data-slide="3"></span>
+            </div>
+            
+            <!-- Setas de Navegação -->
+            <button class="hero-nav hero-prev" type="button" aria-label="Slide anterior">‹</button>
+            <button class="hero-nav hero-next" type="button" aria-label="Próximo slide">›</button>
+        </section>
+
+        <!-- Cards Section -->
+        <section class="cards-section">
+            <div class="container">
+                <div class="cards-container">
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-praying-hands"></i>
+                        </div>
+                        <h3>Celebração da Palavra</h3>
+                        <p>Subsídios litúrgicos para preparação de celebrações dominicais e feriais.</p>
+                        <a href="celebracao_da_palavra.html" class="card-btn">Acessar</a>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-file-alt"></i>
+                        </div>
+                        <h3>Documentos</h3>
+                        <p>Cartas pastorais, decretos e orientações oficiais da Arquidiocese.</p>
+                        <a href="#documentos" class="card-btn">Ver Documentos</a>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <h3>Comunidades</h3>
+                        <p>Informações sobre paróquias, comunidades e movimentos arquidiocesanos.</p>
+                        <a href="#comunidades" class="card-btn">Conhecer</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section class="news-section" id="noticias">
+            <div class="container">
+                <h2 class="section-title">Últimas Notícias</h2>
+                <div class="news-grid" id="news-container">
+                    <!-- Notícias serão carregadas dinamicamente do Firebase -->
+                    <div class="loading-message">
+                        <p><i class="fas fa-spinner fa-spin"></i> Carregando notícias...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section Premium -->
+        <section class="about-section-premium" id="sobre">
+            <div class="about-background-overlay"></div>
+            <div class="container">
+                <div class="about-section-header">
+                    <span class="about-badge">🏛️ Tradição & Fé</span>
+                    <h2 class="titulo-secao-premium">Conheça Nossa Arquidiocese</h2>
+                    <p class="subtitle-premium">Uma história de fé, tradição e devoção mariana em Belém do Pará</p>
+                </div>
+                
+                <div class="sobre-resumo-conteudo-premium">
+                    <div class="sobre-resumo-texto-premium">
+                        <div class="sobre-card-main">
+                            <div class="card-icon">
+                                <i class="fas fa-church"></i>
+                            </div>
+                            <h3>Nossa Missão e Visão</h3>
+                            <p>A Arquidiocese de Belém do Pará, no contexto do Habbo Hotel, dedica-se a promover os valores da fé, da comunidade e do respeito mútuo entre todos os seus membros virtuais. Buscamos ser um farol de esperança e união, oferecendo um espaço de acolhimento e partilha.</p>
+                            <p>Inspirados pelos princípios cristãos, nossa missão é evangelizar e servir, utilizando as ferramentas e o ambiente digital para construir pontes e fortalecer laços de fraternidade.</p>
+                        </div>
+                        
+                        <div class="sobre-actions">
+                            <a href="#sobre-completo" class="botao-premium-primary">
+                                <i class="fas fa-book-open"></i>
+                                Saiba Mais sobre Nós
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="sobre-resumo-imagem-container-premium">
+                        <div class="image-showcase">
+                            <div class="main-image-container">
+                                <img src="images/basilica.jpeg" alt="Basílica de Nossa Senhora de Nazaré - Belém do Pará" class="imagem-basilica-premium">
+                                <div class="image-overlay">
+                                    <div class="image-caption">
+                                        <h4>Basílica de Nossa Senhora de Nazaré</h4>
+                                        <p>Santuário da Padroeira de Belém do Pará</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="image-decorations">
+                                <div class="decoration-circle decoration-1"></div>
+                                <div class="decoration-circle decoration-2"></div>
+                                <div class="decoration-cross">✝️</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mensagem do Arcebispo Premium -->
+        <section id="palavra-arcebispo" class="secao-arcebispo-premium">
+            <div class="arcebispo-background-pattern"></div>
+            <div class="container">
+                <div class="arcebispo-section-header">
+                    <span class="arcebispo-badge">✝️ Palavra Pastoral</span>
+                    <h2 class="titulo-secao-arcebispo">Mensagem do Arcebispo</h2>
+                    <p class="subtitle-arcebispo">Uma palavra de fé, esperança e caridade para nossa comunidade</p>
+                </div>
+                
+                <div class="mensagem-arcebispo-conteudo-premium">
+                    <div class="mensagem-arcebispo-card-foto">
+                        <div class="arcebispo-photo-container">
+                            <div class="photo-frame">
+                                <img src="images/domtomas.png" alt="Dom Tomás Araújo - Arcebispo Metropolitano de Belém do Pará" class="foto-arcebispo-premium">
+                                <div class="photo-border-decoration"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="arcebispo-info-card">
+                            <h3 class="nome-arcebispo-premium">Dom Tomás Araújo</h3>
+                            <p class="titulo-arcebispo-completo">Arcebispo Metropolitano de Belém do Pará</p>
+                            <div class="divider-ornamental"></div>
+                            <div class="devocao-mariana-premium">
+                                <span class="coracao-mariano-icon">🌹</span>
+                                <span>Devoto de Nossa Senhora de Nazaré</span>
+                            </div>
+                            <div class="arcebispo-credentials">
+                                <div class="credential-item">
+                                    <i class="fas fa-calendar-alt"></i>
+                                    <span>Ordenação Episcopal: XXXX</span>
+                                </div>
+                                <div class="credential-item">
+                                    <i class="fas fa-cross"></i>
+                                    <span>Lema: "XXXXXXXXX"</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mensagem-arcebispo-conteudo-texto">
+                        <div class="mensagem-card-premium">
+                            <div class="quote-decoration-top">
+                                <i class="fas fa-quote-left"></i>
+                            </div>
+                            
+                            <blockquote class="mensagem-citacao-premium">
+                                <p>Queridos filhos e filhas da nossa amada Arquidiocese virtual, que a paz do Senhor e a proteção de Nossa Senhora de Nazaré estejam convosco!</p>
+                                
+                                <p>Neste tempo de grandes desafios e também de inúmeras oportunidades no mundo digital, convido cada um a ser um farol de fé, esperança e caridade. Que possamos, como comunidade de fé, construir pontes de diálogo, promover a fraternidade e ser testemunhas do amor de Cristo em todos os ambientes onde nos encontramos.</p>
+                                
+                                <p>Que Maria, Nossa Senhora de Nazaré, Rainha da Amazônia, nos proteja e nos guie sempre no caminho da santidade e do serviço ao próximo.</p>
+                            </blockquote>
+                            
+                            <div class="quote-decoration-bottom">
+                                <i class="fas fa-quote-right"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="mensagem-assinatura-premium">
+                            <div class="assinatura-ornamental">
+                                <div class="cross-decoration">✠</div>
+                                <div class="signature-text">
+                                    <span class="nome-arcebispo-assinatura">TOMÁS ARAÚJO VON KLAPPERSCHLANGE</span>
+                                    <span class="titulo-episcopal">Pela graça de Deus e mercê da Santa Sé Apostólica</span>
+                                    <span class="titulo-arquidiocese">Arcebispo Metropolitano de Santa Maria de</span>
+                                    <span class="localidade-destaque"><strong>BELÉM DO PARÁ</strong></span>
+                                    <div class="devocao-signature">
+                                        <span class="rosa-mariana">🌹</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mensagem-arcebispo-acoes-premium">
+                            <a href="#mensagem-completa" class="botao-arcebispo-primary">
+                                <i class="fas fa-scroll"></i>
+                                Leia a Mensagem Completa
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section" id="newsletter">
+            <div class="newsletter-container">
+                <h2 class="newsletter-title">📬 Receba Nossas Atualizações</h2>
+                <p class="newsletter-description">
+                    Mantenha-se informado sobre comunicados, decretos e eventos da Arquidiocese de Belém do Pará. 
+                    Sua fé sempre atualizada, direto em seu e-mail.
+                </p>
+                <form class="newsletter-form" id="newsletter-form">
+                    <input 
+                        type="email" 
+                        class="newsletter-input" 
+                        placeholder="Seu melhor e-mail aqui"
+                        required
+                        aria-label="Digite seu e-mail para receber nossa newsletter"
+                    >
+                    <button type="submit" class="newsletter-submit">
+                        Receber Newsletter
+                    </button>
+                </form>
+                <p class="newsletter-privacy">
+                    Seus dados estão seguros. Leia nossa <a href="#privacy">Política de Privacidade</a>.
+                </p>
+                <div id="newsletter-message" class="newsletter-message" style="display: none;"></div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="contact-section" id="contato">
+            <div class="container">
+                <h2>Entre em Contato</h2>
+                <p>Estamos aqui para servir e acompanhar nossa comunidade</p>
+                
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Endereço</h3>
+                        <p>Av. Nazaré, S/N - Nazaré - Brennand</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <h3>Telefone</h3>
+                        <p>(xx) xxxx-xxxx</p>
+                    </div>
+                    
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <h3>E-mail</h3>
+                        <p>belemdopara.hb@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="rodape-principal" class="site-footer footer-vatican-inspired">
+        <div class="container">
+            <div class="footer-conteudo">
+                <div class="footer-logo-area">
+                    <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese" class="footer-logo-imagem">
+                    <div class="footer-logo-texto">
+                        <span>Arquidiocese de</span>
+                        <span>Belém do Pará</span>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Links Úteis</h4>
+                    <ul>
+                        <li><a href="#">Perguntas Frequentes</a></li>
+                        <li><a href="#">Contato</a></li>
+                        <li><a href="#">Política de Privacidade</a></li>
+                    </ul>
+                </div>
+                <div class="footer-info">
+                     <p>Este é um projeto fictício para o jogo Habbo Hotel e não possui qualquer vínculo com a Arquidiocese de Belém da vida real.</p>
+                </div>
+            </div>
+            <div class="footer-copyright">
+                 <p>&copy; <span id="ano-atual"></span> Arquidiocese de Belém do Pará - Habbo Hotel. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Widget -->
+    <div class="whatsapp-widget">
+        <button class="whatsapp-floating-btn" id="whatsapp-btn">
+            <div class="whatsapp-pulse"></div>
+            <svg class="whatsapp-icon" viewBox="0 0 24 24">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.905 3.485"/>
+            </svg>
+            <span class="whatsapp-text">Fale Conosco</span>
+        </button>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+            const nav = document.getElementById('nav');
+            
+            if (mobileMenuBtn && nav) {
+                mobileMenuBtn.addEventListener('click', function() {
+                    nav.classList.toggle('active');
+                    mobileMenuBtn.classList.toggle('active');
+                });
+            }
+            
+            // Atualizar ano atual
+            const anoAtualSpan = document.getElementById('ano-atual');
+            if (anoAtualSpan) {
+                anoAtualSpan.textContent = new Date().getFullYear();
+            }
+            
+            // Carrossel Hero
+            const slides = document.querySelectorAll('.hero-slide');
+            const indicators = document.querySelectorAll('.hero-indicator');
+            const prevBtn = document.querySelector('.hero-prev');
+            const nextBtn = document.querySelector('.hero-next');
+            let currentSlide = 0;
+            let autoSlideInterval;
+            
+            function showSlide(index) {
+                // Remove ativo de todos os slides e indicadores
+                slides.forEach(slide => slide.classList.remove('slide-ativo'));
+                indicators.forEach(indicator => indicator.classList.remove('ativo'));
+                
+                // Ativa o slide e indicador atual
+                if (slides[index]) {
+                    slides[index].classList.add('slide-ativo');
+                }
+                if (indicators[index]) {
+                    indicators[index].classList.add('ativo');
+                }
+                
+                currentSlide = index;
+            }
+            
+            function nextSlide() {
+                const next = (currentSlide + 1) % slides.length;
+                showSlide(next);
+            }
+            
+            function prevSlide() {
+                const prev = (currentSlide - 1 + slides.length) % slides.length;
+                showSlide(prev);
+            }
+            
+            function startAutoSlide() {
+                autoSlideInterval = setInterval(nextSlide, 5000); // 5 segundos
+            }
+            
+            function stopAutoSlide() {
+                clearInterval(autoSlideInterval);
+            }
+            
+            // Event listeners
+            if (nextBtn) {
+                nextBtn.addEventListener('click', () => {
+                    stopAutoSlide();
+                    nextSlide();
+                    startAutoSlide();
+                });
+            }
+            
+            if (prevBtn) {
+                prevBtn.addEventListener('click', () => {
+                    stopAutoSlide();
+                    prevSlide();
+                    startAutoSlide();
+                });
+            }
+            
+            // Indicadores
+            indicators.forEach((indicator, index) => {
+                indicator.addEventListener('click', () => {
+                    stopAutoSlide();
+                    showSlide(index);
+                    startAutoSlide();
+                });
+            });
+            
+            // Pausar auto-slide ao passar mouse
+            const heroSection = document.querySelector('.hero');
+            if (heroSection) {
+                heroSection.addEventListener('mouseenter', stopAutoSlide);
+                heroSection.addEventListener('mouseleave', startAutoSlide);
+            }
+            
+            // Iniciar carrossel
+            if (slides.length > 0) {
+                startAutoSlide();
+            }
+        });
+    </script>
+    <script src="js/main.js" type="module"></script>
+    <script src="js/darkmode.js" type="module"></script>
+    <script src="js/whatsapp-integration.js" type="module"></script>
+    <script src="js/newsletter-system.js" type="module"></script>
+</body>
+</html>

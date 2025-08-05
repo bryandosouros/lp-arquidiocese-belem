@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cúria Digital - Painel Administrativo</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Painel administrativo da Arquidiocese de Belém do Pará - Gerenciamento de conteúdo e sistema CMS.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta name="author" content="Arquidiocese de Belém do Pará">
+    
+    <!-- Admin Security Headers -->
+    <meta http-equiv="X-Frame-Options" content="DENY">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    
+    <!-- PWA Meta Tags -->
+    <meta name="description" content="Painel administrativo da Arquidiocese de Belém do Pará - Gerenciamento de conteúdo e sistema CMS.">
+    <meta name="theme-color" content="#1a365d">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Cúria Digital">
+    <meta name="msapplication-TileColor" content="#1a365d">
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Icons -->
+    <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
+    <link rel="apple-touch-icon" href="images/icons/icon-192x192.png">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body class="admin-body">
+    <!-- Header da Cúria -->
+    <header class="admin-header">
+        <div class="admin-header-content">
+            <div class="admin-logo-area">
+                <button class="mobile-menu-toggle" id="mobile-menu-toggle">☰</button>
+                <img src="images/logo-arquidiocese-belem.png" alt="Logo" class="admin-logo">
+                <div class="admin-title-area">
+                    <h1 class="admin-main-title">Cúria Digital</h1>
+                    <p class="admin-subtitle">Painel Administrativo da Arquidiocese</p>
+                </div>
+            </div>
+            
+            <div class="admin-user-area">
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <span class="avatar-icon">👤</span>
+                    </div>
+                    <div class="user-details">
+                        <span class="user-name" id="user-name">Carregando...</span>
+                        <span class="user-title">Administrador</span>
+                    </div>
+                </div>
+                <button class="btn-logout" id="logout-btn">
+                    <span>🚪</span>
+                    Sair
+                </button>
+            </div>
+        </div>
+    </header>
+    
+    <div class="admin-layout">
+        <!-- Sidebar de Navegação -->
+        <aside class="admin-sidebar">
+            <nav class="admin-nav">
+                <ul class="nav-list">
+                    <li class="nav-item">
+                        <a href="#dashboard" class="nav-link active" data-section="dashboard">
+                            <span class="nav-icon">📊</span>
+                            <span class="nav-text">Painel Geral</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#posts" class="nav-link" data-section="posts">
+                            <span class="nav-icon">📝</span>
+                            <span class="nav-text">Decretos & Notícias</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#media" class="nav-link" data-section="media">
+                            <span class="nav-icon">🖼️</span>
+                            <span class="nav-text">Biblioteca de Mídia</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#pages" class="nav-link" data-section="pages">
+                            <span class="nav-icon">📄</span>
+                            <span class="nav-text">Páginas Institucionais</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#settings" class="nav-link" data-section="settings">
+                            <span class="nav-icon">⚙️</span>
+                            <span class="nav-text">Configurações</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#engagement" class="nav-link" data-section="engagement">
+                            <span class="nav-icon">💬</span>
+                            <span class="nav-text">Engajamento</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#comments" class="nav-link" data-section="comments">
+                            <span class="nav-icon">🗨️</span>
+                            <span class="nav-text">Comentários</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#newsletter" class="nav-link" data-section="newsletter">
+                            <span class="nav-icon">📧</span>
+                            <span class="nav-text">Newsletter</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#notifications" class="nav-link" data-section="notifications">
+                            <span class="nav-icon">🔔</span>
+                            <span class="nav-text">Notificações</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#users" class="nav-link" data-section="users">
+                            <span class="nav-icon">👥</span>
+                            <span class="nav-text">Gerenciar Usuários</span>
+                        </a>
+                    </li>
+                </ul>
+                
+                <div class="nav-divider"></div>
+                
+                <div class="nav-quick-actions">
+                    <h4 class="quick-title">Ações Rápidas</h4>
+                    <button class="quick-btn" id="new-post-btn">
+                        <span class="quick-icon">✍️</span>
+                        Novo Decreto
+                    </button>
+                    <a href="index.html" target="_blank" class="quick-btn quick-link">
+                        <span class="quick-icon">👁️</span>
+                        Ver Site
+                    </a>
+                </div>
+            </nav>
+        </aside>
+        
+        <!-- Área Principal de Conteúdo -->
+        <main class="admin-main">
+            <!-- Dashboard Section -->
+            <section id="dashboard-section" class="admin-section active">
+                <div class="section-header">
+                    <h2 class="section-title">Painel Geral</h2>
+                    <p class="section-subtitle">Visão geral das atividades da Arquidiocese</p>
+                </div>
+                
+                <div class="dashboard-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">📄</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="total-posts">0</div>
+                            <div class="stat-label">Decretos Publicados</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📅</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="posts-this-month">0</div>
+                            <div class="stat-label">Publicações Este Mês</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="dashboard-grid">
+                    <div class="dashboard-widget">
+                        <h3 class="widget-title">Últimas Publicações</h3>
+                        <div class="recent-posts" id="recent-posts">
+                            <div class="loading-state">
+                                <div class="loading-spinner"></div>
+                                <p>Carregando publicações recentes...</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="dashboard-widget liturgical-widget">
+                        <h3 class="widget-title">Calendário Litúrgico</h3>
+                        <div class="liturgical-calendar-expanded">
+                            <div class="liturgical-today">
+                                <div class="liturgical-header">
+                                    <div class="today-date" id="today-date"></div>
+                                    <div class="liturgical-status">
+                                        <div class="liturgical-color green" id="liturgical-color"></div>
+                                        <span class="liturgical-season" id="liturgical-season">Tempo Comum</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="daily-readings">
+                                    <h4 class="readings-title">Leituras do Dia</h4>
+                                    <div class="readings-grid">
+                                        <div class="reading-item">
+                                            <span class="reading-label">1ª Leitura</span>
+                                            <span class="reading-text" id="first-reading">Carregando...</span>
+                                        </div>
+                                        <div class="reading-item">
+                                            <span class="reading-label">Salmo</span>
+                                            <span class="reading-text" id="psalm-reading">Carregando...</span>
+                                        </div>
+                                        <div class="reading-item">
+                                            <span class="reading-label">2ª Leitura</span>
+                                            <span class="reading-text" id="second-reading">-</span>
+                                        </div>
+                                        <div class="reading-item">
+                                            <span class="reading-label">Evangelho</span>
+                                            <span class="reading-text" id="gospel-reading">Carregando...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="upcoming-celebrations">
+                                <h4>Próximas Celebrações</h4>
+                                <div class="celebrations-list">
+                                    <div class="celebration-item">
+                                        <div class="celebration-date">25 DEZ</div>
+                                        <div class="celebration-info">
+                                            <span class="celebration-name">🎄 Natal do Senhor</span>
+                                            <span class="celebration-type">Solenidade</span>
+                                        </div>
+                                    </div>
+                                    <div class="celebration-item">
+                                        <div class="celebration-date">01 JAN</div>
+                                        <div class="celebration-info">
+                                            <span class="celebration-name">👼 Santa Maria, Mãe de Deus</span>
+                                            <span class="celebration-type">Solenidade</span>
+                                        </div>
+                                    </div>
+                                    <div class="celebration-item">
+                                        <div class="celebration-date">06 JAN</div>
+                                        <div class="celebration-info">
+                                            <span class="celebration-name">⭐ Epifania do Senhor</span>
+                                            <span class="celebration-type">Solenidade</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Posts Section -->
+            <section id="posts-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Decretos & Notícias</h2>
+                    <div class="section-actions">
+                        <button class="btn-primary" id="create-post-btn">
+                            <span>✍️</span>
+                            Novo Decreto
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="posts-management">
+                    <div class="posts-filters">
+                        <select class="filter-select" id="category-filter">
+                            <option value="">Todas as Categorias</option>
+                            <option value="decretos">Decretos</option>
+                            <option value="comunicados">Comunicados</option>
+                            <option value="noticias">Notícias</option>
+                            <option value="homilias">Homilias</option>
+                        </select>
+                        <select class="filter-select" id="status-filter">
+                            <option value="">Todos os Status</option>
+                            <option value="published">Publicado</option>
+                            <option value="draft">Rascunho</option>
+                        </select>
+                        <select class="filter-select" id="date-filter">
+                            <option value="">Todas as Datas</option>
+                            <option value="today">Hoje</option>
+                            <option value="week">Última Semana</option>
+                            <option value="month">Último Mês</option>
+                        </select>
+                        <select class="filter-select" id="priority-filter">
+                            <option value="">Todas as Prioridades</option>
+                            <option value="high">Alta Prioridade</option>
+                            <option value="normal">Prioridade Normal</option>
+                            <option value="low">Baixa Prioridade</option>
+                        </select>
+                        <input type="search" class="search-input" placeholder="Buscar por título, conteúdo ou tags..." id="search-posts">
+                    </div>
+                    
+                    <div class="posts-list" id="posts-list">
+                        <div class="loading-state">
+                            <div class="loading-spinner"></div>
+                            <p>Carregando decretos e notícias...</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Engagement Section -->
+            <section id="engagement-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Engajamento Geral</h2>
+                    <p class="section-subtitle">Visão geral das interações e engajamento dos fiéis</p>
+                </div>
+                
+                <div class="engagement-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">💬</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="total-comments">0</div>
+                            <div class="stat-label">Total de Comentários</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">📧</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="newsletter-subscribers">0</div>
+                            <div class="stat-label">Inscritos Newsletter</div>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🔔</div>
+                        <div class="stat-content">
+                            <div class="stat-number" id="push-subscribers">0</div>
+                            <div class="stat-label">Push Notifications</div>
+                        </div>
+                    </div>
+
+                </div>
+                
+                <div class="engagement-grid">
+                    <div class="engagement-widget">
+                        <h3 class="widget-title">Atividade Recente</h3>
+                        <div class="activity-feed" id="recent-activity">
+                            <!-- Recent activity will be loaded here -->
+                        </div>
+                    </div>
+                    
+                    <div class="engagement-widget">
+                        <h3 class="widget-title">Configurações Rápidas</h3>
+                        <div class="quick-settings">
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="comments-enabled" checked>
+                                    Sistema de Comentários
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="moderation-enabled" checked>
+                                    Moderação de Comentários
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <label>
+                                    <input type="checkbox" id="newsletter-enabled" checked>
+                                    Sistema de Newsletter
+                                </label>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Comments Section -->
+            <section id="comments-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Moderação de Comentários</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-secondary" id="refresh-comments">
+                            🔄 Atualizar
+                        </button>
+                        <button class="btn btn-primary" id="bulk-approve">
+                            ✅ Aprovar Selecionados
+                        </button>
+                        <button class="btn btn-danger" id="bulk-reject">
+                            ❌ Rejeitar Selecionados
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="comments-filters">
+                    <select class="filter-select" id="comment-status-filter">
+                        <option value="pending">Pendentes</option>
+                        <option value="approved">Aprovados</option>
+                        <option value="rejected">Rejeitados</option>
+                        <option value="all">Todos</option>
+                    </select>
+                    <input type="search" class="search-input" placeholder="Buscar comentários..." id="search-comments">
+                </div>
+                
+                <div class="comments-moderation" id="comments-moderation">
+                    <!-- Comments will be loaded here by comment-system.js -->
+                </div>
+            </section>
+
+            <!-- Newsletter Section -->
+            <section id="newsletter-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Sistema de Newsletter</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="create-campaign">
+                            📧 Nova Campanha
+                        </button>
+                        <button class="btn btn-secondary" id="manage-subscribers">
+                            👥 Gerenciar Inscritos
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="newsletter-dashboard" id="newsletter-dashboard">
+                    <!-- Newsletter content will be loaded here by newsletter-system.js -->
+                </div>
+            </section>
+
+            <!-- Notifications Section -->
+            <section id="notifications-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Push Notifications</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="send-notification">
+                            🔔 Enviar Notificação
+                        </button>
+                        <button class="btn btn-secondary" id="notification-settings">
+                            ⚙️ Configurações
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="notifications-dashboard" id="notifications-dashboard">
+                    <!-- Notifications content will be loaded here by push-notification-manager.js -->
+                </div>
+            </section>
+
+            <!-- Users Management Section -->
+            <section id="users-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Gerenciamento de Usuários</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="create-user-btn">
+                            👤 Novo Usuário
+                        </button>
+                        <button class="btn btn-secondary" id="export-users-btn">
+                            📊 Exportar Lista
+                        </button>
+                    </div>
+                </div>
+
+                <div class="users-management">
+                    <div class="users-filters">
+                        <select class="filter-select" id="role-filter">
+                            <option value="">Todas as Funções</option>
+                            <option value="admin">Administrador</option>
+                            <option value="editor">Editor</option>
+                            <option value="moderator">Moderador</option>
+                            <option value="contributor">Colaborador</option>
+                        </select>
+                        <select class="filter-select" id="status-user-filter">
+                            <option value="">Todos os Status</option>
+                            <option value="active">Ativo</option>
+                            <option value="inactive">Inativo</option>
+                            <option value="pending">Pendente</option>
+                        </select>
+                        <input type="search" class="search-input" placeholder="Buscar por nome, email ou função..." id="search-users">
+                    </div>
+
+                    <div class="users-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">👑</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="admin-count">0</div>
+                                <div class="stat-label">Administradores</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">✏️</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="editor-count">0</div>
+                                <div class="stat-label">Editores</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">👥</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="total-users">0</div>
+                                <div class="stat-label">Total de Usuários</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="users-table-container">
+                        <table class="users-table" id="users-table">
+                            <thead>
+                                <tr>
+                                    <th>
+                                        <input type="checkbox" id="select-all-users">
+                                    </th>
+                                    <th>Usuário</th>
+                                    <th>Email</th>
+                                    <th>Função</th>
+                                    <th>Status</th>
+                                    <th>Último Acesso</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+                            <tbody id="users-table-body">
+                                <tr class="loading-row">
+                                    <td colspan="7">
+                                        <div class="loading-state">
+                                            <div class="loading-spinner"></div>
+                                            <p>Carregando usuários...</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="bulk-actions" id="bulk-actions" style="display: none;">
+                        <div class="bulk-actions-content">
+                            <span class="selected-count" id="selected-count">0 usuários selecionados</span>
+                            <div class="bulk-buttons">
+                                <button class="btn btn-secondary" id="bulk-activate">
+                                    ✅ Ativar
+                                </button>
+                                <button class="btn btn-warning" id="bulk-deactivate">
+                                    ⏸️ Desativar
+                                </button>
+                                <button class="btn btn-danger" id="bulk-delete">
+                                    🗑️ Excluir
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Media Library Section -->
+            <section id="media-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Biblioteca de Mídia</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="upload-media-btn">
+                            📁 Upload de Arquivos
+                        </button>
+                        <button class="btn btn-secondary" id="create-folder-btn">
+                            📂 Nova Pasta
+                        </button>
+                    </div>
+                </div>
+
+                <div class="media-management">
+                    <div class="media-filters">
+                        <select class="filter-select" id="media-type-filter">
+                            <option value="">Todos os Tipos</option>
+                            <option value="image">Imagens</option>
+                            <option value="document">Documentos</option>
+                            <option value="video">Vídeos</option>
+                            <option value="audio">Áudio</option>
+                        </select>
+                        <select class="filter-select" id="media-date-filter">
+                            <option value="">Todas as Datas</option>
+                            <option value="today">Hoje</option>
+                            <option value="week">Última Semana</option>
+                            <option value="month">Último Mês</option>
+                            <option value="year">Último Ano</option>
+                        </select>
+                        <input type="search" class="search-input" placeholder="Buscar arquivos..." id="search-media">
+                    </div>
+
+                    <div class="media-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">🖼️</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="total-images">0</div>
+                                <div class="stat-label">Imagens</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📄</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="total-documents">0</div>
+                                <div class="stat-label">Documentos</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">💾</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="total-size">0 MB</div>
+                                <div class="stat-label">Espaço Usado</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="media-grid" id="media-grid">
+                        <div class="upload-drop-zone" id="upload-drop-zone">
+                            <div class="drop-zone-content">
+                                <div class="drop-zone-icon">📁</div>
+                                <h3>Arraste arquivos aqui</h3>
+                                <p>ou clique para selecionar</p>
+                                <button class="btn btn-primary">Escolher Arquivos</button>
+                            </div>
+                            <input type="file" id="file-input" multiple accept="image/*,audio/*,video/*,.pdf,.doc,.docx,.txt" style="display: none;">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Pages Section -->
+            <section id="pages-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Páginas Institucionais</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="create-page-btn">
+                            📄 Nova Página
+                        </button>
+                        <button class="btn btn-secondary" id="page-templates-btn">
+                            📋 Modelos
+                        </button>
+                    </div>
+                </div>
+
+                <div class="pages-management">
+                    <div class="pages-stats">
+                        <div class="stat-card">
+                            <div class="stat-icon">📄</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="total-pages">8</div>
+                                <div class="stat-label">Páginas Ativas</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">📝</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="draft-pages">2</div>
+                                <div class="stat-label">Rascunhos</div>
+                            </div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-icon">👁️</div>
+                            <div class="stat-content">
+                                <div class="stat-number" id="page-views">1.2k</div>
+                                <div class="stat-label">Visualizações</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="pages-list">
+                        <div class="page-item">
+                            <div class="page-info">
+                                <h4 class="page-title">Sobre a Arquidiocese</h4>
+                                <p class="page-description">História e missão da Arquidiocese de Belém</p>
+                                <div class="page-meta">
+                                    <span class="page-status published">Publicada</span>
+                                    <span class="page-date">Atualizada em 20/06/2024</span>
+                                </div>
+                            </div>
+                            <div class="page-actions">
+                                <button class="btn-icon" title="Editar">✏️</button>
+                                <button class="btn-icon" title="Visualizar">👁️</button>
+                                <button class="btn-icon" title="Configurações">⚙️</button>
+                            </div>
+                        </div>
+
+                        <div class="page-item">
+                            <div class="page-info">
+                                <h4 class="page-title">Paróquias</h4>
+                                <p class="page-description">Lista de paróquias da Arquidiocese</p>
+                                <div class="page-meta">
+                                    <span class="page-status published">Publicada</span>
+                                    <span class="page-date">Atualizada em 18/06/2024</span>
+                                </div>
+                            </div>
+                            <div class="page-actions">
+                                <button class="btn-icon" title="Editar">✏️</button>
+                                <button class="btn-icon" title="Visualizar">👁️</button>
+                                <button class="btn-icon" title="Configurações">⚙️</button>
+                            </div>
+                        </div>
+
+                        <div class="page-item">
+                            <div class="page-info">
+                                <h4 class="page-title">Pastorais</h4>
+                                <p class="page-description">Informações sobre as pastorais diocesanas</p>
+                                <div class="page-meta">
+                                    <span class="page-status draft">Rascunho</span>
+                                    <span class="page-date">Criada em 15/06/2024</span>
+                                </div>
+                            </div>
+                            <div class="page-actions">
+                                <button class="btn-icon" title="Editar">✏️</button>
+                                <button class="btn-icon" title="Visualizar">👁️</button>
+                                <button class="btn-icon" title="Configurações">⚙️</button>
+                            </div>
+                        </div>
+
+                        <div class="page-item">
+                            <div class="page-info">
+                                <h4 class="page-title">Contato</h4>
+                                <p class="page-description">Informações de contato e localização</p>
+                                <div class="page-meta">
+                                    <span class="page-status published">Publicada</span>
+                                    <span class="page-date">Atualizada em 25/06/2024</span>
+                                </div>
+                            </div>
+                            <div class="page-actions">
+                                <button class="btn-icon" title="Editar">✏️</button>
+                                <button class="btn-icon" title="Visualizar">👁️</button>
+                                <button class="btn-icon" title="Configurações">⚙️</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings Section -->
+            <section id="settings-section" class="admin-section">
+                <div class="section-header">
+                    <h2 class="section-title">Configurações do Sistema</h2>
+                    <div class="section-actions">
+                        <button class="btn btn-primary" id="save-settings-btn">
+                            💾 Salvar Configurações
+                        </button>
+                        <button class="btn btn-secondary" id="backup-btn">
+                            📦 Backup
+                        </button>
+                    </div>
+                </div>
+
+                <div class="settings-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="general">Geral</button>
+                        <button class="tab-btn" data-tab="appearance">Aparência</button>
+                        <button class="tab-btn" data-tab="notifications">Notificações</button>
+                        <button class="tab-btn" data-tab="security">Segurança</button>
+                        <button class="tab-btn" data-tab="advanced">Avançado</button>
+                    </div>
+
+                    <div class="tab-content active" id="general-tab">
+                        <div class="settings-group">
+                            <h3>Informações Gerais</h3>
+                            <div class="form-group">
+                                <label for="site-title">Título do Site</label>
+                                <input type="text" id="site-title" class="form-input" value="Arquidiocese de Belém do Pará">
+                            </div>
+                            <div class="form-group">
+                                <label for="site-description">Descrição do Site</label>
+                                <textarea id="site-description" class="form-textarea" rows="3">Igreja Católica Apostólica Romana - Arquidiocese de Belém do Pará</textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="admin-email">E-mail do Administrador</label>
+                                <input type="email" id="admin-email" class="form-input" value="admin@arquidiocesebelem.org.br">
+                            </div>
+                        </div>
+
+                        <div class="settings-group">
+                            <h3>Configurações de Conteúdo</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" checked> Permitir comentários nos decretos
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" checked> Moderar comentários antes da publicação
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" checked> Ativar sistema de newsletter
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="appearance-tab">
+                        <div class="settings-group">
+                            <h3>Tema e Cores</h3>
+                            <div class="form-group">
+                                <label for="primary-color">Cor Primária</label>
+                                <input type="color" id="primary-color" value="#2563eb">
+                            </div>
+                            <div class="form-group">
+                                <label for="secondary-color">Cor Secundária</label>
+                                <input type="color" id="secondary-color" value="#dc2626">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="notifications-tab">
+                        <div class="settings-group">
+                            <h3>Notificações Push</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" checked> Enviar notificações para novos decretos
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox"> Notificar sobre novos comentários
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="security-tab">
+                        <div class="settings-group">
+                            <h3>Segurança</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox" checked> Autenticação de dois fatores obrigatória
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="session-timeout">Timeout de Sessão (minutos)</label>
+                                <input type="number" id="session-timeout" class="form-input" value="60">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="advanced-tab">
+                        <div class="settings-group">
+                            <h3>Configurações Avançadas</h3>
+                            <div class="form-group">
+                                <label>
+                                    <input type="checkbox"> Modo de debug
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label for="cache-duration">Duração do Cache (horas)</label>
+                                <input type="number" id="cache-duration" class="form-input" value="24">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            
+            <!-- Outras sections serão adicionadas posteriormente -->
+        </main>
+    </div>
+    
+    <!-- Modal para Criar/Editar Usuário -->
+    <div id="user-editor-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content user-editor">
+            <div class="modal-header">
+                <h3 class="modal-title" id="user-editor-title">Novo Usuário</h3>
+                <button class="modal-close" id="close-user-editor">&times;</button>
+            </div>
+            
+            <form class="user-form" id="user-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="user-name">Nome Completo</label>
+                        <input type="text" id="user-name" name="name" class="form-input" placeholder="Ex: Dom Tomás Balduino" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email">Email</label>
+                        <input type="email" id="user-email" name="email" class="form-input" placeholder="email@arquidiocesebelem.org.br" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="user-role">Função</label>
+                        <select id="user-role" name="role" class="form-select" required>
+                            <option value="">Selecione uma função</option>
+                            <option value="admin">Administrador</option>
+                            <option value="editor">Editor</option>
+                            <option value="moderator">Moderador</option>
+                            <option value="contributor">Colaborador</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-status">Status</label>
+                        <select id="user-status" name="status" class="form-select">
+                            <option value="active">Ativo</option>
+                            <option value="inactive">Inativo</option>
+                            <option value="pending">Pendente</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="user-password">Senha</label>
+                    <div class="password-input-container">
+                        <input type="password" id="user-password" name="password" class="form-input" placeholder="Digite uma senha segura">
+                        <button type="button" class="password-toggle" id="toggle-password">👁️</button>
+                    </div>
+                    <small class="form-help">Deixe em branco para manter a senha atual (apenas para edição)</small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="user-permissions">Permissões Específicas</label>
+                    <div class="permissions-grid">
+                        <label class="permission-item">
+                            <input type="checkbox" name="permissions" value="create_posts">
+                            <span>Criar Decretos</span>
+                        </label>
+                        <label class="permission-item">
+                            <input type="checkbox" name="permissions" value="edit_posts">
+                            <span>Editar Decretos</span>
+                        </label>
+                        <label class="permission-item">
+                            <input type="checkbox" name="permissions" value="delete_posts">
+                            <span>Excluir Decretos</span>
+                        </label>
+                        <label class="permission-item">
+                            <input type="checkbox" name="permissions" value="moderate_comments">
+                            <span>Moderar Comentários</span>
+                        </label>
+                        <label class="permission-item">
+                            <input type="checkbox" name="permissions" value="manage_media">
+                            <span>Gerenciar Mídia</span>
+                        </label>
+                        <label class="permission-item">
+                            <input type="checkbox" name="permissions" value="manage_users">
+                            <span>Gerenciar Usuários</span>
+                        </label>
+                        <label class="permission-item">
+                            <input type="checkbox" name="permissions" value="system_settings">
+                            <span>Configurações do Sistema</span>
+                        </label>
+                        <label class="permission-item">
+                            <input type="checkbox" name="permissions" value="analytics">
+                            <span>Visualizar Analytics</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="user-notes">Observações</label>
+                    <textarea id="user-notes" name="notes" class="form-textarea" rows="3" placeholder="Informações adicionais sobre o usuário..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancel-user-edit">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="save-user">
+                        <span class="btn-text">Salvar Usuário</span>
+                        <div class="btn-loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Modal para Edição de Posts -->
+    <div id="post-editor-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content post-editor">
+            <div class="modal-header">
+                <h3 class="modal-title" id="editor-title">Novo Decreto</h3>
+                <button class="modal-close" id="close-editor">&times;</button>
+            </div>
+            
+            <form class="post-form" id="post-form">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="post-title">Título do Decreto</label>
+                        <input type="text" id="post-title" name="title" class="form-input" placeholder="Ex: Decreto sobre a organização das paróquias..." required>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-category">Categoria</label>
+                        <select id="post-category" name="category" class="form-select" required>
+                            <option value="">Selecione uma categoria</option>
+                            <option value="decretos">Decretos</option>
+                            <option value="comunicados">Comunicados</option>
+                            <option value="noticias">Notícias</option>
+                            <option value="homilias">Homilias</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-excerpt">Resumo/Chamada</label>
+                    <textarea id="post-excerpt" name="excerpt" class="form-textarea" rows="3" placeholder="Breve resumo que aparecerá nos cards de notícia..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-content">Conteúdo</label>
+                    <div class="editor-toolbar">
+                        <button type="button" class="toolbar-btn" data-command="bold">
+                            <strong>B</strong>
+                        </button>
+                        <button type="button" class="toolbar-btn" data-command="italic">
+                            <em>I</em>
+                        </button>
+                        <button type="button" class="toolbar-btn" data-command="underline">
+                            <u>U</u>
+                        </button>
+                        <span class="toolbar-divider"></span>
+                        <button type="button" class="toolbar-btn" data-command="insertUnorderedList">
+                            • Lista
+                        </button>
+                        <button type="button" class="toolbar-btn" data-command="insertOrderedList">
+                            1. Lista
+                        </button>
+                    </div>
+                    <div id="post-content" class="content-editor" contenteditable="true" data-placeholder="Digite o conteúdo do decreto aqui..."></div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-tags-input">Tags</label>
+                    <input type="text" id="post-tags-input" class="form-input" placeholder="Digite uma tag e pressione Enter...">
+                    <div id="post-tags-container" class="tags-container"></div>
+                    <small class="form-help">Pressione Enter ou vírgula para adicionar uma tag</small>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="post-status">Status</label>
+                        <select id="post-status" name="status" class="form-select">
+                            <option value="draft">Rascunho</option>
+                            <option value="published">Publicar</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="post-date">Data de Publicação</label>
+                        <input type="datetime-local" id="post-date" name="publishDate" class="form-input">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="post-priority">Prioridade</label>
+                    <select id="post-priority" name="priority" class="form-select">
+                        <option value="normal">Normal</option>
+                        <option value="high">Alta</option>
+                        <option value="low">Baixa</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="featured-image-url">Imagem Destacada (URL)</label>
+                    <input type="url" id="featured-image-url" name="featuredImage" class="form-input" placeholder="https://exemplo.com/imagem.jpg">
+                </div>
+                <div class="form-group">
+                    <label for="meta-description">Meta Descrição (SEO)</label>
+                    <textarea id="meta-description" name="metaDescription" class="form-textarea" rows="2" placeholder="Descrição para motores de busca (recomendado: 150-160 caracteres)" maxlength="160"></textarea>
+                    <small class="form-help character-count">0/160 caracteres</small>
+                </div>
+                
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancel-edit">Cancelar</button>
+                    <button type="submit" class="btn-primary" id="save-post">
+                        <span class="btn-text">Salvar Decreto</span>
+                        <div class="btn-loading">
+                            <div class="loading-spinner"></div>
+                        </div>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="js/multi-site-template.js" type="module" defer></script>
+    <script type="module" src="js/admin.js"></script>
+    <script type="module" src="js/user-manager.js"></script>
+    <script type="module" src="js/liturgical-calendar.js"></script>
+    
+    <!-- Mobile UX Enhancement - Release 6A -->
+    <script src="js/mobile-ux.js" defer></script>
+    <script src="js/mobile-gestures.js" defer></script>
+    <script src="js/mobile-forms.js" defer></script>
+    
+    <!-- Release 6B: Advanced PWA Features -->
+    <script src="js/advanced-pwa-controller.js" defer></script>
+    <script src="js/pwa-performance-monitor.js" defer></script>
+    
+    <!-- Engagement Scripts -->
+    <script type="module" src="js/comment-system.js"></script>
+    <script type="module" src="js/newsletter-system.js"></script>
+
+    <script type="module" src="js/push-notification-manager.js"></script>
+    <script type="module" src="js/notification-system.js"></script>
+    
+    <!-- Scripts -->
+    <script type="module" src="js/admin.js"></script>
+    <script type="module" src="js/pwa-manager.js"></script>
+    <script type="module" src="js/multi-site-template.js"></script>
+    <script type="module" src="js/sitemap-generator.js"></script>
+    <script type="module" src="js/analytics-dashboard.js"></script>
+    <script type="module" src="js/seo-manager.js"></script>
+    
+    <!-- Analytics Manager -->
+    <script src="js/analytics-manager.js"></script>
+    <script>
+        // Initialize admin-specific analytics
+        document.addEventListener('DOMContentLoaded', function() {
+            if (window.analyticsManager) {
+                // Track admin panel access
+                analyticsManager.trackEvent('page_view', {
+                    page_title: 'Admin Panel - Cúria Digital',
+                    page_location: window.location.href,
+                    content_group1: 'Admin',
+                    content_group2: 'Private'
+                });
+                
+                // Setup admin-specific tracking
+                setupAdminTracking();
+            }
+            
+            // Initialize engagement systems for admin
+            initializeAdminEngagement();
+            
+            // Initialize modal controls
+            initializeModalControls();
+            
+            // Initialize user management
+            initializeUserManagement();
+            
+            // Initialize liturgical calendar
+            initializeLiturgicalCalendar();
+            
+            // Initialize mobile menu
+            initializeMobileMenu();
+            
+            // Initialize settings tabs
+            initializeSettingsTabs();
+            
+            // Initialize media upload
+            initializeMediaUpload();
+        });
+        
+        async function initializeAdminEngagement() {
+            try {
+                console.log('🚀 Initializing admin engagement systems...');
+                
+                // Wait for engagement systems to be available
+                await waitForEngagementSystems();
+                
+                // Setup admin interfaces for each system
+                setupCommentSystemAdmin();
+                setupNewsletterSystemAdmin();
+                setupPushNotificationAdmin();
+                
+                // Load engagement statistics
+                loadEngagementStats();
+                
+                console.log('✅ Admin engagement systems initialized');
+            } catch (error) {
+                console.error('❌ Error initializing admin engagement systems:', error);
+            }
+        }
+        
+        function waitForEngagementSystems() {
+            return new Promise((resolve) => {
+                const checkSystems = () => {
+                    if (window.commentSystem && window.newsletterSystem && 
+                        window.pushNotificationManager) {
+                        resolve();
+                    } else {
+                        setTimeout(checkSystems, 100);
+                    }
+                };
+                checkSystems();
+            });
+        }
+        
+        function setupCommentSystemAdmin() {
+            const commentsSection = document.getElementById('comments-moderation');
+            if (commentsSection && window.commentSystem) {
+                // Create admin interface for comments
+                commentsSection.innerHTML = window.commentSystem.createAdminInterface();
+                
+                // Setup event listeners for comment moderation
+                document.getElementById('refresh-comments')?.addEventListener('click', () => {
+                    window.commentSystem.loadModerationStats();
+                });
+            }
+        }
+        
+        function setupNewsletterSystemAdmin() {
+            const newsletterDashboard = document.getElementById('newsletter-dashboard');
+            if (newsletterDashboard && window.newsletterSystem) {
+                // Create admin interface for newsletter
+                newsletterDashboard.innerHTML = window.newsletterSystem.createAdminInterface();
+            }
+        }
+
+        
+        function setupPushNotificationAdmin() {
+            const notificationsDashboard = document.getElementById('notifications-dashboard');
+            if (notificationsDashboard && window.pushNotificationManager) {
+                // Create admin interface for push notifications
+                notificationsDashboard.innerHTML = window.pushNotificationManager.createAdminInterface();
+                
+                // Setup send notification button
+                document.getElementById('send-notification')?.addEventListener('click', () => {
+                    window.pushNotificationManager.openSendNotificationDialog();
+                });
+            }
+        }
+        
+        async function loadEngagementStats() {
+            try {
+                // Load comment stats
+                if (window.commentSystem) {
+                    const commentStats = await window.commentSystem.getStats();
+                    document.getElementById('total-comments').textContent = commentStats.totalComments || 0;
+                }
+                
+                // Load newsletter stats
+                if (window.newsletterSystem) {
+                    const newsletterStats = await window.newsletterSystem.getStats();
+                    document.getElementById('newsletter-subscribers').textContent = newsletterStats.totalSubscribers || 0;
+                }
+                
+                // Load push notification stats
+                if (window.pushNotificationManager) {
+                    const pushStats = await window.pushNotificationManager.getStats();
+                    document.getElementById('push-subscribers').textContent = pushStats.totalSubscribers || 0;
+                }
+                
+            } catch (error) {
+                console.error('Error loading engagement stats:', error);
+            }
+        }
+        
+        function setupAdminTracking() {
+            // Track CMS actions
+            document.addEventListener('click', function(e) {
+                const target = e.target;
+                
+                // Track button clicks
+                if (target.matches('.btn-primary, .btn-secondary, .btn-danger, .admin-btn')) {
+                    const action = target.textContent.trim();
+                    analyticsManager.trackEvent('admin_action', {
+                        action_type: 'button_click',
+                        action_name: action,
+                        section: getActiveSection()
+                    });
+                }
+                
+                // Track tab switches
+                if (target.matches('.nav-item, .admin-nav-item')) {
+                    const tabName = target.textContent.trim();
+                    analyticsManager.trackEvent('admin_navigation', {
+                        tab_name: tabName,
+                        navigation_type: 'tab_switch'
+                    });
+                }
+            });
+            
+            // Track form submissions
+            document.addEventListener('submit', function(e) {
+                const form = e.target;
+                const formType = form.id || form.className || 'unknown_form';
+                
+                analyticsManager.trackEvent('admin_form_submit', {
+                    form_type: formType,
+                    section: getActiveSection()
+                });
+            });
+            
+            // Track content management actions
+            window.trackContentAction = function(action, contentType, contentId) {
+                analyticsManager.trackEvent('content_management', {
+                    action: action, // create, edit, delete, publish, schedule
+                    content_type: contentType,
+                    content_id: contentId || 'new',
+                    timestamp: new Date().toISOString()
+                });
+            };
+        }
+        
+        function getActiveSection() {
+            const activeTab = document.querySelector('.nav-item.active, .admin-nav-item.active');
+            return activeTab ? activeTab.textContent.trim() : 'unknown';
+        }
+        
+        // Modal Controls
+        function initializeModalControls() {
+            // Post Editor Modal
+            const postModal = document.getElementById('post-editor-modal');
+            const newPostBtns = document.querySelectorAll('#new-post-btn, #create-post-btn');
+            const closeEditorBtn = document.getElementById('close-editor');
+            const cancelEditBtn = document.getElementById('cancel-edit');
+            
+            newPostBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    postModal.style.display = 'flex';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            function closePostModal() {
+                postModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            closeEditorBtn.addEventListener('click', closePostModal);
+            cancelEditBtn.addEventListener('click', closePostModal);
+            
+            postModal.addEventListener('click', (e) => {
+                if (e.target === postModal) closePostModal();
+            });
+            
+            // User Editor Modal
+            const userModal = document.getElementById('user-editor-modal');
+            const createUserBtn = document.getElementById('create-user-btn');
+            const closeUserEditorBtn = document.getElementById('close-user-editor');
+            const cancelUserEditBtn = document.getElementById('cancel-user-edit');
+            
+            createUserBtn.addEventListener('click', () => {
+                userModal.style.display = 'flex';
+                document.body.style.overflow = 'hidden';
+                document.getElementById('user-editor-title').textContent = 'Novo Usuário';
+                document.getElementById('user-form').reset();
+            });
+            
+            function closeUserModal() {
+                userModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            
+            closeUserEditorBtn.addEventListener('click', closeUserModal);
+            cancelUserEditBtn.addEventListener('click', closeUserModal);
+            
+            userModal.addEventListener('click', (e) => {
+                if (e.target === userModal) closeUserModal();
+            });
+            
+            // Password toggle
+            const passwordToggle = document.getElementById('toggle-password');
+            const passwordInput = document.getElementById('user-password');
+            
+            passwordToggle.addEventListener('click', () => {
+                const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+                passwordInput.setAttribute('type', type);
+                passwordToggle.textContent = type === 'password' ? '👁️' : '🙈';
+            });
+        }
+        
+        // User Management
+        function initializeUserManagement() {
+            // Load initial user data
+            loadUsers();
+            
+            // Search functionality
+            const searchInput = document.getElementById('search-users');
+            searchInput.addEventListener('input', debounce(filterUsers, 300));
+            
+            // Filter functionality
+            const roleFilter = document.getElementById('role-filter');
+            const statusFilter = document.getElementById('status-user-filter');
+            
+            roleFilter.addEventListener('change', filterUsers);
+            statusFilter.addEventListener('change', filterUsers);
+            
+            // Select all functionality
+            const selectAllCheckbox = document.getElementById('select-all-users');
+            selectAllCheckbox.addEventListener('change', toggleAllUsers);
+            
+            // Form submission
+            const userForm = document.getElementById('user-form');
+            userForm.addEventListener('submit', handleUserFormSubmit);
+        }
+        
+        async function loadUsers() {
+            // Simulate loading users - replace with Firebase integration
+            const mockUsers = [
+                {
+                    id: '1',
+                    name: 'Dom Alberto Taveira Corrêa',
+                    email: 'arcebispo@arquidiocesebelem.org.br',
+                    role: 'admin',
+                    status: 'active',
+                    lastAccess: '2024-06-26T10:30:00'
+                },
+                {
+                    id: '2',
+                    name: 'Pe. João Silva',
+                    email: 'joao.silva@arquidiocesebelem.org.br',
+                    role: 'editor',
+                    status: 'active',
+                    lastAccess: '2024-06-25T15:45:00'
+                },
+                {
+                    id: '3',
+                    name: 'Ir. Maria Santos',
+                    email: 'maria.santos@arquidiocesebelem.org.br',
+                    role: 'contributor',
+                    status: 'pending',
+                    lastAccess: null
+                }
+            ];
+            
+            renderUsers(mockUsers);
+            updateUserStats(mockUsers);
+        }
+        
+        function renderUsers(users) {
+            const tbody = document.getElementById('users-table-body');
+            tbody.innerHTML = '';
+            
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <input type="checkbox" value="${user.id}" class="user-checkbox">
+                    </td>
+                    <td>
+                        <div class="user-info">
+                            <div class="user-avatar">${user.name.charAt(0)}</div>
+                            <div class="user-details">
+                                <div class="user-name">${user.name}</div>
+                            </div>
+                        </div>
+                    </td>
+                    <td>${user.email}</td>
+                    <td><span class="user-role ${user.role}">${translateRole(user.role)}</span></td>
+                    <td><span class="user-status ${user.status}">${translateStatus(user.status)}</span></td>
+                    <td>${user.lastAccess ? formatDate(user.lastAccess) : 'Nunca'}</td>
+                    <td>
+                        <div class="user-actions">
+                            <button class="user-action-btn edit" onclick="editUser('${user.id}')">✏️</button>
+                            <button class="user-action-btn delete" onclick="deleteUser('${user.id}')">🗑️</button>
+                        </div>
+                    </td>
+                `;
+                tbody.appendChild(row);
+            });
+            
+            // Add event listeners to checkboxes
+            document.querySelectorAll('.user-checkbox').forEach(checkbox => {
+                checkbox.addEventListener('change', updateBulkActions);
+            });
+        }
+        
+        function updateUserStats(users) {
+            const adminCount = users.filter(u => u.role === 'admin').length;
+            const editorCount = users.filter(u => u.role === 'editor').length;
+            const totalUsers = users.length;
+            
+            document.getElementById('admin-count').textContent = adminCount;
+            document.getElementById('editor-count').textContent = editorCount;
+            document.getElementById('total-users').textContent = totalUsers;
+        }
+        
+        function translateRole(role) {
+            const roles = {
+                'admin': 'Administrador',
+                'editor': 'Editor',
+                'moderator': 'Moderador',
+                'contributor': 'Colaborador'
+            };
+            return roles[role] || role;
+        }
+        
+        function translateStatus(status) {
+            const statuses = {
+                'active': 'Ativo',
+                'inactive': 'Inativo',
+                'pending': 'Pendente'
+            };
+            return statuses[status] || status;
+        }
+        
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('pt-BR') + ' ' + date.toLocaleTimeString('pt-BR', {hour: '2-digit', minute: '2-digit'});
+        }
+        
+        function filterUsers() {
+            // Implement user filtering logic
+            console.log('Filtering users...');
+        }
+        
+        function toggleAllUsers() {
+            const checkboxes = document.querySelectorAll('.user-checkbox');
+            const selectAll = document.getElementById('select-all-users');
+            
+            checkboxes.forEach(checkbox => {
+                checkbox.checked = selectAll.checked;
+            });
+            
+            updateBulkActions();
+        }
+        
+        function updateBulkActions() {
+            const selectedCheckboxes = document.querySelectorAll('.user-checkbox:checked');
+            const bulkActions = document.getElementById('bulk-actions');
+            const selectedCount = document.getElementById('selected-count');
+            
+            if (selectedCheckboxes.length > 0) {
+                bulkActions.style.display = 'block';
+                selectedCount.textContent = `${selectedCheckboxes.length} usuários selecionados`;
+            } else {
+                bulkActions.style.display = 'none';
+            }
+        }
+        
+        function handleUserFormSubmit(e) {
+            e.preventDefault();
+            // Implement user creation/update logic with Firebase
+            console.log('Saving user...');
+        }
+        
+        function editUser(userId) {
+            // Open user modal for editing
+            console.log('Editing user:', userId);
+        }
+        
+        function deleteUser(userId) {
+            if (confirm('Tem certeza que deseja excluir este usuário?')) {
+                // Implement user deletion
+                console.log('Deleting user:', userId);
+            }
+        }
+        
+        // Liturgical Calendar
+        function initializeLiturgicalCalendar() {
+            updateLiturgicalInfo();
+        }
+        
+        function updateLiturgicalInfo() {
+            const today = new Date();
+            const dateElement = document.getElementById('today-date');
+            const seasonElement = document.getElementById('liturgical-season');
+            const colorElement = document.getElementById('liturgical-color');
+            
+            // Update date
+            dateElement.textContent = today.toLocaleDateString('pt-BR', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            // Mock liturgical data - replace with real liturgical calendar API
+            const mockReadings = {
+                firstReading: 'Gn 1,1-2,2',
+                psalm: 'Sl 103',
+                secondReading: '', // Not always present
+                gospel: 'Mt 1,1-17'
+            };
+            
+            document.getElementById('first-reading').textContent = mockReadings.firstReading;
+            document.getElementById('psalm-reading').textContent = mockReadings.psalm;
+            document.getElementById('second-reading').textContent = mockReadings.secondReading || '-';
+            document.getElementById('gospel-reading').textContent = mockReadings.gospel;
+        }
+        
+        // Utility function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        // Mobile Menu
+        function initializeMobileMenu() {
+            const mobileToggle = document.getElementById('mobile-menu-toggle');
+            const sidebar = document.querySelector('.admin-sidebar');
+            const overlay = document.createElement('div');
+            overlay.className = 'sidebar-overlay';
+            document.body.appendChild(overlay);
+            
+            mobileToggle.addEventListener('click', () => {
+                sidebar.classList.toggle('mobile-open');
+                overlay.classList.toggle('active');
+                document.body.style.overflow = sidebar.classList.contains('mobile-open') ? 'hidden' : 'auto';
+            });
+            
+            overlay.addEventListener('click', () => {
+                sidebar.classList.remove('mobile-open');
+                overlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Close sidebar when clicking nav links on mobile
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (window.innerWidth <= 1024) {
+                        sidebar.classList.remove('mobile-open');
+                        overlay.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    }
+                });
+            });
+        }
+        
+        // Settings Tabs
+        function initializeSettingsTabs() {
+            const tabButtons = document.querySelectorAll('.tab-btn');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const targetTab = button.getAttribute('data-tab');
+                    
+                    // Remove active class from all buttons and contents
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Add active class to clicked button and corresponding content
+                    button.classList.add('active');
+                    const targetContent = document.getElementById(targetTab + '-tab');
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                    }
+                });
+            });
+        }
+        
+        // Media Upload
+        function initializeMediaUpload() {
+            const dropZone = document.getElementById('upload-drop-zone');
+            const fileInput = document.getElementById('file-input');
+            const uploadBtn = document.getElementById('upload-media-btn');
+            
+            if (!dropZone || !fileInput) return;
+            
+            // Click to upload
+            dropZone.addEventListener('click', () => {
+                fileInput.click();
+            });
+            
+            if (uploadBtn) {
+                uploadBtn.addEventListener('click', () => {
+                    fileInput.click();
+                });
+            }
+            
+            // Drag and drop
+            dropZone.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                dropZone.classList.add('dragover');
+            });
+            
+            dropZone.addEventListener('dragleave', () => {
+                dropZone.classList.remove('dragover');
+            });
+            
+            dropZone.addEventListener('drop', (e) => {
+                e.preventDefault();
+                dropZone.classList.remove('dragover');
+                const files = e.dataTransfer.files;
+                handleFileUpload(files);
+            });
+            
+            // File input change
+            fileInput.addEventListener('change', (e) => {
+                const files = e.target.files;
+                handleFileUpload(files);
+            });
+        }
+        
+        function handleFileUpload(files) {
+            if (files.length === 0) return;
+            
+            console.log('Uploading files:', files.length);
+            
+            // Show upload progress
+            const dropZone = document.getElementById('upload-drop-zone');
+            const originalContent = dropZone.innerHTML;
+            
+            dropZone.innerHTML = `
+                <div class="drop-zone-content">
+                    <div class="loading-spinner"></div>
+                    <h3>Fazendo upload...</h3>
+                    <p>${files.length} arquivo(s) sendo enviado(s)</p>
+                </div>
+            `;
+            
+            // Simulate upload (replace with real Firebase Storage implementation)
+            setTimeout(() => {
+                dropZone.innerHTML = originalContent;
+                alert(`${files.length} arquivo(s) enviado(s) com sucesso!`);
+                
+                // Update media stats
+                updateMediaStats();
+            }, 2000);
+        }
+        
+        function updateMediaStats() {
+            // Simulate media stats update
+            document.getElementById('total-images').textContent = Math.floor(Math.random() * 50) + 10;
+            document.getElementById('total-documents').textContent = Math.floor(Math.random() * 20) + 5;
+            document.getElementById('total-size').textContent = (Math.random() * 100 + 50).toFixed(1) + ' MB';
+        }
+    </script>
+    
+    <!-- PWA Initialization -->
+    <script>
+        window.addEventListener('load', () => {
+            console.log('🚀 Inicializando PWA no painel administrativo...');
+            console.log('✅ PWA Admin inicializado!');
+        });
+    </script>
+</body>
+</html>

@@ -1,12 +1,12 @@
 // Enhanced Service Worker - Release 6B: PWA Avançado e Performance
 // Cache inteligente avançado, performance otimizada e sincronização robusta
 
-const SW_VERSION = '6B.1.1';
-const CACHE_NAME = 'arquidiocese-pwa-v6b-2';
-const CONTENT_CACHE = 'arquidiocese-content-v6b-2';
-const STATIC_CACHE = 'arquidiocese-static-v6b-2';
-const DYNAMIC_CACHE = 'arquidiocese-dynamic-v6b-2';
-const MOBILE_CACHE = 'arquidiocese-mobile-v6b-2';
+const SW_VERSION = '6B.1.2';
+const CACHE_NAME = 'arquidiocese-pwa-v6b-3';
+const CONTENT_CACHE = 'arquidiocese-content-v6b-3';
+const STATIC_CACHE = 'arquidiocese-static-v6b-3';
+const DYNAMIC_CACHE = 'arquidiocese-dynamic-v6b-3';
+const MOBILE_CACHE = 'arquidiocese-mobile-v6b-3';
 
 // API URLs for network detection
 const API_URLS = [
@@ -62,7 +62,9 @@ const STATIC_RESOURCES = [
     '/manifest.json',
     'https://fonts.googleapis.com/',
     'https://fonts.gstatic.com/',
-    'https://www.gstatic.com/firebasejs/'
+    'https://www.gstatic.com/firebasejs/',
+    'https://images.weserv.nl/',
+    'https://cdnjs.cloudflare.com/'
 ];
 
 // API endpoints with intelligent caching
@@ -245,10 +247,18 @@ class PWAServiceWorker {
 
         try {
             const networkResponse = await fetch(request);
-            if (networkResponse && networkResponse.status === 200) {
-                const cache = await caches.open(STATIC_CACHE);
-                cache.put(request, networkResponse.clone());
-                return networkResponse;
+            // Retornar respostas válidas (200) e também opacas (cross-origin, status 0)
+            if (networkResponse) {
+                const isOpaque = networkResponse.type === 'opaque';
+                if (networkResponse.status === 200) {
+                    const cache = await caches.open(STATIC_CACHE);
+                    cache.put(request, networkResponse.clone());
+                    return networkResponse;
+                }
+                if (isOpaque) {
+                    // Não é possível armazenar com segurança, mas podemos servir a resposta
+                    return networkResponse;
+                }
             }
         } catch (error) {
             console.log('🔌 Static resource network failed');
@@ -282,10 +292,17 @@ class PWAServiceWorker {
                 )
             ]);
             
-            if (networkResponse && networkResponse.status === 200) {
-                const cache = await caches.open(DYNAMIC_CACHE);
-                cache.put(request, networkResponse.clone());
-                return networkResponse;
+            if (networkResponse) {
+                const isOpaque = networkResponse.type === 'opaque';
+                if (networkResponse.status === 200) {
+                    const cache = await caches.open(DYNAMIC_CACHE);
+                    cache.put(request, networkResponse.clone());
+                    return networkResponse;
+                }
+                if (isOpaque) {
+                    // Para imagens e outros recursos cross-origin requisitados como no-cors
+                    return networkResponse;
+                }
             }
         } catch (error) {
             console.log('🔌 Dynamic resource failed, trying cache...');

@@ -98,7 +98,7 @@ class WhatsAppIntegration {
             <div class="whatsapp-modal-overlay" onclick="whatsappIntegration.closeWhatsAppModal()"></div>
             <div class="whatsapp-modal-content">
                 <div class="whatsapp-modal-header">
-                    <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese" class="whatsapp-avatar">
+                    <img src="/images/logo-arquidiocese-belem.png" alt="Arquidiocese" class="whatsapp-avatar">
                     <div class="whatsapp-header-info">
                         <h3>Arquidiocese de Belém</h3>
                         <p class="whatsapp-status">

@@ -116,9 +116,9 @@ function renderPost(post) {
     container.innerHTML = `
         <header class="p-6 md:p-8 border-b border-gray-200 dark:border-gray-700">
             <nav class="text-sm text-gray-500 dark:text-gray-400 mb-4">
-                <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Início</a>
+                <a href="/" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Início</a>
                 <span class="mx-2">›</span>
-                <a href="index.html#noticias" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Notícias</a>
+                <a href="/#noticias" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Notícias</a>
                 <span class="mx-2">›</span>
                 <span class="text-gray-700 dark:text-gray-300">${getCategoryLabel(post.category)}</span>
             </nav>
@@ -156,7 +156,7 @@ function renderPost(post) {
         ` : ''}
         
         <div class="p-6 md:p-8 border-t border-gray-200 dark:border-gray-700">
-            <a href="index.html#noticias" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+            <a href="/#noticias" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1">
                 <i class="fas fa-arrow-left"></i>
                 Voltar às Notícias
             </a>
@@ -259,7 +259,7 @@ function showError(message) {
                 <div class="text-6xl mb-4">⚠️</div>
                 <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Oops! Algo deu errado</h2>
                 <p class="text-gray-600 dark:text-gray-400 mb-6">${message}</p>
-                <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 inline-flex items-center gap-2">
+                <a href="/" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 inline-flex items-center gap-2">
                     <i class="fas fa-home"></i>
                     Voltar ao Início
                 </a>

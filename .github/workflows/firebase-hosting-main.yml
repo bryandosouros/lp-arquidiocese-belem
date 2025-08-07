@@ -1,7 +1,7 @@
 # This workflow is triggered on pushes to the main branch.
 # It deploys the website to Firebase Hosting.
 
-name: Deploy to Firebase Hosting on main push
+name: (DEPRECATED) Deploy to Firebase Hosting on main push
 
 on:
   push:
@@ -10,26 +10,8 @@ on:
 
 jobs:
   build_and_deploy:
+    if: false
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '18'
-
-      - name: Install Dependencies & Compile SASS
-        run: |
-          npm install
-          npm run compile:sass
-
-      - name: Deploy to Firebase Hosting
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_ARQUIDIOCESE_BELEM_WEB_APP }}'
-          channelId: live
-          projectId: arquidiocese-belem
-          target: arquidiocese-belem # Opcional, se você nomeou o site no firebase.json
+      - name: Disabled
+        run: echo "Deprecated workflow. Use .github/workflows/deploy.yml instead."

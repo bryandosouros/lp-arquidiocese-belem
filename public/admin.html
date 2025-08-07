@@ -10,15 +10,13 @@
     <meta name="robots" content="noindex, nofollow">
     <meta name="author" content="Arquidiocese de Belém do Pará">
     
-    <!-- Admin Security Headers -->
-    <meta http-equiv="X-Frame-Options" content="DENY">
-    <meta http-equiv="X-Content-Type-Options" content="nosniff">
-    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <!-- Admin Security Headers (mantenha via servidor; removido do HTML para evitar warnings) -->
     
     <!-- PWA Meta Tags -->
     <meta name="description" content="Painel administrativo da Arquidiocese de Belém do Pará - Gerenciamento de conteúdo e sistema CMS.">
     <meta name="theme-color" content="#1a365d">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
     <meta name="apple-mobile-web-app-title" content="Cúria Digital">
     <meta name="msapplication-TileColor" content="#1a365d">
@@ -82,7 +80,7 @@
     
     <div class="flex">
         <!-- Sidebar de Navegação -->
-        <aside class="w-64 bg-white dark:bg-gray-800 shadow-lg h-screen sticky top-0 hidden lg:block">
+        <aside class="admin-sidebar w-64 bg-white dark:bg-gray-800 shadow-lg h-screen sticky top-0 hidden lg:block">
             <nav class="p-6">
                 <ul class="space-y-2">
                     <li>
@@ -268,6 +266,8 @@
                         </div>
                     </div>
                 </div>
+                <!-- Container para widgets dinâmicos do dashboard -->
+                <div class="dashboard-grid"></div>
             </section>
             
             <!-- Posts Section -->
@@ -1183,7 +1183,7 @@
     
     <!-- PWA Management -->
     <script src="js/advanced-pwa-controller.js" defer></script>
-    <script src="js/pwa-performance-monitor.js" defer></script>
+    <script src="js/pwa-performance-monitor.js" type="module" defer></script>
     <script type="module" src="js/pwa-manager.js" defer></script>
     
     <!-- Engagement Systems -->

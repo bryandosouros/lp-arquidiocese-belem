@@ -47,6 +47,54 @@ class CommentSystem {
         console.log('✅ Enhanced Comment System initialized');
     }
 
+    // Admin: cria interface compacta de moderação para o painel
+    createAdminInterface() {
+        const stats = this.moderationStats || { totalComments: 0, pending: 0, approved: 0, rejected: 0 };
+        return `
+            <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-4">
+                <div class="flex items-center justify-between mb-4">
+                    <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100">Moderação de Comentários</h3>
+                    <button id="refresh-comments" class="px-3 py-1 text-sm bg-blue-600 text-white rounded">Atualizar</button>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
+                    <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                        <div class="text-xs text-gray-500 dark:text-gray-300">Total</div>
+                        <div class="text-xl font-bold text-gray-900 dark:text-gray-100">${stats.totalComments}</div>
+                    </div>
+                    <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                        <div class="text-xs text-gray-500 dark:text-gray-300">Pendentes</div>
+                        <div class="text-xl font-bold text-yellow-600">${stats.pending}</div>
+                    </div>
+                    <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                        <div class="text-xs text-gray-500 dark:text-gray-300">Aprovados</div>
+                        <div class="text-xl font-bold text-green-600">${stats.approved}</div>
+                    </div>
+                    <div class="p-3 bg-gray-50 dark:bg-gray-700 rounded">
+                        <div class="text-xs text-gray-500 dark:text-gray-300">Rejeitados</div>
+                        <div class="text-xl font-bold text-red-600">${stats.rejected}</div>
+                    </div>
+                </div>
+                <div class="flex gap-2">
+                    <button class="px-3 py-2 bg-blue-600 text-white rounded" onclick="window.commentSystem.showModerationQueue()">Fila de Moderação</button>
+                    <button class="px-3 py-2 bg-gray-200 dark:bg-gray-700 text-gray-900 dark:text-gray-100 rounded" onclick="window.commentSystem.showAllComments()">Todos</button>
+                </div>
+            </div>
+        `;
+    }
+
+    // Admin: estatísticas agregadas para o painel
+    async getStats() {
+        try {
+            // Gera ou retorna stats já carregadas
+            if (!this.moderationStats || this.moderationStats.totalComments === 0) {
+                await this.loadModerationStats();
+            }
+            return this.moderationStats;
+        } catch (_) {
+            return { totalComments: 0, approved: 0, rejected: 0, pending: 0 };
+        }
+    }
+
     // Load comments for a specific post
     async loadComments(postId) {
         const commentsQuery = query(

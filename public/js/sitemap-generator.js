@@ -94,13 +94,22 @@ class SitemapGenerator {
         
         try {
             // Get all published posts (including migrated posts with 'LIVE' status)
-            const postsQuery = query(
-                collection(db, 'posts'),
-                where('status', 'in', ['published', 'LIVE']),
-                orderBy('publishedDate', 'desc')
-            );
-            
-            const postsSnapshot = await getDocs(postsQuery);
+            let postsSnapshot;
+            try {
+                const postsQuery = query(
+                    collection(db, 'posts'),
+                    where('status', 'in', ['published', 'LIVE']),
+                    orderBy('publishedDate', 'desc')
+                );
+                postsSnapshot = await getDocs(postsQuery);
+            } catch (e) {
+                // Fallback sem índice composto: remove orderBy e ordena no cliente
+                const fallbackQuery = query(
+                    collection(db, 'posts'),
+                    where('status', 'in', ['published', 'LIVE'])
+                );
+                postsSnapshot = await getDocs(fallbackQuery);
+            }
             
             postsSnapshot.forEach(doc => {
                 const post = doc.data();
@@ -115,6 +124,9 @@ class SitemapGenerator {
                     category: post.category
                 });
             });
+
+            // Ordena no cliente por publishedDate desc se existir
+            dynamicPages.sort((a, b) => (b.lastmod || '').localeCompare(a.lastmod || ''));
             
             // Get all categories (could be dynamic category pages)
             const categories = [...new Set(

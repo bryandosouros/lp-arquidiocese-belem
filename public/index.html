@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/index-new.css">
+    <link href="/css/output.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -21,261 +21,276 @@
     <meta name="theme-color" content="#0c4a6e">
     <link rel="icon" type="image/x-icon" href="images/logo-arquidiocese-belem.png">
 </head>
-<body>
+<body class="font-montserrat bg-gray-100 text-gray-800 dark:bg-gray-900 dark:text-gray-200">
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém">
-                        <div class="header-logo-texto">
-                            <span>Arquidiocese de<br></span>
-                            <span>Belém do Pará</span>
+    <header class="bg-gradient-to-r from-blue-900 to-blue-800 text-white sticky top-0 z-50 shadow-lg border-b-4 border-yellow-400">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
+                <div class="logo flex items-center gap-4">
+                    <a href="index.html" class="flex items-center gap-3 text-white hover:opacity-90 transition-all duration-200">
+                        <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém" class="w-12 h-12 rounded-full border-2 border-yellow-400 p-1 bg-white object-contain">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold leading-tight">Arquidiocese de</span>
+                            <span class="text-lg font-bold leading-tight">Belém do Pará</span>
                         </div>
                     </a>
                 </div>
                 
                 <nav class="nav" id="nav">
-                    <ul class="nav-list">
-                        <li><a href="index.html" class="active">Início</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle">Documentos <i class="fas fa-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="celebracao_da_palavra.html">Celebração da Palavra</a></li>
-                                <li><a href="#">Orientações Litúrgicas</a></li>
-                                <li><a href="#">Cartas Pastorais</a></li>
+                    <ul class="nav-list hidden lg:flex items-center gap-8">
+                        <li><a href="index.html" class="nav-link font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Início</a></li>
+                        <li class="dropdown relative group">
+                            <a href="#" class="dropdown-toggle font-medium hover:text-yellow-400 transition-all duration-200 flex items-center gap-1">
+                                Documentos <i class="fas fa-chevron-down text-sm"></i>
+                            </a>
+                            <ul class="dropdown-menu absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-lg py-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                                <li><a href="celebracao_da_palavra.html" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Celebração da Palavra</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Orientações Litúrgicas</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Cartas Pastorais</a></li>
                             </ul>
                         </li>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#contato">Contato</a></li>
+                        <li><a href="#sobre" class="nav-link font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Sobre</a></li>
+                        <li><a href="#contato" class="nav-link font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Contato</a></li>
                     </ul>
                 </nav>
                 
-                <div class="header-actions">
-                    <a href="login.html" class="curia-digital-btn">
+                <div class="header-actions flex items-center gap-3">
+                    <!-- Dark Mode Toggle -->
+                    <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-blue-700 transition-colors duration-200" title="Alternar modo escuro">
+                        <i class="fas fa-moon text-lg"></i>
+                    </button>
+                    
+                    <a href="login.html" class="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-200 hover:shadow-md">
                         <i class="fas fa-shield-alt"></i>
-                        <span>Cúria Digital</span>
+                        <span class="font-medium">Cúria Digital</span>
                     </a>
                 </div>
                 
-                <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="mobile-menu-btn lg:hidden flex flex-col gap-1.5 p-2" id="mobile-menu-btn">
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="main">
+    <main class="flex-1">
         <!-- Hero Section com Carrossel -->
-        <section class="hero">
-            <div class="hero-slides-container">
+        <section class="relative min-h-[500px] bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 overflow-hidden">
+            <div class="hero-slides-container relative w-full h-full min-h-[500px]">
                 <!-- Slide 1 -->
-                <div class="hero-slide slide-ativo">
-                    <div class="container">
-                        <h1>Arquidiocese de Belém do Pará</h1>
-                        <p>Fé, comunidade e serviço pastoral para todos os fiéis belenenses</p>
+                <div class="hero-slide hidden absolute inset-0 flex items-center justify-center text-white text-center px-6 py-24">
+                    <div class="max-w-4xl mx-auto">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Arquidiocese de Belém do Pará</h1>
+                        <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">Fé, comunidade e serviço pastoral para todos os fiéis belenenses</p>
                         <div class="hero-actions">
-                            <a href="#sobre" class="botao">Conheça Nossa História</a>
+                            <a href="#sobre" class="bg-yellow-400 hover:bg-yellow-300 text-blue-900 px-8 py-3 rounded-lg font-bold text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1 inline-block">Conheça Nossa História</a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Slide 2 -->
-                <div class="hero-slide">
-                    <div class="container">
-                        <h1>Nossa Senhora de Nazaré</h1>
-                        <p>Sob a proteção materna de Maria, caminhamos juntos na fé</p>
+                <div class="hero-slide hidden absolute inset-0 flex items-center justify-center text-white text-center px-6 py-24">
+                    <div class="max-w-4xl mx-auto">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Nossa Senhora de Nazaré</h1>
+                        <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">Sob a proteção materna de Maria, caminhamos juntos na fé</p>
                         <div class="hero-actions">
-                            <a href="#contato" class="botao">Oração e Comunidade</a>
+                            <a href="#contato" class="bg-yellow-400 hover:bg-yellow-300 text-blue-900 px-8 py-3 rounded-lg font-bold text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1 inline-block">Oração e Comunidade</a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Slide 3 -->
-                <div class="hero-slide">
-                    <div class="container">
-                        <h1>Palavra de Deus</h1>
-                        <p>Levando a Boa Nova a todos os cantos de Belém</p>
+                <div class="hero-slide hidden absolute inset-0 flex items-center justify-center text-white text-center px-6 py-24">
+                    <div class="max-w-4xl mx-auto">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Palavra de Deus</h1>
+                        <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">Levando a Boa Nova a todos os cantos de Belém</p>
                         <div class="hero-actions">
-                            <a href="#" class="botao">Evangelização</a>
+                            <a href="#" class="bg-yellow-400 hover:bg-yellow-300 text-blue-900 px-8 py-3 rounded-lg font-bold text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1 inline-block">Evangelização</a>
                         </div>
                     </div>
                 </div>
                 
                 <!-- Slide 4 -->
-                <div class="hero-slide">
-                    <div class="container">
-                        <h1>Comunidade Unida</h1>
-                        <p>Juntos na missão de construir o Reino de Deus</p>
+                <div class="hero-slide hidden absolute inset-0 flex items-center justify-center text-white text-center px-6 py-24">
+                    <div class="max-w-4xl mx-auto">
+                        <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">Comunidade Unida</h1>
+                        <p class="text-xl md:text-2xl mb-8 text-blue-100 max-w-3xl mx-auto">Juntos na missão de construir o Reino de Deus</p>
                         <div class="hero-actions">
-                            <a href="#contato" class="botao">Participe</a>
+                            <a href="#contato" class="bg-yellow-400 hover:bg-yellow-300 text-blue-900 px-8 py-3 rounded-lg font-bold text-lg transition-all duration-300 hover:shadow-lg hover:-translate-y-1 inline-block">Participe</a>
                         </div>
                     </div>
                 </div>
             </div>
             
             <!-- Controles do Carrossel -->
-            <div class="hero-controls">
-                <span class="hero-indicator ativo" data-slide="0"></span>
-                <span class="hero-indicator" data-slide="1"></span>
-                <span class="hero-indicator" data-slide="2"></span>
-                <span class="hero-indicator" data-slide="3"></span>
+            <div class="hero-controls flex justify-center gap-3 absolute bottom-8 left-1/2 transform -translate-x-1/2">
+                <span class="hero-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 cursor-pointer transition-all duration-300 hover:bg-opacity-75 active" data-slide="0"></span>
+                <span class="hero-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 cursor-pointer transition-all duration-300 hover:bg-opacity-75" data-slide="1"></span>
+                <span class="hero-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 cursor-pointer transition-all duration-300 hover:bg-opacity-75" data-slide="2"></span>
+                <span class="hero-indicator w-3 h-3 rounded-full bg-white bg-opacity-50 cursor-pointer transition-all duration-300 hover:bg-opacity-75" data-slide="3"></span>
             </div>
             
             <!-- Setas de Navegação -->
-            <button class="hero-nav hero-prev" type="button" aria-label="Slide anterior">‹</button>
-            <button class="hero-nav hero-next" type="button" aria-label="Próximo slide">›</button>
+            <button class="hero-nav hero-prev absolute left-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full flex items-center justify-center text-white text-2xl transition-all duration-300 backdrop-blur-sm" type="button" aria-label="Slide anterior">‹</button>
+            <button class="hero-nav hero-next absolute right-4 top-1/2 transform -translate-y-1/2 w-12 h-12 bg-white bg-opacity-20 hover:bg-opacity-30 rounded-full flex items-center justify-center text-white text-2xl transition-all duration-300 backdrop-blur-sm" type="button" aria-label="Próximo slide">›</button>
         </section>
 
         <!-- Cards Section -->
-        <section class="cards-section">
-            <div class="container">
-                <div class="cards-container">
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-praying-hands"></i>
+        <section class="py-16 bg-gray-50 dark:bg-gray-800">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 text-center transition-all duration-300 hover:shadow-xl">
+                        <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-praying-hands text-blue-600 dark:text-blue-400 text-2xl"></i>
                         </div>
-                        <h3>Celebração da Palavra</h3>
-                        <p>Subsídios litúrgicos para preparação de celebrações dominicais e feriais.</p>
-                        <a href="celebracao_da_palavra.html" class="card-btn">Acessar</a>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Celebração da Palavra</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">Subsídios litúrgicos para preparação de celebrações dominicais e feriais.</p>
+                        <a href="celebracao_da_palavra.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 inline-block">Acessar</a>
                     </div>
                     
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-file-alt"></i>
+                    <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 text-center transition-all duration-300 hover:shadow-xl">
+                        <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-file-alt text-green-600 dark:text-green-400 text-2xl"></i>
                         </div>
-                        <h3>Documentos</h3>
-                        <p>Cartas pastorais, decretos e orientações oficiais da Arquidiocese.</p>
-                        <a href="#documentos" class="card-btn">Ver Documentos</a>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Documentos</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">Cartas pastorais, decretos e orientações oficiais da Arquidiocese.</p>
+                        <a href="#documentos" class="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 inline-block">Ver Documentos</a>
                     </div>
                     
-                    <div class="card">
-                        <div class="card-icon">
-                            <i class="fas fa-users"></i>
+                    <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 text-center transition-all duration-300 hover:shadow-xl">
+                        <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-users text-purple-600 dark:text-purple-400 text-2xl"></i>
                         </div>
-                        <h3>Comunidades</h3>
-                        <p>Informações sobre paróquias, comunidades e movimentos arquidiocesanos.</p>
-                        <a href="#comunidades" class="card-btn">Conhecer</a>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Comunidades</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">Informações sobre paróquias, comunidades e movimentos arquidiocesanos.</p>
+                        <a href="#comunidades" class="bg-purple-600 hover:bg-purple-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 inline-block">Conhecer</a>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- News Section -->
-        <section class="news-section" id="noticias">
-            <div class="container">
-                <h2 class="section-title">Últimas Notícias</h2>
-                <div class="news-grid" id="news-container">
+        <section class="py-12 bg-gray-50 dark:bg-gray-800" id="noticias">
+            <div class="max-w-6xl mx-auto px-6">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-800 dark:text-gray-200">Últimas Notícias</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="news-container">
                     <!-- Notícias serão carregadas dinamicamente do Firebase -->
-                    <div class="loading-message">
-                        <p><i class="fas fa-spinner fa-spin"></i> Carregando notícias...</p>
+                    <div class="col-span-full flex justify-center">
+                        <div class="bg-white dark:bg-gray-900 rounded-lg shadow-md p-8 text-center">
+                            <p class="text-gray-600 dark:text-gray-400"><i class="fas fa-spinner fa-spin mr-2"></i> Carregando notícias...</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- About Section Premium -->
-        <section class="about-section-premium" id="sobre">
-            <div class="about-background-overlay"></div>
-            <div class="container">
-                <div class="about-section-header">
-                    <span class="about-badge">🏛️ Tradição & Fé</span>
-                    <h2 class="titulo-secao-premium">Conheça Nossa Arquidiocese</h2>
-                    <p class="subtitle-premium">Uma história de fé, tradição e devoção mariana em Belém do Pará</p>
+        <section class="py-16 bg-white dark:bg-gray-900 relative overflow-hidden" id="sobre">
+            <div class="absolute inset-0 bg-gradient-to-br from-blue-50 to-purple-50 dark:from-gray-800 dark:to-gray-900 opacity-50"></div>
+            <div class="max-w-6xl mx-auto px-6 relative">
+                <div class="text-center mb-12">
+                    <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                        🏛️ Tradição & Fé
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">Conheça Nossa Arquidiocese</h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">Uma história de fé, tradição e devoção mariana em Belém do Pará</p>
                 </div>
                 
-                <div class="sobre-resumo-conteudo-premium">
-                    <div class="sobre-resumo-texto-premium">
-                        <div class="sobre-card-main">
-                            <div class="card-icon">
-                                <i class="fas fa-church"></i>
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="space-y-6">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-8">
+                            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-6">
+                                <i class="fas fa-church text-blue-600 dark:text-blue-400 text-2xl"></i>
                             </div>
-                            <h3>Nossa Missão e Visão</h3>
-                            <p>A Arquidiocese de Belém do Pará, no contexto do Habbo Hotel, dedica-se a promover os valores da fé, da comunidade e do respeito mútuo entre todos os seus membros virtuais. Buscamos ser um farol de esperança e união, oferecendo um espaço de acolhimento e partilha.</p>
-                            <p>Inspirados pelos princípios cristãos, nossa missão é evangelizar e servir, utilizando as ferramentas e o ambiente digital para construir pontes e fortalecer laços de fraternidade.</p>
+                            <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Nossa Missão e Visão</h3>
+                            <p class="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">A Arquidiocese de Belém do Pará, no contexto do Habbo Hotel, dedica-se a promover os valores da fé, da comunidade e do respeito mútuo entre todos os seus membros virtuais. Buscamos ser um farol de esperança e união, oferecendo um espaço de acolhimento e partilha.</p>
+                            <p class="text-gray-600 dark:text-gray-400 leading-relaxed">Inspirados pelos princípios cristãos, nossa missão é evangelizar e servir, utilizando as ferramentas e o ambiente digital para construir pontes e fortalecer laços de fraternidade.</p>
                         </div>
                         
-                        <div class="sobre-actions">
-                            <a href="#sobre-completo" class="botao-premium-primary">
+                        <div class="flex justify-center lg:justify-start">
+                            <a href="#sobre-completo" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-1 inline-flex items-center gap-2">
                                 <i class="fas fa-book-open"></i>
                                 Saiba Mais sobre Nós
                             </a>
                         </div>
                     </div>
                     
-                    <div class="sobre-resumo-imagem-container-premium">
-                        <div class="image-showcase">
-                            <div class="main-image-container">
-                                <img src="images/basilica.jpeg" alt="Basílica de Nossa Senhora de Nazaré - Belém do Pará" class="imagem-basilica-premium">
-                                <div class="image-overlay">
-                                    <div class="image-caption">
-                                        <h4>Basílica de Nossa Senhora de Nazaré</h4>
-                                        <p>Santuário da Padroeira de Belém do Pará</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="image-decorations">
-                                <div class="decoration-circle decoration-1"></div>
-                                <div class="decoration-circle decoration-2"></div>
-                                <div class="decoration-cross">✝️</div>
+                    <div class="relative">
+                        <div class="relative bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden">
+                            <img src="images/basilica.jpeg" alt="Basílica de Nossa Senhora de Nazaré - Belém do Pará" class="w-full h-80 object-cover">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                            <div class="absolute bottom-6 left-6 right-6 text-white">
+                                <h4 class="text-xl font-bold mb-2">Basílica de Nossa Senhora de Nazaré</h4>
+                                <p class="text-gray-200">Santuário da Padroeira de Belém do Pará</p>
                             </div>
                         </div>
+                        
+                        <!-- Decorative elements -->
+                        <div class="absolute -top-4 -right-4 w-8 h-8 bg-yellow-400 rounded-full opacity-80"></div>
+                        <div class="absolute -bottom-4 -left-4 w-6 h-6 bg-blue-400 rounded-full opacity-60"></div>
+                        <div class="absolute top-1/2 -right-8 text-yellow-400 text-2xl">✝️</div>
                     </div>
                 </div>
             </div>
         </section>
 
         <!-- Mensagem do Arcebispo Premium -->
-        <section id="palavra-arcebispo" class="secao-arcebispo-premium">
-            <div class="arcebispo-background-pattern"></div>
-            <div class="container">
-                <div class="arcebispo-section-header">
-                    <span class="arcebispo-badge">✝️ Palavra Pastoral</span>
-                    <h2 class="titulo-secao-arcebispo">Mensagem do Arcebispo</h2>
-                    <p class="subtitle-arcebispo">Uma palavra de fé, esperança e caridade para nossa comunidade</p>
+        <section id="palavra-arcebispo" class="py-16 bg-gray-50 dark:bg-gray-800 relative">
+            <div class="absolute inset-0 opacity-10">
+                <div class="w-full h-full bg-gradient-to-br from-purple-100 to-blue-100 dark:from-purple-900 dark:to-blue-900"></div>
+            </div>
+            <div class="max-w-6xl mx-auto px-6 relative">
+                <div class="text-center mb-12">
+                    <span class="inline-block bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-200 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                        ✝️ Palavra Pastoral
+                    </span>
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">Mensagem do Arcebispo</h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">Uma palavra de fé, esperança e caridade para nossa comunidade</p>
                 </div>
                 
-                <div class="mensagem-arcebispo-conteudo-premium">
-                    <div class="mensagem-arcebispo-card-foto">
-                        <div class="arcebispo-photo-container">
-                            <div class="photo-frame">
-                                <img src="images/domtomas.png" alt="Dom Tomás Araújo - Arcebispo Metropolitano de Belém do Pará" class="foto-arcebispo-premium">
-                                <div class="photo-border-decoration"></div>
+                <div class="grid lg:grid-cols-2 gap-12 items-start">
+                    <div class="space-y-6">
+                        <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 text-center">
+                            <div class="relative inline-block mb-6">
+                                <div class="w-32 h-32 rounded-full overflow-hidden border-4 border-yellow-400 shadow-lg">
+                                    <img src="images/domtomas.png" alt="Dom Tomás Araújo - Arcebispo Metropolitano de Belém do Pará" class="w-full h-full object-cover">
+                                </div>
+                                <div class="absolute -bottom-2 -right-2 w-8 h-8 bg-yellow-400 rounded-full border-2 border-white dark:border-gray-900"></div>
                             </div>
-                        </div>
-                        
-                        <div class="arcebispo-info-card">
-                            <h3 class="nome-arcebispo-premium">Dom Tomás Araújo</h3>
-                            <p class="titulo-arcebispo-completo">Arcebispo Metropolitano de Belém do Pará</p>
-                            <div class="divider-ornamental"></div>
-                            <div class="devocao-mariana-premium">
-                                <span class="coracao-mariano-icon">🌹</span>
-                                <span>Devoto de Nossa Senhora de Nazaré</span>
+                            
+                            <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-2">Dom Tomás Araújo</h3>
+                            <p class="text-purple-600 dark:text-purple-400 font-medium mb-4">Arcebispo Metropolitano de Belém do Pará</p>
+                            
+                            <div class="w-16 h-px bg-gradient-to-r from-transparent via-yellow-400 to-transparent mx-auto mb-4"></div>
+                            
+                            <div class="flex items-center justify-center gap-2 mb-6">
+                                <span class="text-2xl">🌹</span>
+                                <span class="text-gray-600 dark:text-gray-400">Devoto de Nossa Senhora de Nazaré</span>
                             </div>
-                            <div class="arcebispo-credentials">
-                                <div class="credential-item">
-                                    <i class="fas fa-calendar-alt"></i>
+                            
+                            <div class="space-y-3 text-sm text-gray-600 dark:text-gray-400">
+                                <div class="flex items-center justify-center gap-2">
+                                    <i class="fas fa-calendar-alt text-blue-500"></i>
                                     <span>Ordenação Episcopal: XXXX</span>
                                 </div>
-                                <div class="credential-item">
-                                    <i class="fas fa-cross"></i>
+                                <div class="flex items-center justify-center gap-2">
+                                    <i class="fas fa-cross text-purple-500"></i>
                                     <span>Lema: "XXXXXXXXX"</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                     
-                    <div class="mensagem-arcebispo-conteudo-texto">
-                        <div class="mensagem-card-premium">
-                            <div class="quote-decoration-top">
+                    <div class="space-y-6">
+                        <div class="bg-white dark:bg-gray-900 rounded-xl shadow-lg p-8 relative">
+                            <div class="absolute top-6 left-6 text-4xl text-blue-200 dark:text-blue-800">
                                 <i class="fas fa-quote-left"></i>
                             </div>
                             
-                            <blockquote class="mensagem-citacao-premium">
+                            <blockquote class="space-y-4 text-gray-700 dark:text-gray-300 leading-relaxed pt-8">
                                 <p>Queridos filhos e filhas da nossa amada Arquidiocese virtual, que a paz do Senhor e a proteção de Nossa Senhora de Nazaré estejam convosco!</p>
                                 
                                 <p>Neste tempo de grandes desafios e também de inúmeras oportunidades no mundo digital, convido cada um a ser um farol de fé, esperança e caridade. Que possamos, como comunidade de fé, construir pontes de diálogo, promover a fraternidade e ser testemunhas do amor de Cristo em todos os ambientes onde nos encontramos.</p>
@@ -283,28 +298,24 @@
                                 <p>Que Maria, Nossa Senhora de Nazaré, Rainha da Amazônia, nos proteja e nos guie sempre no caminho da santidade e do serviço ao próximo.</p>
                             </blockquote>
                             
-                            <div class="quote-decoration-bottom">
+                            <div class="absolute bottom-6 right-6 text-4xl text-blue-200 dark:text-blue-800">
                                 <i class="fas fa-quote-right"></i>
                             </div>
                         </div>
                         
-                        <div class="mensagem-assinatura-premium">
-                            <div class="assinatura-ornamental">
-                                <div class="cross-decoration">✠</div>
-                                <div class="signature-text">
-                                    <span class="nome-arcebispo-assinatura">TOMÁS ARAÚJO VON KLAPPERSCHLANGE</span>
-                                    <span class="titulo-episcopal">Pela graça de Deus e mercê da Santa Sé Apostólica</span>
-                                    <span class="titulo-arquidiocese">Arcebispo Metropolitano de Santa Maria de</span>
-                                    <span class="localidade-destaque"><strong>BELÉM DO PARÁ</strong></span>
-                                    <div class="devocao-signature">
-                                        <span class="rosa-mariana">🌹</span>
-                                    </div>
-                                </div>
+                        <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-xl shadow-lg p-6 text-white text-center">
+                            <div class="text-3xl mb-2">✠</div>
+                            <div class="space-y-1 text-sm">
+                                <div class="font-bold">TOMÁS ARAÚJO VON KLAPPERSCHLANGE</div>
+                                <div class="opacity-90">Pela graça de Deus e mercê da Santa Sé Apostólica</div>
+                                <div class="opacity-90">Arcebispo Metropolitano de Santa Maria de</div>
+                                <div class="font-bold text-yellow-300">BELÉM DO PARÁ</div>
+                                <div class="text-2xl mt-2">🌹</div>
                             </div>
                         </div>
                         
-                        <div class="mensagem-arcebispo-acoes-premium">
-                            <a href="#mensagem-completa" class="botao-arcebispo-primary">
+                        <div class="text-center">
+                            <a href="#mensagem-completa" class="bg-purple-600 hover:bg-purple-700 text-white px-8 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-lg hover:-translate-y-1 inline-flex items-center gap-2">
                                 <i class="fas fa-scroll"></i>
                                 Leia a Mensagem Completa
                             </a>
@@ -313,106 +324,132 @@
                 </div>
             </div>
         </section>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
 
         <!-- Newsletter Section -->
-        <section class="newsletter-section" id="newsletter">
-            <div class="newsletter-container">
-                <h2 class="newsletter-title">📬 Receba Nossas Atualizações</h2>
-                <p class="newsletter-description">
+        <section class="py-16 bg-blue-600 dark:bg-blue-800" id="newsletter">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">📬 Receba Nossas Atualizações</h2>
+                <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
                     Mantenha-se informado sobre comunicados, decretos e eventos da Arquidiocese de Belém do Pará. 
                     Sua fé sempre atualizada, direto em seu e-mail.
                 </p>
-                <form class="newsletter-form" id="newsletter-form">
+                <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto mb-6" id="newsletter-form">
                     <input 
                         type="email" 
-                        class="newsletter-input" 
+                        class="flex-1 px-4 py-3 rounded-lg border border-gray-300 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 placeholder-gray-500 dark:placeholder-gray-400 focus:ring-2 focus:ring-yellow-400 focus:border-transparent" 
                         placeholder="Seu melhor e-mail aqui"
                         required
                         aria-label="Digite seu e-mail para receber nossa newsletter"
                     >
-                    <button type="submit" class="newsletter-submit">
+                    <button type="submit" class="bg-yellow-400 hover:bg-yellow-300 text-blue-900 px-6 py-3 rounded-lg font-bold transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                         Receber Newsletter
                     </button>
                 </form>
-                <p class="newsletter-privacy">
-                    Seus dados estão seguros. Leia nossa <a href="#privacy">Política de Privacidade</a>.
+                <p class="text-sm text-blue-200">
+                    Seus dados estão seguros. Leia nossa <a href="#privacy" class="text-yellow-300 hover:text-yellow-200 underline">Política de Privacidade</a>.
                 </p>
-                <div id="newsletter-message" class="newsletter-message" style="display: none;"></div>
+                <div id="newsletter-message" class="mt-4 text-center hidden"></div>
             </div>
         </section>
 
         <!-- Contact Section -->
-        <section class="contact-section" id="contato">
-            <div class="container">
-                <h2>Entre em Contato</h2>
-                <p>Estamos aqui para servir e acompanhar nossa comunidade</p>
+        <section class="py-16 bg-white dark:bg-gray-900" id="contato">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">Entre em Contato</h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">Estamos aqui para servir e acompanhar nossa comunidade</p>
+                </div>
                 
-                <div class="contact-info">
-                    <div class="contact-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <h3>Endereço</h3>
-                        <p>Av. Nazaré, S/N - Nazaré - Brennand</p>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-all duration-300">
+                        <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-map-marker-alt text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Endereço</h3>
+                        <p class="text-gray-600 dark:text-gray-400">Av. Nazaré, S/N - Nazaré - Brennand</p>
                     </div>
                     
-                    <div class="contact-item">
-                        <i class="fas fa-phone"></i>
-                        <h3>Telefone</h3>
-                        <p>(xx) xxxx-xxxx</p>
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-all duration-300">
+                        <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-phone text-green-600 dark:text-green-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">Telefone</h3>
+                        <p class="text-gray-600 dark:text-gray-400">(xx) xxxx-xxxx</p>
                     </div>
                     
-                    <div class="contact-item">
-                        <i class="fas fa-envelope"></i>
-                        <h3>E-mail</h3>
-                        <p>belemdopara.hb@gmail.com</p>
+                    <div class="bg-gray-50 dark:bg-gray-800 rounded-xl shadow-lg p-8 text-center hover:shadow-xl transition-all duration-300">
+                        <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-envelope text-purple-600 dark:text-purple-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 mb-4">E-mail</h3>
+                        <p class="text-gray-600 dark:text-gray-400">belemdopara.hb@gmail.com</p>
                     </div>
                 </div>
             </div>
         </section>
+
+        </section>
     </main>
 
     <!-- Footer -->
-    <footer id="rodape-principal" class="site-footer footer-vatican-inspired">
-        <div class="container">
-            <div class="footer-conteudo">
-                <div class="footer-logo-area">
-                    <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese" class="footer-logo-imagem">
-                    <div class="footer-logo-texto">
-                        <span>Arquidiocese de</span>
-                        <span>Belém do Pará</span>
+    <footer id="rodape-principal" class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese" class="w-12 h-12 rounded-full border-2 border-yellow-400 p-1 bg-white object-contain">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold">Arquidiocese de</span>
+                            <span class="text-lg font-bold">Belém do Pará</span>
+                        </div>
                     </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Este é um projeto fictício para o jogo Habbo Hotel e não possui qualquer vínculo com a Arquidiocese de Belém da vida real.</p>
                 </div>
-                <div class="footer-links">
-                    <h4>Links Úteis</h4>
-                    <ul>
-                        <li><a href="#">Perguntas Frequentes</a></li>
-                        <li><a href="#">Contato</a></li>
-                        <li><a href="#">Política de Privacidade</a></li>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold text-yellow-400">Links Úteis</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Perguntas Frequentes</a></li>
+                        <li><a href="#contato" class="text-gray-400 hover:text-white transition-colors duration-200">Contato</a></li>
+                        <li><a href="#privacy" class="text-gray-400 hover:text-white transition-colors duration-200">Política de Privacidade</a></li>
+                        <li><a href="celebracao_da_palavra.html" class="text-gray-400 hover:text-white transition-colors duration-200">Celebração da Palavra</a></li>
                     </ul>
                 </div>
-                <div class="footer-info">
-                     <p>Este é um projeto fictício para o jogo Habbo Hotel e não possui qualquer vínculo com a Arquidiocese de Belém da vida real.</p>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold text-yellow-400">Contato</h4>
+                    <div class="space-y-2 text-gray-400 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-envelope w-4"></i>
+                            <span>belemdopara.hb@gmail.com</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt w-4"></i>
+                            <span>Av. Nazaré, S/N - Nazaré</span>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="footer-copyright">
-                 <p>&copy; <span id="ano-atual"></span> Arquidiocese de Belém do Pará - Habbo Hotel. Todos os direitos reservados.</p>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 text-sm">&copy; <span id="ano-atual"></span> Arquidiocese de Belém do Pará - Habbo Hotel. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
-    <!-- WhatsApp Widget -->
-    <div class="whatsapp-widget">
-        <button class="whatsapp-floating-btn" id="whatsapp-btn">
-            <div class="whatsapp-pulse"></div>
-            <svg class="whatsapp-icon" viewBox="0 0 24 24">
-                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.905 3.485"/>
-            </svg>
-            <span class="whatsapp-text">Fale Conosco</span>
-        </button>
+    <!-- Discord Widget -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://discord.gg/qzzJkpYH" target="_blank" class="discord-floating-btn group relative bg-purple-600 hover:bg-purple-700 text-white rounded-full p-4 shadow-lg transition-all duration-300 hover:scale-105 flex items-center gap-3" id="discord-btn">
+            <!-- Discord Icon -->
+            <div class="relative z-10 flex items-center gap-3">
+                <svg class="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                    <path d="M20.317 4.3698a19.7913 19.7913 0 00-4.8851-1.5152.0741.0741 0 00-.0785.0371c-.211.3753-.4447.8648-.6083 1.2495-1.8447-.2762-3.68-.2762-5.4868 0-.1636-.3933-.4058-.8742-.6177-1.2495a.077.077 0 00-.0785-.037 19.7363 19.7363 0 00-4.8852 1.515.0699.0699 0 00-.0321.0277C.5334 9.0458-.319 13.5799.0992 18.0578a.0824.0824 0 00.0312.0561c2.0528 1.5076 4.0413 2.4228 5.9929 3.0294a.0777.0777 0 00.0842-.0276c.4616-.6304.8731-1.2952 1.226-1.9942a.076.076 0 00-.0416-.1057c-.6528-.2476-1.2743-.5495-1.8722-.8923a.077.077 0 01-.0076-.1277c.1258-.0943.2517-.1923.3718-.2914a.0743.0743 0 01.0776-.0105c3.9278 1.7933 8.18 1.7933 12.0614 0a.0739.0739 0 01.0785.0095c.1202.099.246.1981.3728.2924a.077.077 0 01-.0066.1276 12.2986 12.2986 0 01-1.873.8914.0766.0766 0 00-.0407.1067c.3604.698.7719 1.3628 1.225 1.9932a.076.076 0 00.0842.0286c1.961-.6067 3.9495-1.5219 6.0023-3.0294a.077.077 0 00.0313-.0552c.5004-5.177-.8382-9.6739-3.5485-13.6604a.061.061 0 00-.0312-.0286zM8.02 15.3312c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9555-2.4189 2.157-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419-.0189 1.3332-.9555 2.4189-2.1569 2.4189zm7.9748 0c-1.1825 0-2.1569-1.0857-2.1569-2.419 0-1.3332.9554-2.4189 2.1569-2.4189 1.2108 0 2.1757 1.0952 2.1568 2.419 0 1.3332-.946 2.4189-2.1568 2.4189Z"/>
+                </svg>
+                
+                <!-- Text (hidden on mobile, shown on larger screens) -->
+                <span class="hidden md:block text-sm font-medium whitespace-nowrap">Fale Conosco</span>
+            </div>
+        </a>
     </div>
 
     <script>
@@ -428,12 +465,6 @@
                 });
             }
             
-            // Atualizar ano atual
-            const anoAtualSpan = document.getElementById('ano-atual');
-            if (anoAtualSpan) {
-                anoAtualSpan.textContent = new Date().getFullYear();
-            }
-            
             // Carrossel Hero
             const slides = document.querySelectorAll('.hero-slide');
             const indicators = document.querySelectorAll('.hero-indicator');
@@ -443,13 +474,19 @@
             let autoSlideInterval;
             
             function showSlide(index) {
-                // Remove ativo de todos os slides e indicadores
-                slides.forEach(slide => slide.classList.remove('slide-ativo'));
+                // Primeiro, esconde TODOS os slides removendo classes ativas e adicionando hidden
+                slides.forEach(slide => {
+                    slide.classList.remove('slide-ativo');
+                    slide.classList.remove('active');
+                    slide.classList.add('hidden');
+                });
                 indicators.forEach(indicator => indicator.classList.remove('ativo'));
                 
-                // Ativa o slide e indicador atual
+                // Apenas o slide ativo fica visível (remove hidden e adiciona classes ativas)
                 if (slides[index]) {
+                    slides[index].classList.remove('hidden');
                     slides[index].classList.add('slide-ativo');
+                    slides[index].classList.add('active');
                 }
                 if (indicators[index]) {
                     indicators[index].classList.add('ativo');
@@ -511,13 +548,16 @@
             
             // Iniciar carrossel
             if (slides.length > 0) {
+                showSlide(0); // Garantir que o primeiro slide seja exibido corretamente
                 startAutoSlide();
             }
         });
     </script>
-    <script src="js/main.js" type="module"></script>
-    <script src="js/darkmode.js" type="module"></script>
-    <script src="js/whatsapp-integration.js" type="module"></script>
-    <script src="js/newsletter-system.js" type="module"></script>
+    <script src="js/main.js" type="module" defer></script>
+    <script src="js/darkmode.js" type="module" defer></script>
+    <script src="js/disclaimer-manager.js" type="module" defer></script>
+    <script src="js/discord-integration.js" type="module" defer></script>
+    <script src="js/newsletter-system.js" type="module" defer></script>
+    <script src="js/newsletter-system.js" type="module" defer></script>
 </body>
 </html>

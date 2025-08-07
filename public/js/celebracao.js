@@ -152,8 +152,18 @@ class CelebracaoController {
     
     updateConditionalSections() {
         if (!this.liturgyData) return;
-        document.querySelector('.gloria-section').style.display = this.liturgyData.hasGloria ? '' : 'none';
-        document.querySelector('.credo-section').style.display = this.liturgyData.hasCredo ? '' : 'none';
+        
+        // Verificar se os elementos existem antes de tentar acessá-los
+        const gloriaSection = document.querySelector('.gloria-section');
+        if (gloriaSection) {
+            gloriaSection.style.display = this.liturgyData.hasGloria ? '' : 'none';
+        }
+        
+        const credoSection = document.querySelector('.credo-section');
+        if (credoSection) {
+            credoSection.style.display = this.liturgyData.hasCredo ? '' : 'none';
+        }
+        
         const slSection = document.querySelector('.segunda-leitura-section');
         if (slSection) {
             slSection.style.display = this.liturgyData.hasSecondReading ? '' : 'none';
@@ -179,10 +189,18 @@ class CelebracaoController {
         const toastMessage = document.getElementById('toast-message');
         if (toast && toastMessage) {
             toastMessage.textContent = message;
-            toast.className = 'toast show';
+            // Remove existing color classes
+            toast.classList.remove('bg-green-600', 'bg-red-600');
+            // Add appropriate color class
+            toast.classList.add(type === 'error' ? 'bg-red-600' : 'bg-green-600');
+            // Show toast with Tailwind classes
+            toast.classList.remove('translate-y-16', 'opacity-0');
+            toast.classList.add('translate-y-0', 'opacity-100');
             toast.querySelector('i').className = type === 'error' ? 'fas fa-times-circle' : 'fas fa-check-circle';
-            toast.style.backgroundColor = type === 'error' ? '#dc2626' : 'var(--azul-mariano)';
-            setTimeout(() => toast.classList.remove('show'), 3000);
+            setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-16', 'opacity-0');
+            }, 3000);
         }
     }
 }

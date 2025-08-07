@@ -126,7 +126,7 @@ class ContentStrategy {
                 q = query(q, where('site', '==', filters.site));
             }
 
-            q = query(q, orderBy('createdAt', 'desc'));
+            q = query(q, orderBy('publishedDate', 'desc'));
             
             const querySnapshot = await getDocs(q);
             const posts = [];

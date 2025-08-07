@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/celebracao.css">
+    <link href="/css/output.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -21,913 +21,690 @@
     <meta name="theme-color" content="#0c4a6e">
     <link rel="icon" type="image/x-icon" href="images/logo-arquidiocese-belem.png">
 </head>
-<body>
+<body class="font-montserrat">
     <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém">
-                        <div class="header-logo-texto">
-                            <span>Arquidiocese de<br></span>
-                            <span>Belém do Pará</span>
+    <header class="bg-gradient-to-r from-blue-900 to-blue-800 text-white sticky top-0 z-50 shadow-lg border-b-4 border-yellow-400">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
+                <div class="logo flex items-center gap-4">
+                    <a href="index.html" class="flex items-center gap-3 text-white hover:opacity-90 transition-all duration-200">
+                        <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém" class="w-12 h-12 rounded-full border-2 border-yellow-400 p-1 bg-white object-contain">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold leading-tight">Arquidiocese de</span>
+                            <span class="text-lg font-bold leading-tight">Belém do Pará</span>
                         </div>
                     </a>
                 </div>
                 
                 <nav class="nav" id="nav">
-                    <ul class="nav-list">
-                        <li><a href="index.html">Início</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="active dropdown-toggle">Documentos <i class="fas fa-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="celebracao_da_palavra.html">Celebração da Palavra</a></li>
-                                <li><a href="#">Orientações Litúrgicas</a></li>
-                                <li><a href="#">Cartas Pastorais</a></li>
+                    <ul class="hidden lg:flex items-center gap-8">
+                        <li><a href="index.html" class="font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Início</a></li>
+                        <li class="dropdown relative group">
+                            <a href="#" class="font-medium text-yellow-400 transition-all duration-200 flex items-center gap-1">
+                                Documentos <i class="fas fa-chevron-down text-sm"></i>
+                            </a>
+                            <ul class="dropdown-menu absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-lg py-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                                <li><a href="celebracao_da_palavra.html" class="block px-4 py-2 bg-blue-50 text-blue-700 font-medium">Celebração da Palavra</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Orientações Litúrgicas</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Cartas Pastorais</a></li>
                             </ul>
                         </li>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#contato">Contato</a></li>
+                        <li><a href="index.html#sobre" class="font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Sobre</a></li>
+                        <li><a href="index.html#contato" class="font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Contato</a></li>
                     </ul>
                 </nav>
                 
-                <div class="header-actions">
-                    <a href="login.html" class="curia-digital-btn">
+                <div class="header-actions flex items-center gap-3">
+                    <!-- Dark Mode Toggle -->
+                    <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-blue-700 transition-colors duration-200" title="Alternar modo escuro">
+                        <i class="fas fa-moon text-lg"></i>
+                    </button>
+                    
+                    <a href="login.html" class="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-200 hover:shadow-md">
                         <i class="fas fa-shield-alt"></i>
-                        <span>Cúria Digital</span>
+                        <span class="font-medium">Cúria Digital</span>
                     </a>
                 </div>
                 
-                <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="lg:hidden flex flex-col gap-1.5 p-2" id="mobile-menu-btn">
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
                 </button>
             </div>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="main">
-        <div class="container">
+    <main class="min-h-screen bg-gray-50 dark:bg-gray-900">
+        <div class="max-w-4xl mx-auto px-4 py-8">
             <!-- Hero Section -->
-            <section class="hero">
-                <div class="hero-content">
-                    <h1>Celebração da Palavra</h1>
-                    <p>Subsídio para preparação de folhetos da Celebração da Palavra</p>
-                    <div class="hero-subtitle">
-                        <strong>ARQUIDIOCESE DE BELÉM DO PARÁ</strong><br>
-                        <em>PASTORAL LITÚRGICA</em>
-                    </div>
+            <section class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 mb-8 text-center">
+                <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 mb-4">Celebração da Palavra</h1>
+                <p class="text-xl text-gray-600 dark:text-gray-400 mb-4">Subsídio para preparação de folhetos da Celebração da Palavra</p>
+                <div class="text-lg text-gray-700 dark:text-gray-300">
+                    <strong>ARQUIDIOCESE DE BELÉM DO PARÁ</strong><br>
+                    <em>PASTORAL LITÚRGICA</em>
                 </div>
             </section>
 
             <!-- Controls -->
-            <section class="controls">
-                <div class="date-selector">
-                    <label for="liturgical-date">Data da Celebração:</label>
-                    <input type="date" id="liturgical-date" name="liturgical-date">
-                    <button id="load-liturgy" class="btn-primary">
+            <section class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+                <div class="flex flex-col md:flex-row gap-4 items-end">
+                    <div class="flex-1">
+                        <label for="liturgical-date" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Data da Celebração:</label>
+                        <input type="date" id="liturgical-date" name="liturgical-date" 
+                               class="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                    </div>
+                    
+                    <button id="load-liturgy" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 flex items-center gap-2">
                         <i class="fas fa-search"></i> Carregar Liturgia
                     </button>
                 </div>
                 
-                <div class="action-buttons">
-                    <button id="copy-all" class="btn-secondary">
+                <div class="flex flex-wrap gap-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                    <button id="copy-all" class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:shadow-md flex items-center gap-2">
                         <i class="fas fa-copy"></i> Copiar Tudo
                     </button>
-                    <button id="print-page" class="btn-secondary">
+                    <button id="print-page" class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 hover:shadow-md flex items-center gap-2">
                         <i class="fas fa-print"></i> Imprimir
                     </button>
                 </div>
             </section>
 
             <!-- Loading State -->
-            <div id="loading" class="loading" style="display: none;">
-                <div class="spinner"></div>
-                <p>Carregando liturgia do dia...</p>
+            <div id="loading" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-8 text-center" style="display: none;">
+                <div class="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent mx-auto mb-4"></div>
+                <p class="text-gray-600 dark:text-gray-400">Carregando liturgia do dia...</p>
             </div>
 
-            <!-- Content Sections -->
-            <div id="liturgical-content" class="liturgical-content">
+            <!-- Content Sections with Tabs -->
+            <div id="liturgical-content" class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
                 
-                <!-- Orientações Gerais -->
-                <section class="section orientation">
-                    <h2><i class="fas fa-info-circle"></i> Orientações Gerais</h2>
-                    <div class="content-box">
-                        <p>Seguindo o <strong>Documento 52 da CNBB</strong> e <strong>Constituição Conciliar Sacrosanctum Concilium</strong> do Concílio Vaticano II, a Canção Nova preparou uma análise sobre a natureza e finalidade da Celebração da Palavra, escrita pelo Pe. Flávio Sobreiro, disponível <a href="https://formacao.cancaonova.com/liturgia/catequese-liturgica/como-celebrar-a-palavra-quando-nao-ha-um-sacerdote-ou-diacono/" target="_blank">AQUI</a>.</p>
-                        
-                        <p>Notadamente, como é presidida por um ministro leigo ou diácono, a Celebração da Palavra <strong>NÃO POSSUI</strong> caráter sacrifical nem oblativo, mas focado em:</p>
-                        <ol>
-                            <li>Reunir a comunidade</li>
-                            <li>Meditar a palavra de Deus</li>
-                            <li>Render graças</li>
-                            <li>Partir em missão</li>
-                        </ol>
-                        
-                        <p>O leigo/diácono também não possui autoridade para abençoar e perdoar, portanto, nas invocações em que o padre diria "VOS", o presidente da celebração da palavra dirá "NOS". Por exemplo: "o Senhor <strong>NOS</strong> abençoe" ao invés de "o Senhor <strong>VOS</strong> abençoe".</p>
-                        
-                        <div class="subsection">
-                            <h3>VESTES:</h3>
-                            <p>O diácono use a dalmática, o seminarista e o irmão religioso usem a túnica com cíngulo, as irmãs religiosas usem seu hábito completo, o ministro da eucaristia/palavra use sua veste própria e digna.</p>
-                        </div>
-                        
-                        <div class="subsection">
-                            <h3>ALTAR:</h3>
-                            <p>O altar deve conter 2, 4 ou 6 velas acesas e estar preparado como de costume, com uma toalha branca e com flores ao seu redor, nunca sobre ele.</p>
-                        </div>
-                        
-                        <div class="note">
-                            <p><strong>Nota:</strong> O vermelho em itálico são as ações dentro do jogo que o presidente DEVE fazer para cumprir a rubrica do Missal Romano.</p>
-                        </div>
-                    </div>
-                </section>
+                <!-- Tab Navigation -->
+                <div class="border-b border-gray-200 dark:border-gray-700">
+                    <nav class="flex overflow-x-auto" aria-label="Tabs">
+                        <button class="tab-button active whitespace-nowrap py-4 px-6 border-b-2 border-blue-600 text-blue-600 font-medium text-sm" data-tab="orientacoes">
+                            Orientações Gerais
+                        </button>
+                        <button class="tab-button whitespace-nowrap py-4 px-6 border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 font-medium text-sm" data-tab="ritos-iniciais">
+                            Ritos Iniciais
+                        </button>
+                        <button class="tab-button whitespace-nowrap py-4 px-6 border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 font-medium text-sm" data-tab="liturgia-palavra">
+                            Liturgia da Palavra
+                        </button>
+                        <button class="tab-button whitespace-nowrap py-4 px-6 border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 font-medium text-sm" data-tab="ritos-finais">
+                            Ritos Finais
+                        </button>
+                        <button class="tab-button whitespace-nowrap py-4 px-6 border-b-2 border-transparent text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-300 font-medium text-sm" data-tab="avisos">
+                            Avisos
+                        </button>
+                    </nav>
+                </div>
 
-                <!-- Ritos Iniciais -->
-                <section class="section ritual-section">
-                    <h2><i class="fas fa-cross"></i> Ritos Iniciais</h2>
+                <!-- Tab Content -->
+                <div class="tab-content-container">
                     
-                    <!-- Saudação -->
-                    <div class="subsection-card">
-                        <h3>Saudação</h3>
-                        <div class="liturgical-text">
-                            <p>Terminado o canto de entrada, o presidente e os fiéis, todos de pé, fazem o sinal da cruz, enquanto o presidente, voltado para o povo, diz:</p>
+                    <!-- Orientações Gerais Tab -->
+                    <div id="orientacoes" class="tab-content active">
+                        <div class="p-6 prose prose-lg max-w-none dark:prose-invert">
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-4 flex items-center gap-2">
+                                <i class="fas fa-info-circle"></i> Orientações Gerais
+                            </h2>
                             
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Em nome do Pai e do + Filho e do Espírito Santo.
-                                <button class="copy-line" data-text="Em nome do Pai e do + Filho e do Espírito Santo.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
+                            <p>Seguindo o <strong>Documento 52 da CNBB</strong> e <strong>Constituição Conciliar Sacrosanctum Concilium</strong> do Concílio Vaticano II, a Canção Nova preparou uma análise sobre a natureza e finalidade da Celebração da Palavra, escrita pelo Pe. Flávio Sobreiro, disponível <a href="https://formacao.cancaonova.com/liturgia/catequese-liturgica/como-celebrar-a-palavra-quando-nao-ha-um-sacerdote-ou-diacono/" target="_blank" class="text-blue-600 dark:text-blue-400 hover:underline">AQUI</a>.</p>
+                            
+                            <p>Notadamente, como é presidida por um ministro leigo ou diácono, a Celebração da Palavra <strong>NÃO POSSUI</strong> caráter sacrifical nem oblativo, mas focado em:</p>
+                            <ol class="list-decimal list-inside space-y-1">
+                                <li>Reunir a comunidade</li>
+                                <li>Meditar a palavra de Deus</li>
+                                <li>Render graças</li>
+                                <li>Partir em missão</li>
+                            </ol>
+                            
+                            <p>O leigo/diácono também não possui autoridade para abençoar e perdoar, portanto, nas invocações em que o padre diria "VOS", o presidente da celebração da palavra dirá "NOS". Por exemplo: "o Senhor <strong>NOS</strong> abençoe" ao invés de "o Senhor <strong>VOS</strong> abençoe".</p>
+                            
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mt-6">
+                                <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200">VESTES:</h3>
+                                <p class="text-gray-700 dark:text-gray-300">O diácono use a dalmática, o seminarista e o irmão religioso usem a túnica com cíngulo, as irmãs religiosas usem seu hábito completo, o ministro da eucaristia/palavra use sua veste própria e digna.</p>
                             </div>
                             
-                            <p>O povo responde:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> +Amém.
-                                <button class="copy-line" data-text="+Amém.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
+                            <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mt-4">
+                                <h3 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200">ALTAR:</h3>
+                                <p class="text-gray-700 dark:text-gray-300">O altar deve conter 2, 4 ou 6 velas acesas e estar preparado como de costume, com uma toalha branca e com flores ao seu redor, nunca sobre ele.</p>
                             </div>
                             
-                            <div class="action-note">*Abro braços*</div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> A graça de nosso Senhor Jesus Cristo <em>*Vênia*</em>, o amor do Pai e a comunhão do Espírito Santo estejam conosco.
-                                <button class="copy-line" data-text="A graça de nosso Senhor Jesus Cristo, o amor do Pai e a comunhão do Espírito Santo estejam conosco.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>O povo responde:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Bendito seja Deus que nos reuniu no amor de Cristo.
-                                <button class="copy-line" data-text="Bendito seja Deus que nos reuniu no amor de Cristo.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
+                            <div class="bg-yellow-50 dark:bg-yellow-900 border-l-4 border-yellow-400 p-4 mt-6">
+                                <p class="text-yellow-800 dark:text-yellow-200"><strong>Nota:</strong> O vermelho em itálico são as ações dentro do jogo que o presidente DEVE fazer para cumprir a rubrica do Missal Romano.</p>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Ato Penitencial -->
-                    <div class="subsection-card">
-                        <h3>Ato Penitencial</h3>
-                        <div class="liturgical-text">
-                            <p>O presidente convida os fiéis ao ato penitencial:</p>
+                    <!-- Ritos Iniciais Tab -->
+                    <div id="ritos-iniciais" class="tab-content">
+                        <div class="p-6">
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
+                                <i class="fas fa-cross"></i> Ritos Iniciais
+                            </h2>
                             
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Irmãos e irmãs, reconheçamos os nossos pecados, para celebrarmos dignamente os santos mistérios.
-                                <button class="copy-line" data-text="Irmãos e irmãs, reconheçamos os nossos pecados, para celebrarmos dignamente os santos mistérios.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
+                            <!-- Saudação -->
+                            <div class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Saudação</h3>
+                                <div class="prose prose-lg max-w-none dark:prose-invert">
+                                    <p>Terminado o canto de entrada, o presidente e os fiéis, todos de pé, fazem o sinal da cruz, enquanto o presidente, voltado para o povo, diz:</p>
+                                    
+                                    <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                        <div>
+                                            <strong>Pres.:</strong> Em nome do Pai e do + Filho e do Espírito Santo.
+                                        </div>
+                                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Em nome do Pai e do + Filho e do Espírito Santo.')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <p>O povo responde:</p>
+                                    <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 my-4 flex items-start justify-between">
+                                        <div>
+                                            <strong>℟.:</strong> Amém.
+                                        </div>
+                                        <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Amém.')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded p-3 my-4">
+                                        <em class="text-red-700 dark:text-red-300">*Abro braços*</em>
+                                    </div>
+                                    
+                                    <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                        <div>
+                                            <strong>Pres.:</strong> A graça de nosso Senhor Jesus Cristo, o amor do Pai e a comunhão do Espírito Santo estejam conosco.
+                                        </div>
+                                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('A graça de nosso Senhor Jesus Cristo, o amor do Pai e a comunhão do Espírito Santo estejam conosco.')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <p>O povo responde:</p>
+                                    <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 my-4 flex items-start justify-between">
+                                        <div>
+                                            <strong>℟.:</strong> Bendito seja Deus que nos reuniu no amor de Cristo.
+                                        </div>
+                                        <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Bendito seja Deus que nos reuniu no amor de Cristo.')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <p>Pode-se, agora, cantar algum canto penitencial, ou:</p>
-                            <p>Se o ato penitencial for rezado, o presidente diz:</p>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Tende compaixão de nós, Senhor.
-                                <button class="copy-line" data-text="Tende compaixão de nós, Senhor.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
+
+                            <!-- Ato Penitencial -->
+                            <div class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Ato Penitencial</h3>
+                                <div class="prose prose-lg max-w-none dark:prose-invert">
+                                    <p>O presidente convida os fiéis ao ato penitencial:</p>
+                                    
+                                    <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                        <div>
+                                            <strong>Pres.:</strong> Irmãos e irmãs, reconheçamos os nossos pecados, para celebrarmos dignamente os santos mistérios.
+                                        </div>
+                                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Irmãos e irmãs, reconheçamos os nossos pecados, para celebrarmos dignamente os santos mistérios.')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <p>Pode-se, agora, cantar algum canto penitencial, ou se o ato penitencial for rezado, o presidente diz:</p>
+                                    
+                                    <div class="space-y-3">
+                                        <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 flex items-start justify-between">
+                                            <div><strong>Pres.:</strong> Tende compaixão de nós, Senhor.</div>
+                                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Tende compaixão de nós, Senhor.')">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 flex items-start justify-between">
+                                            <div><strong>℟.:</strong> Porque somos pecadores.</div>
+                                            <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Porque somos pecadores.')">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 flex items-start justify-between">
+                                            <div><strong>Pres.:</strong> Manifestai, Senhor, a vossa misericórdia.</div>
+                                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Manifestai, Senhor, a vossa misericórdia.')">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 flex items-start justify-between">
+                                            <div><strong>℟.:</strong> E dai-nos a vossa salvação.</div>
+                                            <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('E dai-nos a vossa salvação.')">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    
+                                    <p>Segue-se a absolvição comunitária:</p>
+                                    
+                                    <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                        <div>
+                                            <strong>Pres.:</strong> Deus todo-poderoso tenha compaixão de nós, perdoe os nossos pecados e nos conduza à vida eterna.
+                                        </div>
+                                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Deus todo-poderoso tenha compaixão de nós, perdoe os nossos pecados e nos conduza à vida eterna.')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 my-4 flex items-start justify-between">
+                                        <div><strong>℟.:</strong> Amém.</div>
+                                        <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Amém.')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Porque somos pecadores.
-                                <button class="copy-line" data-text="Porque somos pecadores.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
+
+                            <!-- Kyrie -->
+                            <div class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Senhor, Tende Piedade (Kyrie)</h3>
+                                <div class="prose prose-lg max-w-none dark:prose-invert">
+                                    <p>Seguem-se as invocações Senhor, tende piedade de nós (Kýrie eléison), se já não tiverem sido feitas no canto penitencial:</p>
+                                    
+                                    <div class="space-y-2">
+                                        <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-3 flex items-start justify-between">
+                                            <div><strong>Pres.:</strong> Kýrie, eléison.</div>
+                                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Kýrie, eléison.')">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-3 flex items-start justify-between">
+                                            <div><strong>℟.:</strong> Kýrie, eléison.</div>
+                                            <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('℟.: Kýrie, eléison.')">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-3 flex items-start justify-between">
+                                            <div><strong>Pres.:</strong> Christe, eléison.</div>
+                                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Christe, eléison.')">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-3 flex items-start justify-between">
+                                            <div><strong>℟.:</strong> Christe, eléison.</div>
+                                            <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('℟.: Christe, eléison.')">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-3 flex items-start justify-between">
+                                            <div><strong>Pres.:</strong> Kýrie, eléison.</div>
+                                            <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Kýrie, eléison.')">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                        <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-3 flex items-start justify-between">
+                                            <div><strong>℟.:</strong> Kýrie, eléison.</div>
+                                            <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('℟.: Kýrie, eléison.')">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Manifestai, Senhor, a vossa misericórdia.
-                                <button class="copy-line" data-text="Manifestai, Senhor, a vossa misericórdia.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
+
+                            <!-- Glória -->
+                            <div class="mb-8 pb-6 border-b border-gray-200 dark:border-gray-700">
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Glória <span class="text-sm font-normal text-gray-500">(Apenas quando prescrito. Conferir liturgia do dia)</span></h3>
+                                <div class="prose prose-lg max-w-none dark:prose-invert">
+                                    <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 mb-4 flex items-start justify-between">
+                                        <div><strong>Pres.:</strong> Glória a Deus nas alturas,</div>
+                                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Glória a Deus nas alturas,')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 flex items-start justify-between">
+                                        <div><strong>℟.:</strong> e paz na terra aos homens por ele amados. Senhor Deus, Rei dos céus, Deus Pai todo-poderoso: nós vos louvamos, nós vos bendizemos, nós vos adoramos, nós vos glorificamos, nós vos damos graças por vossa imensa glória. Senhor Jesus Cristo, Filho Unigênito, Senhor Deus, Cordeiro de Deus, Filho de Deus Pai. Vós que tirais o pecado do mundo, tende piedade de nós. Vós que tirais o pecado do mundo, acolhei a nossa súplica. Vós que estais à direita do Pai, tende piedade de nós. Só Vós sois o Santo, só vós, o Senhor, só vós, o Altíssimo, Jesus Cristo, com o Espírito Santo, na glória de Deus Pai. Amém.</div>
+                                        <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('℟.: e paz na terra aos homens por ele amados. Senhor Deus, Rei dos céus, Deus Pai todo-poderoso: nós vos louvamos, nós vos bendizemos, nós vos adoramos, nós vos glorificamos, nós vos damos graças por vossa imensa glória. Senhor Jesus Cristo, Filho Unigênito, Senhor Deus, Cordeiro de Deus, Filho de Deus Pai. Vós que tirais o pecado do mundo, tende piedade de nós. Vós que tirais o pecado do mundo, acolhei a nossa súplica. Vós que estais à direita do Pai, tende piedade de nós. Só Vós sois o Santo, só vós, o Senhor, só vós, o Altíssimo, Jesus Cristo, com o Espírito Santo, na glória de Deus Pai. Amém.')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> E dai-nos a vossa salvação.
-                                <button class="copy-line" data-text="E dai-nos a vossa salvação.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>Segue-se a absolvição comunitária:</p>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Deus todo-poderoso tenha compaixão de nós, perdoe os nossos pecados e nos conduza à vida eterna.
-                                <button class="copy-line" data-text="Deus todo-poderoso tenha compaixão de nós, perdoe os nossos pecados e nos conduza à vida eterna.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>O povo responde:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Amém.
-                                <button class="copy-line" data-text="Amém.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
+
+                            <!-- Oração da Coleta -->
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Oração da Coleta</h3>
+                                <div class="prose prose-lg max-w-none dark:prose-invert">
+                                    <p>Terminado o hino o presidente diz:</p>
+                                    
+                                    <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                        <div><strong>Pres.:</strong> Oremos.</div>
+                                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Oremos.')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <p>E todos oram com o presidente, por algum tempo, em silêncio.</p>
+                                    <div class="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-700 rounded p-3 my-4">
+                                        <em class="text-red-700 dark:text-red-300">*Abro braços*</em>
+                                    </div>
+                                    
+                                    <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                        <div><strong>Pres.:</strong> <span id="coleta-text">Ver Oração da Coleta do dia.</span></div>
+                                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard(document.getElementById('coleta-text').textContent)">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                    
+                                    <p>Ao terminar o povo aclama:</p>
+                                    <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 my-4 flex items-start justify-between">
+                                        <div><strong>℟.:</strong> Amém.</div>
+                                        <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Amém.')">
+                                            <i class="fas fa-copy"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Kyrie -->
-                    <div class="subsection-card">
-                        <h3>Senhor, Tende Piedade (Kyrie)</h3>
-                        <div class="liturgical-text">
-                            <p>Seguem-se as invocações Senhor, tende piedade de nós (Kýrie eléison), se já não tiverem sido feitas no canto penitencial:</p>
+                    <!-- Liturgia da Palavra Tab -->
+                    <div id="liturgia-palavra" class="tab-content">
+                        <div class="p-6">
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
+                                <i class="fas fa-book-open"></i> Liturgia da Palavra
+                            </h2>
                             
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Kýrie, eléison.
-                                <button class="copy-line" data-text="Kýrie, eléison.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Kýrie, eléison.
-                                <button class="copy-line" data-text="℟.: Kýrie, eléison.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Christe, eléison.
-                                <button class="copy-line" data-text="Christe, eléison.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Christe, eléison.
-                                <button class="copy-line" data-text="℟.: Christe, eléison.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Kýrie, eléison.
-                                <button class="copy-line" data-text="Kýrie, eléison.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Kýrie, eléison.
-                                <button class="copy-line" data-text="℟.: Kýrie, eléison.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Glória -->
-                    <div class="subsection-card gloria-section">
-                        <h3>Glória <span class="conditional-note">(Apenas quando prescrito. Conferir liturgia do dia)</span></h3>
-                        <div class="liturgical-text">
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Glória a Deus nas alturas,
-                                <button class="copy-line" data-text="Glória a Deus nas alturas,">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line gloria-text">
-                                <strong>℟.:</strong> e paz na terra aos homens por ele amados. Senhor Deus, Rei dos céus, Deus Pai todo-poderoso: nós vos louvamos, nós vos bendizemos, nós vos adoramos, nós vos glorificamos, nós vos damos graças por vossa imensa glória. Senhor Jesus Cristo <em>*Vênia*</em>, Filho Unigênito, Senhor Deus, Cordeiro de Deus, Filho de Deus Pai. Vós que tirais o pecado do mundo, tende piedade de nós. Vós que tirais o pecado do mundo, acolhei a nossa súplica. Vós que estais à direita do Pai, tende piedade de nós. Só Vós sois o Santo, só vós, o Senhor, só vós, o Altíssimo, Jesus Cristo <em>*Vênia*</em>, com o Espírito Santo, na glória de Deus Pai. Amém.
-                                <button class="copy-line" data-text="℟.: e paz na terra aos homens por ele amados. Senhor Deus, Rei dos céus, Deus Pai todo-poderoso: nós vos louvamos, nós vos bendizemos, nós vos adoramos, nós vos glorificamos, nós vos damos graças por vossa imensa glória. Senhor Jesus Cristo, Filho Unigênito, Senhor Deus, Cordeiro de Deus, Filho de Deus Pai. Vós que tirais o pecado do mundo, tende piedade de nós. Vós que tirais o pecado do mundo, acolhei a nossa súplica. Vós que estais à direita do Pai, tende piedade de nós. Só Vós sois o Santo, só vós, o Senhor, só vós, o Altíssimo, Jesus Cristo, com o Espírito Santo, na glória de Deus Pai. Amém.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Oração da Coleta -->
-                    <div class="subsection-card">
-                        <h3>Oração da Coleta</h3>
-                        <div class="liturgical-text">
-                            <p>Terminado o hino o presidente diz:</p>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Oremos.
-                                <button class="copy-line" data-text="Oremos.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>E todos oram com o presidente, por algum tempo, em silêncio.</p>
-                            <div class="action-note">*Abro braços*</div>
-                            
-                            <div class="dynamic-content" id="coleta-content">
-                                <div class="prayer-line">
-                                    <strong>Pres.:</strong> <span class="liturgy-text" data-section="coleta">Ver Oração da Coleta do dia.</span>
-                                    <button class="copy-line" data-dynamic="coleta">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Primeira Leitura</h3>
+                                <div id="primeira-leitura" class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                    <p class="text-gray-600 dark:text-gray-400">Aguardando carregamento da liturgia...</p>
                                 </div>
                             </div>
                             
-                            <p>Ao terminar o povo aclama:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Amém.
-                                <button class="copy-line" data-text="Amém.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Salmo Responsorial</h3>
+                                <div id="salmo" class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                    <p class="text-gray-600 dark:text-gray-400">Aguardando carregamento da liturgia...</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Segunda Leitura</h3>
+                                <div id="segunda-leitura" class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                    <p class="text-gray-600 dark:text-gray-400">Aguardando carregamento da liturgia...</p>
+                                </div>
+                            </div>
+                            
+                            <div class="mb-8">
+                                <h3 class="text-lg font-bold text-gray-800 dark:text-gray-200 mb-4">Evangelho</h3>
+                                <div id="evangelho" class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                    <p class="text-gray-600 dark:text-gray-400">Aguardando carregamento da liturgia...</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </section>
 
-                <!-- Liturgia da Palavra -->
-                <section class="section liturgy-word">
-                    <h2><i class="fas fa-book-open"></i> Liturgia da Palavra</h2>
-                    
-                    <!-- Primeira Leitura -->
-                    <div class="subsection-card">
-                        <h3>Primeira Leitura</h3>
-                        <div class="liturgical-text">
-                            <div class="dynamic-content" id="primeira-leitura-content">
-                                <div class="reading-header">
-                                    <span class="liturgy-text" data-section="primeira-leitura-ref">Leitura...</span>
+                    <!-- Ritos Finais Tab -->
+                    <div id="ritos-finais" class="tab-content">
+                        <div class="p-6">
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
+                                <i class="fas fa-hands"></i> Ritos Finais
+                            </h2>
+                            
+                            <div class="prose prose-lg max-w-none dark:prose-invert">
+                                <p>Avisos Paroquiais ou Diocesanos, se houverem.</p>
+                                
+                                <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                    <div><strong>Pres.:</strong> O Senhor esteja convosco.</div>
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('O Senhor esteja convosco.')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
                                 </div>
                                 
-                                <div class="reading-text">
-                                    <span class="liturgy-text" data-section="primeira-leitura">Ver primeira leitura do dia.</span>
-                                    <button class="copy-line" data-dynamic="primeira-leitura-full">
+                                <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 my-4 flex items-start justify-between">
+                                    <div><strong>℟.:</strong> Ele está no meio de nós.</div>
+                                    <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Ele está no meio de nós.')">
                                         <i class="fas fa-copy"></i>
                                     </button>
-                                </div>
-                            </div>
-                            
-                            <p>O leitor conclui:</p>
-                            <div class="prayer-line">
-                                <strong>Leitor:</strong> Palavra do Senhor.
-                                <button class="copy-line" data-text="Palavra do Senhor.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>Todos aclamam:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Graças a Deus.
-                                <button class="copy-line" data-text="℟.: Graças a Deus.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Salmo Responsorial -->
-                    <div class="subsection-card">
-                        <h3>Salmo Responsorial</h3>
-                        <div class="liturgical-text">
-                            <div class="dynamic-content" id="salmo-content">
-                                <div class="psalm-content">
-                                    <span class="liturgy-text" data-section="salmo">Ver Salmo Responsorial do dia.</span>
-                                    <button class="copy-line" data-dynamic="salmo-full">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Segunda Leitura -->
-                    <div class="subsection-card segunda-leitura-section">
-                        <h3>Segunda Leitura <span class="conditional-note">(Quando há)</span></h3>
-                        <div class="liturgical-text">
-                            <div class="dynamic-content" id="segunda-leitura-content">
-                                <div class="reading-header">
-                                    <span class="liturgy-text" data-section="segunda-leitura-ref">Leitura...</span>
                                 </div>
                                 
-                                <div class="reading-text">
-                                    <span class="liturgy-text" data-section="segunda-leitura">Ver segunda leitura do dia.</span>
-                                    <button class="copy-line" data-dynamic="segunda-leitura-full">
+                                <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                    <div><strong>Pres.:</strong> Bendito seja o nome do Senhor.</div>
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Bendito seja o nome do Senhor.')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 my-4 flex items-start justify-between">
+                                    <div><strong>℟.:</strong> Agora e sempre.</div>
+                                    <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Agora e sempre.')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                    <div><strong>Pres.:</strong> Nosso auxílio está no nome do Senhor.</div>
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Nosso auxílio está no nome do Senhor.')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 my-4 flex items-start justify-between">
+                                    <div><strong>℟.:</strong> Que fez o céu e a terra.</div>
+                                    <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Que fez o céu e a terra.')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                    <div><strong>Pres.:</strong> O Senhor nos abençoe, nos guarde de todo mal e nos conduza à vida eterna.</div>
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('O Senhor nos abençoe, nos guarde de todo mal e nos conduza à vida eterna.')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 my-4 flex items-start justify-between">
+                                    <div><strong>℟.:</strong> Amém.</div>
+                                    <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Amém.')">
                                         <i class="fas fa-copy"></i>
                                     </button>
                                 </div>
                             </div>
-                            
-                            <p>O leitor conclui:</p>
-                            <div class="prayer-line">
-                                <strong>Leitor:</strong> Palavra do Senhor.
-                                <button class="copy-line" data-text="Palavra do Senhor.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>Todos aclamam:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Graças a Deus.
-                                <button class="copy-line" data-text="Graças a Deus.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
                         </div>
                     </div>
 
-                    <!-- Aleluia -->
-                    <div class="subsection-card">
-                        <h3>Aleluia</h3>
-                        <div class="liturgical-text">
-                            <div class="prayer-line">
-                                <strong>℣.:</strong> Aleluia, aleluia, aleluia.
-                                <button class="copy-line" data-text="℣.: Aleluia, aleluia, aleluia.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
+                    <!-- Avisos Tab -->
+                    <div id="avisos" class="tab-content">
+                        <div class="p-6">
+                            <h2 class="text-xl font-bold text-gray-900 dark:text-gray-100 mb-6 flex items-center gap-2">
+                                <i class="fas fa-bullhorn"></i> Avisos Paroquiais ou Diocesanos
+                            </h2>
                             
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Aleluia, aleluia, aleluia.
-                                <button class="copy-line" data-text="℟.: Aleluia, aleluia, aleluia.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="dynamic-content" id="aleluia-content">
-                                <div class="prayer-line">
-                                    <strong>℣.:</strong> <span class="liturgy-text" data-section="aleluia">Ver verso do Aleluia do dia.</span>
-                                    <button class="copy-line" data-dynamic="aleluia">
+                            <div class="prose prose-lg max-w-none dark:prose-invert">
+                                <p>Eis que os avisos paroquiais ou diocesanos, se houverem. Bênção Final e Despedida</p>
+                                
+                                <p>O presidente, voltado para o povo, diz:</p>
+                                
+                                <div class="bg-blue-50 dark:bg-blue-900 border-l-4 border-blue-500 p-4 my-4 flex items-start justify-between">
+                                    <div><strong>Pres.:</strong> Obedientes à palavra do Salvador e formados por Seu divino ensinamento, ousamos dizer:</div>
+                                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Obedientes à palavra do Salvador e formados por Seu divino ensinamento, ousamos dizer:')">
+                                        <i class="fas fa-copy"></i>
+                                    </button>
+                                </div>
+                                
+                                <div class="bg-green-50 dark:bg-green-900 border-l-4 border-green-500 p-4 my-4 flex items-start justify-between">
+                                    <div><strong>℟.:</strong> Pai Nosso que estais nos céus, santificado seja o vosso nome; venha a nós o vosso Reino; seja feita a vossa vontade, assim na terra como no céu. O pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.</div>
+                                    <button class="bg-green-500 hover:bg-green-600 text-white px-2 py-1 rounded text-sm ml-4 flex items-center gap-1" onclick="copyToClipboard('Pai Nosso que estais nos céus, santificado seja o vosso nome; venha a nós o vosso Reino; seja feita a vossa vontade, assim na terra como no céu. O pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal. Amém.')">
                                         <i class="fas fa-copy"></i>
                                     </button>
                                 </div>
                             </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Aleluia, aleluia, aleluia.
-                                <button class="copy-line" data-text="℟.: Aleluia, aleluia, aleluia.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℣.:</strong> Limpai o meu coração e os meus lábios, Deus todo-poderoso, para que eu possa anunciar dignamente o vosso santo Evangelho.
-                                <button class="copy-line" data-text="Limpai o meu coração e os meus lábios, Deus todo-poderoso, para que eu possa anunciar dignamente o vosso santo Evangelho.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
                         </div>
-                    </div>
-
-                    <!-- Evangelho -->
-                    <div class="subsection-card">
-                        <h3>Evangelho</h3>
-                        <div class="liturgical-text">
-                            <div class="prayer-line">
-                                <strong>℣.:</strong> O Senhor esteja conosco.
-                                <button class="copy-line" data-text="℣.: O Senhor esteja conosco.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Ele está no meio de nós.
-                                <button class="copy-line" data-text="℟.: Ele está no meio de nós.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="dynamic-content" id="evangelho-title-content">
-                                <div class="prayer-line">
-                                    <strong>℣.:</strong> Proclamação + do Evangelho + de Jesus Cristo, + segundo <span class="liturgy-text" data-section="evangelho-evangelista">N.</span> <em>*Persigno-me*</em>
-                                    <button class="copy-line" data-dynamic="evangelho-title">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>O povo aclama:</strong><br>
-                                <strong>℟.:</strong> Glória + a vós +, Senhor +.
-                                <button class="copy-line" data-text="℟.: Glória + a vós +, Senhor +.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="dynamic-content" id="evangelho-content">
-                                <div class="gospel-text">
-                                    <strong>℣.:</strong> <span class="liturgy-text" data-section="evangelho">Ver Evangelho do dia.</span>
-                                    <button class="copy-line" data-dynamic="evangelho-full">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <p>Terminado o Evangelho, o presidente aclama:</p>
-                            <div class="prayer-line">
-                                <strong>℣.:</strong> Palavra da Salvação.
-                                <button class="copy-line" data-text="Palavra da Salvação.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>O povo aclama:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Glória a vós, Senhor.
-                                <button class="copy-line" data-text="Glória a vós, Senhor.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Homilia -->
-                    <div class="subsection-card">
-                        <h3>REFLEXÃO DA PALAVRA (Opcional)</h3>
-                        <div class="liturgical-text">
-                            <p><strong>Reflexão da Palavra</strong> (em torno de cinco minutos e não mais que dez).</p>
-                        </div>
-                    </div>
-
-                    <!-- Credo -->
-                    <div class="subsection-card credo-section">
-                        <h3>Credo <span class="conditional-note">(Apenas quando prescrito. Conferir liturgia do dia)</span></h3>
-                        <div class="liturgical-text">
-                            <div class="prayer-line credo-text">
-                                <strong>℟.:</strong> Creio em Deus Pai todo-poderoso, criador do céu e da terra. E em Jesus Cristo, seu único Filho, nosso Senhor, <em>*Inclino-me profundamente*</em> que foi concebido pelo poder do Espírito Santo; nasceu da virgem Maria <em>*Volto-me*</em>; padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado. Desceu à mansão dos mortos; ressuscitou ao terceiro dia, subiu aos céus; está sentado à direita de Deus Pai todo-poderoso, donde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo; na Santa Igreja católica; na comunhão dos santos; na remissão dos pecados; na ressurreição da carne; na vida eterna. Amém.
-                                <button class="copy-line" data-text="℟.: Creio em Deus Pai todo-poderoso, criador do céu e da terra. E em Jesus Cristo, seu único Filho, nosso Senhor, que foi concebido pelo poder do Espírito Santo; nasceu da virgem Maria; padeceu sob Pôncio Pilatos, foi crucificado, morto e sepultado. Desceu à mansão dos mortos; ressuscitou ao terceiro dia, subiu aos céus; está sentado à direita de Deus Pai todo-poderoso, donde há de vir a julgar os vivos e os mortos. Creio no Espírito Santo; na Santa Igreja católica; na comunhão dos santos; na remissão dos pecados; na ressurreição da carne; na vida eterna. Amém.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Oração dos Fiéis -->
-                    <div class="subsection-card">
-                        <h3>Oração dos Fiéis (Preces da Comunidade)</h3>
-                        <div class="liturgical-text">
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Irmãos e irmãs, reunidos para celebrar os mistérios da nossa Redenção, roguemos ao Deus todo-poderoso que o mundo inteiro seja lavado na fonte de toda bênção e toda vida.
-                                <button class="copy-line" data-text="Irmãos e irmãs, reunidos para celebrar os mistérios da nossa Redenção, roguemos ao Deus todo-poderoso que o mundo inteiro seja lavado na fonte de toda bênção e toda vida.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Senhor, escutai a nossa prece.
-                                <button class="copy-line" data-text="℟.: Senhor, escutai a nossa prece.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="dynamic-content" id="preces-content">
-                                <p><strong>Ver preces próprias do tempo:</strong> <a href="https://missalromano-habbo.blogspot.com/p/oracao-dos-fieis.html" target="_blank">AQUI</a></p>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Sede propício, ó Deus, às súplicas de vosso povo, para que, sem demora, alcancemos de vossa bondade o que, por vossa inspiração, pedimos cheios de fé. Por Cristo, nosso Senhor.
-                                <button class="copy-line" data-text="Sede propício, ó Deus, às súplicas de vosso povo, para que, sem demora, alcancemos de vossa bondade o que, por vossa inspiração, pedimos cheios de fé. Por Cristo, nosso Senhor.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Amém.
-                                <button class="copy-line" data-text="℟.: Amém.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Preparação para a Comunhão -->
-                <section class="section communion-prep">
-                    <h2><i class="fas fa-bread-slice"></i> Preparação para a Comunhão</h2>
-                    
-                    <!-- Preparo do Altar -->
-                    <div class="subsection-card">
-                        <h3>Preparo do Altar</h3>
-                        <div class="liturgical-text">
-                            <p>Inicia-se o canto da preparação, enquanto os ministros colocam no altar o corporal e tomam o cibório com as hóstias consagradas do sacrário e o colocam sobre o corporal, no altar.</p>
-                            
-                            <div class="note">
-                                <p><strong>CANTO DA PREPARAÇÃO</strong> (Escolher um canto digno e apropriado. NÃO usar cantos que falem de sacrifício, vinho, ou outros elementos próprios da Santa Missa).</p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Rito da Comunhão -->
-                <section class="section communion-rite">
-                    <h2><i class="fas fa-praying-hands"></i> Rito da Comunhão</h2>
-                    
-                    <!-- Pai Nosso -->
-                    <div class="subsection-card">
-                        <h3>Pai Nosso</h3>
-                        <div class="liturgical-text">
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Obedientes à palavra do Salvador e formados por seu divino ensinamento, ousamos dizer:
-                                <button class="copy-line" data-text="Obedientes à palavra do Salvador e formados por seu divino ensinamento, ousamos dizer:">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="action-note">*Abro braços*</div>
-                            
-                            <div class="prayer-line pai-nosso-text">
-                                <strong>℟.:</strong> Pai nosso que estais nos céus, santificado seja o vosso nome; venha a nós o vosso reino, seja feita a vossa vontade, assim na terra como no céu; o pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal.
-                                <button class="copy-line" data-text="℟.: Pai nosso que estais nos céus, santificado seja o vosso nome; venha a nós o vosso reino, seja feita a vossa vontade, assim na terra como no céu; o pão nosso de cada dia nos dai hoje; perdoai-nos as nossas ofensas, assim como nós perdoamos a quem nos tem ofendido; e não nos deixeis cair em tentação, mas livrai-nos do mal.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Livrai-nos de todos os males, ó Pai, e dai-nos hoje a vossa paz. Ajudados pela vossa misericórdia, sejamos sempre livres do pecado e protegidos de todos os perigos, enquanto aguardamos a feliz esperança e a vinda do nosso Salvador, Jesus Cristo. <em>*Uno mãos*</em>
-                                <button class="copy-line" data-text="Livrai-nos de todos os males, ó Pai, e dai-nos hoje a vossa paz. Ajudados pela vossa misericórdia, sejamos sempre livres do pecado e protegidos de todos os perigos, enquanto aguardamos a feliz esperança e a vinda do nosso Salvador, Jesus Cristo.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>O povo conclui a oração, aclamando:</strong><br>
-                                <strong>℟.:</strong> Vosso é o reino, o poder e a glória para sempre!
-                                <button class="copy-line" data-text="℟.: Vosso é o reino, o poder e a glória para sempre!">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Oração pela Paz -->
-                    <div class="subsection-card">
-                        <h3>Oração pela Paz</h3>
-                        <div class="liturgical-text">
-                            <div class="action-note">*Abro braços*</div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Senhor Jesus Cristo, dissestes aos vossos Apóstolos: Eu vos deixo a paz, eu vos dou a minha paz. Não olheis os nossos pecados, mas a fé que anima vossa Igreja; dai-lhe, segundo o vosso desejo, a paz e a unidade. <em>*Uno mãos*</em> Vós, que sois Deus com o Pai e o Espírito Santo.
-                                <button class="copy-line" data-text="Senhor Jesus Cristo, dissestes aos vossos Apóstolos: Eu vos deixo a paz, eu vos dou a minha paz. Não olheis os nossos pecados, mas a fé que anima vossa Igreja; dai-lhe, segundo o vosso desejo, a paz e a unidade. Vós, que sois Deus com o Pai e o Espírito Santo.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>O povo responde:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Amém.
-                                <button class="copy-line" data-text="℟.: Amém.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="action-note">*Abro e uno mãos*</div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> A paz do Senhor esteja sempre conosco.
-                                <button class="copy-line" data-text="A paz do Senhor esteja sempre conosco.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>E o povo responde:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> O amor de Cristo nos uniu.
-                                <button class="copy-line" data-text="℟.: O amor de Cristo nos uniu.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Abraço da Paz -->
-                    <div class="subsection-card">
-                        <h3>Abraço da Paz</h3>
-                        <div class="liturgical-text">
-                            <p>Em seguida, se for oportuno, o presidente diz:</p>
-                            
-                            <div class="prayer-line">
-                                <strong>℣.:</strong> Irmãos e irmãs, saudai-vos em Cristo Jesus.
-                                <button class="copy-line" data-text="℣.: Irmãos e irmãs, saudai-vos em Cristo Jesus.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>E, todos, segundo o costume do lugar, manifestam uns aos outros a paz, a comunhão e a caridade.</p>
-                            
-                            <div class="note">
-                                <p><strong>NÃO SE REZA O CORDEIRO DE DEUS</strong></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Convite à Comunhão -->
-                    <div class="subsection-card">
-                        <h3>Convite à Comunhão</h3>
-                        <div class="liturgical-text">
-                            <p>Após todos manifestarem a paz uns aos outros, o presidente toma uma hóstia (partícula) e a eleva diante dos olhos, sobre o cibório.</p>
-                            
-                            <div class="action-note">*Tomo uma partícula e a elevo sobre o cibório*</div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Felizes os convidados para a Ceia do Senhor. Eis o Cordeiro de Deus, que tira o pecado do mundo.
-                                <button class="copy-line" data-text="Felizes os convidados para a Ceia do Senhor. Eis o Cordeiro de Deus, que tira o pecado do mundo.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <p>E acrescenta, com o povo, uma só vez:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Senhor, eu não sou digno de que entreis em minha morada, mas dizei uma palavra e serei salvo.
-                                <button class="copy-line" data-text="℟.: Senhor, eu não sou digno de que entreis em minha morada, mas dizei uma palavra e serei salvo.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Comunhão -->
-                    <div class="subsection-card">
-                        <h3>Comunhão</h3>
-                        <div class="liturgical-text">
-                            <p>O presidente reverentemente comunga do Corpo de Cristo.</p>
-                            <p>Procede-se à distribuição do Corpo de Cristo aos presentes.</p>
-                            <p><strong>CANTO DA COMUNHÃO</strong></p>
-                            <p>Após todos terem comungado, o presidente guarda o cibório no sacrário e depois de dobrar o corporal, guarda-o na credência.</p>
-                            <p>Depois, o presidente volta à cadeira. É aconselhável guardar algum tempo de silêncio sagrado ou proferir um salmo ou outro cântico de louvor.</p>
-                        </div>
-                    </div>
-
-                    <!-- Alma de Cristo -->
-                    <div class="subsection-card">
-                        <h3>Alma de Cristo</h3>
-                        <div class="liturgical-text">
-                            <div class="prayer-line alma-cristo-text">
-                                <strong>℟.:</strong> Alma de Cristo, santificai-me. Corpo de Cristo, salvai-me. Sangue de Cristo, inebriai-me. Água do lado de Cristo, lavai-me. Paixão de Cristo, confortai-me. Ó bom Jesus, ouvi-me. Dentro das Vossas chagas, escondei-me. Não permitais que eu me separe de Vós. Do inimigo maligno defendei-me. Na hora da minha morte, chamai-me. Mandai-me ir para Vós, Para que Vos louve com os Vossos Santos Pelos séculos dos séculos. Amém.
-                                <button class="copy-line" data-text="℟.: Alma de Cristo, santificai-me. Corpo de Cristo, salvai-me. Sangue de Cristo, inebriai-me. Água do lado de Cristo, lavai-me. Paixão de Cristo, confortai-me. Ó bom Jesus, ouvi-me. Dentro das Vossas chagas, escondei-me. Não permitais que eu me separe de Vós. Do inimigo maligno defendei-me. Na hora da minha morte, chamai-me. Mandai-me ir para Vós, Para que Vos louve com os Vossos Santos Pelos séculos dos séculos. Amém.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Oração Depois da Comunhão -->
-                    <div class="subsection-card">
-                        <h3>Oração Depois da Comunhão</h3>
-                        <div class="liturgical-text">
-                            <p>Terminado o momento de Comunhão, o presidente diz:</p>
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Oremos.
-                                <button class="copy-line" data-text="Oremos.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            <div class="action-note">*Abro braços*</div>
-                            
-                            <div class="dynamic-content" id="pos-comunhao-content">
-                                <div class="prayer-line">
-                                    <strong>Pres.:</strong> <span class="liturgy-text" data-section="pos-comunhao">Ver Oração Depois da Comunhão do dia.</span>
-                                    <button class="copy-line" data-dynamic="pos-comunhao">
-                                        <i class="fas fa-copy"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            
-                            <p>Ao terminar, o povo aclama:</p>
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Amém.
-                                <button class="copy-line" data-text="℟.: Amém.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Ritos Finais -->
-                <section class="section final-rites">
-                    <h2><i class="fas fa-hands"></i> Ritos Finais</h2>
-                    
-                    <!-- Avisos -->
-                    <div class="subsection-card">
-                        <h3>Avisos</h3>
-                        <div class="liturgical-text">
-                            <p><strong>AVISOS PAROQUIAIS OU DIOCESANOS</strong>, se houverem.</p>
-                        </div>
-                    </div>
-
-                    <!-- Bênção Final -->
-                    <div class="subsection-card">
-                        <h3>Bênção Final e Despedida</h3>
-                        <div class="liturgical-text">
-                            <p>O presidente, voltado para o povo, abre os braços e diz:</p>
-                            
-                            <div class="action-note">*Abro e uno mãos*</div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> O Senhor esteja conosco.
-                                <button class="copy-line" data-text="O Senhor esteja conosco.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Ele está no meio de nós.
-                                <button class="copy-line" data-text="℟.: Ele está no meio de nós.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Abençoe-nos Deus todo-poderoso, + Pai e Filho e Espírito Santo.
-                                <button class="copy-line" data-text="Abençoe-nos Deus todo-poderoso, + Pai e Filho e Espírito Santo.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Amém.
-                                <button class="copy-line" data-text="℟.: Amém.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>Pres.:</strong> Ide em paz e o Senhor vos acompanhe.
-                                <button class="copy-line" data-text="Ide em paz e o Senhor vos acompanhe.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                            
-                            <div class="prayer-line">
-                                <strong>℟.:</strong> Graças a Deus.
-                                <button class="copy-line" data-text="℟.: Graças a Deus.">
-                                    <i class="fas fa-copy"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-
-                <!-- Disclaimer -->
-                <div id="weekday-disclaimer" class="disclaimer" style="display: none;">
-                    <div class="disclaimer-content">
-                        <i class="fas fa-info-circle"></i>
-                        <p><strong>Nota:</strong> Em dias de semana comuns, algumas seções como o Glória e o Credo podem não ser recitadas. Consulte sempre o calendário litúrgico para verificar as particularidades do dia.</p>
                     </div>
                 </div>
+            </div>
+
             </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>Arquidiocese de Belém</h3>
-                    <p>Servindo à Igreja Católica no Pará com fé, esperança e caridade.</p>
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-yellow-400">Arquidiocese de Belém</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Servindo à Igreja Católica no Pará com fé, esperança e caridade.</p>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Contato</h3>
-                    <p><i class="fas fa-envelope"></i> contato@arquidiocesebelem.org.br</p>
-                    <p><i class="fas fa-phone"></i> (91) 3210-1234</p>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-yellow-400">Contato</h3>
+                    <div class="space-y-2 text-gray-400 text-sm">
+                        <p class="flex items-center gap-2">
+                            <i class="fas fa-envelope w-4"></i>
+                            contato@arquidiocesebelem.org.br
+                        </p>
+                        <p class="flex items-center gap-2">
+                            <i class="fas fa-phone w-4"></i>
+                            (91) 3210-1234
+                        </p>
+                    </div>
                 </div>
                 
-                <div class="footer-section">
-                    <h3>Horários de Missas</h3>
-                    <p>Segunda a Sexta: 7h e 18h</p>
-                    <p>Sábado: 18h</p>
-                    <p>Domingo: 8h, 10h e 18h</p>
+                <div class="space-y-4">
+                    <h3 class="text-lg font-bold text-yellow-400">Horários de Missas</h3>
+                    <div class="text-gray-400 text-sm space-y-1">
+                        <p>Segunda a Sexta: 7h e 18h</p>
+                        <p>Sábado: 18h</p>
+                        <p>Domingo: 8h, 10h e 18h</p>
+                    </div>
                 </div>
             </div>
             
-            <div class="footer-bottom">
-                <p>&copy; 2024 Arquidiocese de Belém do Pará. Todos os direitos reservados.</p>
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 text-sm">&copy; 2024 Arquidiocese de Belém do Pará. Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
     <!-- Toast Notification -->
-    <div id="toast" class="toast">
+    <div id="toast" class="fixed bottom-6 right-6 bg-green-600 text-white px-6 py-3 rounded-lg shadow-lg transform translate-y-16 opacity-0 transition-all duration-300 flex items-center gap-2 z-50">
         <i class="fas fa-check-circle"></i>
         <span id="toast-message">Texto copiado para a área de transferência!</span>
     </div>
 
     <!-- Scripts -->
     <script>
-        // Mobile menu toggle
+        // Sistema de Tabs
+        function switchTab(tabName) {
+            // Ocultar todos os conteúdos de tabs
+            const allTabContents = document.querySelectorAll('.tab-content');
+            allTabContents.forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Remover classe ativa de todos os botões de tab
+            const allTabButtons = document.querySelectorAll('.tab-button');
+            allTabButtons.forEach(button => {
+                button.classList.remove('active');
+            });
+            
+            // Mostrar o conteúdo do tab selecionado
+            const selectedTab = document.getElementById(tabName);
+            if (selectedTab) {
+                selectedTab.style.display = 'block';
+            }
+            
+            // Adicionar classe ativa ao botão clicado
+            const selectedButton = document.querySelector(`[onclick="switchTab('${tabName}')"]`);
+            if (selectedButton) {
+                selectedButton.classList.add('active');
+            }
+        }
+
+        // Função para copiar texto
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(function() {
+                // Feedback visual
+                showCopyFeedback();
+            }).catch(function(err) {
+                console.error('Erro ao copiar: ', err);
+                // Fallback para navegadores mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                showCopyFeedback();
+            });
+        }
+
+        // Feedback visual para cópia
+        function showCopyFeedback() {
+            const feedback = document.createElement('div');
+            feedback.textContent = 'Texto copiado!';
+            feedback.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 5px;
+                z-index: 10000;
+                font-family: Arial, sans-serif;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            `;
+            document.body.appendChild(feedback);
+            
+            setTimeout(() => {
+                feedback.remove();
+            }, 2000);
+        }
+
+        // Mobile menu toggle e inicialização
         document.addEventListener('DOMContentLoaded', function() {
+            // Inicializar com a primeira tab ativa
+            switchTab('orientacoes-gerais');
+            
+            // Configurar botões de cópia
+            const copyButtons = document.querySelectorAll('.copy-line');
+            copyButtons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    let textToCopy = '';
+                    
+                    // Verificar se tem atributo data-text
+                    if (this.hasAttribute('data-text')) {
+                        textToCopy = this.getAttribute('data-text');
+                    }
+                    // Verificar se tem atributo data-dynamic
+                    else if (this.hasAttribute('data-dynamic')) {
+                        const dynamicKey = this.getAttribute('data-dynamic');
+                        const parentLine = this.closest('.prayer-line');
+                        if (parentLine) {
+                            // Pegar o texto da linha, removendo o botão
+                            const buttonClone = this.cloneNode(true);
+                            const lineClone = parentLine.cloneNode(true);
+                            const buttonInClone = lineClone.querySelector('.copy-line');
+                            if (buttonInClone) {
+                                buttonInClone.remove();
+                            }
+                            textToCopy = lineClone.textContent.trim();
+                        }
+                    }
+                    
+                    if (textToCopy) {
+                        copyToClipboard(textToCopy);
+                    }
+                });
+            });
+            
+            // Menu móvel
             const mobileMenuBtn = document.getElementById('mobile-menu-btn');
             const nav = document.getElementById('nav');
             
@@ -939,6 +716,8 @@
             }
         });
     </script>
-    <script src="js/celebracao.js"></script>
+    <script src="js/celebracao.js" defer></script>
+    <script src="js/darkmode.js" type="module" defer></script>
+    <script src="js/disclaimer-manager.js" type="module" defer></script>
 </body>
 </html>

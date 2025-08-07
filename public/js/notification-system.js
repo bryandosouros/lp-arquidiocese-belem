@@ -22,7 +22,6 @@ class NotificationSystem {
         this.setupVisibilityAPI();
         this.setupRealtimeListeners();
         this.setupNotificationUI();
-        this.loadNotificationSettings();
         this.setupNotificationSounds();
         
         // Check for missed notifications
@@ -33,27 +32,35 @@ class NotificationSystem {
 
     // Setup Realtime Listeners
     setupRealtimeListeners() {
+        console.log('🔔 DEBUG: Iniciando listeners do sistema de notificação...');
+        
         // Listen for new posts
         this.listenForNewPosts();
         
+        // TEMPORARIAMENTE DESABILITADO - coleções não existem
         // Listen for content sharing
-        this.listenForContentSharing();
+        // this.listenForContentSharing();
         
         // Listen for workflow updates
-        this.listenForWorkflowUpdates();
+        // this.listenForWorkflowUpdates();
         
         // Listen for user mentions
-        this.listenForUserMentions();
+        // this.listenForUserMentions();
         
         // Listen for system announcements
-        this.listenForSystemAnnouncements();
+        // this.listenForSystemAnnouncements();
+        
+        console.log('🔔 DEBUG: Apenas listener de posts ativo (outros desabilitados temporariamente)');
     }
 
     // Listen for new posts
     listenForNewPosts() {
+        const postsCollectionRef = collection(db, 'posts');
+        console.log('DEBUG: O sistema de notificação está tentando ler a coleção em:', postsCollectionRef.path);
+        
         const postsQuery = query(
-            collection(db, 'posts'),
-            orderBy('createdAt', 'desc')
+            postsCollectionRef,
+            orderBy('publishedDate', 'desc')
         );
         
         const unsubscribe = onSnapshot(postsQuery, (snapshot) => {
@@ -62,7 +69,8 @@ class NotificationSystem {
                     const post = { id: change.doc.id, ...change.doc.data() };
                     
                     // Only notify for posts created in the last 5 minutes
-                    const isRecent = this.isRecentPost(post.createdAt);
+                    // Use createdDate (from migrated posts) or publishedDate as fallback
+                    const isRecent = this.isRecentPost(post.createdDate || post.publishedDate);
                     
                     if (isRecent && !this.isCurrentUserPost(post)) {
                         this.createNotification({
@@ -87,8 +95,11 @@ class NotificationSystem {
 
     // Listen for content sharing
     listenForContentSharing() {
+        const contentSharesCollectionRef = collection(db, 'content_shares');
+        console.log('DEBUG: O sistema de notificação está tentando ler a coleção em:', contentSharesCollectionRef.path);
+        
         const sharesQuery = query(
-            collection(db, 'content_shares'),
+            contentSharesCollectionRef,
             orderBy('sharedAt', 'desc')
         );
         
@@ -116,8 +127,11 @@ class NotificationSystem {
 
     // Listen for workflow updates
     listenForWorkflowUpdates() {
+        const approvalWorkflowsCollectionRef = collection(db, 'approval_workflows');
+        console.log('DEBUG: O sistema de notificação está tentando ler a coleção em:', approvalWorkflowsCollectionRef.path);
+        
         const workflowQuery = query(
-            collection(db, 'approval_workflows'),
+            approvalWorkflowsCollectionRef,
             orderBy('createdAt', 'desc')
         );
         
@@ -151,8 +165,11 @@ class NotificationSystem {
         const currentUser = this.getCurrentUser();
         if (!currentUser) return;
         
+        const notificationsCollectionRef = collection(db, 'notifications');
+        console.log('DEBUG: O sistema de notificação está tentando ler a coleção em:', notificationsCollectionRef.path);
+        
         const mentionsQuery = query(
-            collection(db, 'notifications'),
+            notificationsCollectionRef,
             where('userId', '==', currentUser.uid),
             where('type', '==', 'mention'),
             orderBy('createdAt', 'desc')
@@ -181,8 +198,11 @@ class NotificationSystem {
 
     // Listen for system announcements
     listenForSystemAnnouncements() {
+        const systemAnnouncementsCollectionRef = collection(db, 'system_announcements');
+        console.log('DEBUG: O sistema de notificação está tentando ler a coleção em:', systemAnnouncementsCollectionRef.path);
+        
         const announcementsQuery = query(
-            collection(db, 'system_announcements'),
+            systemAnnouncementsCollectionRef,
             where('active', '==', true),
             orderBy('createdAt', 'desc')
         );
@@ -502,9 +522,24 @@ class NotificationSystem {
         return timestamp.toLocaleDateString();
     }
 
-    isRecentPost(createdAt) {
+    isRecentPost(createdDate) {
+        if (!createdDate) return false;
+        
         const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
-        return createdAt.toDate() > fiveMinutesAgo;
+        
+        // Verificar se é um Timestamp do Firestore ou uma data normal
+        let postDate;
+        if (createdDate && typeof createdDate.toDate === 'function') {
+            postDate = createdDate.toDate();
+        } else if (createdDate instanceof Date) {
+            postDate = createdDate;
+        } else if (typeof createdDate === 'string') {
+            postDate = new Date(createdDate);
+        } else {
+            return false; // Se não conseguir converter, considerar como não recente
+        }
+        
+        return postDate > fiveMinutesAgo;
     }
 
     isCurrentUserPost(post) {

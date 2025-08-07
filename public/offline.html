@@ -195,9 +195,39 @@
         @keyframes spin {
             to { transform: rotate(360deg); }
         }
+        
+        /* Dark Mode Toggle */
+        .dark-mode-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+            font-size: 1.2rem;
+            z-index: 1000;
+        }
+        
+        .dark-mode-toggle:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: scale(1.1);
+        }
     </style>
 </head>
 <body>
+    <!-- Dark Mode Toggle -->
+    <button id="dark-mode-toggle" class="dark-mode-toggle" title="Alternar modo escuro">
+        🌙
+    </button>
+    
     <div class="connection-status" id="connection-status">
         📵 Offline
     </div>
@@ -402,5 +432,7 @@
         // Auto-check connection every 30 seconds
         setInterval(updateConnectionStatus, 30000);
     </script>
+    <script src="js/darkmode.js" type="module" defer></script>
+    <script src="js/disclaimer-manager.js" type="module" defer></script>
 </body>
 </html>

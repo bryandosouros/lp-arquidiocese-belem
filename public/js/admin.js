@@ -148,7 +148,7 @@ async function loadDashboardData() {
 // Carregar posts do Firestore
 async function loadPosts() {
     try {
-        const postsQuery = query(collection(db, 'posts'), orderBy('createdAt', 'desc'));
+        const postsQuery = query(collection(db, 'posts'), orderBy('publishedDate', 'desc'));
         const querySnapshot = await getDocs(postsQuery);
         
         posts = [];
@@ -171,13 +171,13 @@ async function loadPosts() {
 function renderPostsList() {
     if (posts.length === 0) {
         postsListElement.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">📄</div>
-                <h3>Nenhum decreto encontrado</h3>
-                <p>Comece criando seu primeiro decreto oficial.</p>
-                <button class="btn-primary" onclick="openPostEditor()">
+            <div class="text-center py-16">
+                <div class="text-6xl mb-4">📄</div>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Nenhum decreto encontrado</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">Comece criando seu primeiro decreto oficial.</p>
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium inline-flex items-center space-x-2 transition-colors" onclick="openPostEditor()">
                     <span>✍️</span>
-                    Criar Primeiro Decreto
+                    <span>Criar Primeiro Decreto</span>
                 </button>
             </div>
         `;
@@ -190,43 +190,44 @@ function renderPostsList() {
         const priorityBadge = getPriorityBadge(post.priority);
         
         return `
-            <div class="post-item" data-post-id="${post.id}">
-                <div class="post-content">
-                    <div class="post-header">
-                        <h3 class="post-title">${post.title}</h3>
-                        <div class="post-badges">
-                            ${statusBadge}
-                            ${priorityBadge}
-                        </div>
+            <tr class="hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors" data-post-id="${post.id}">
+                <td class="px-6 py-4">
+                    <div class="flex flex-col">
+                        <h3 class="font-medium text-gray-900 dark:text-gray-100 mb-1">${post.title}</h3>
+                        <p class="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">${post.excerpt || 'Sem resumo disponível.'}</p>
                     </div>
-                    <div class="post-meta">
-                        <span class="post-category">${getCategoryLabel(post.category)}</span>
-                        <span class="post-date">${formatDate(date)}</span>
-                        ${post.tags ? `<div class="post-tags">${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>` : ''}
+                </td>
+                <td class="px-6 py-4">
+                    <span class="text-sm text-gray-600 dark:text-gray-400">${getCategoryLabel(post.category)}</span>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex flex-col space-y-1">
+                        ${statusBadge}
+                        ${priorityBadge}
                     </div>
-                    <p class="post-excerpt">${post.excerpt || 'Sem resumo disponível.'}</p>
-                </div>
-                <div class="post-actions">
-                    <button class="action-btn edit-btn" onclick="editPost('${post.id}')">
-                        <span>✏️</span>
-                        Editar
-                    </button>
-                    <button class="action-btn duplicate-btn" onclick="duplicatePost('${post.id}')">
-                        <span>📋</span>
-                        Duplicar
-                    </button>
-                    <button class="action-btn delete-btn" onclick="deletePost('${post.id}')">
-                        <span>🗑️</span>
-                        Excluir
-                    </button>
-                    ${post.status === 'published' ? 
-                        `<a href="noticia.html?id=${post.id}" target="_blank" class="action-btn view-btn">
-                            <span>👁️</span>
-                            Ver
-                        </a>` : ''
-                    }
-                </div>
-            </div>
+                </td>
+                <td class="px-6 py-4">
+                    <span class="text-sm text-gray-600 dark:text-gray-400">${formatDate(date)}</span>
+                </td>
+                <td class="px-6 py-4">
+                    <div class="flex space-x-2">
+                        <button class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors" onclick="editPost('${post.id}')" title="Editar">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="text-green-600 hover:text-green-800 dark:text-green-400 dark:hover:text-green-300 p-2 rounded-lg hover:bg-green-50 dark:hover:bg-green-900/20 transition-colors" onclick="duplicatePost('${post.id}')" title="Duplicar">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                        <button class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300 p-2 rounded-lg hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors" onclick="deletePost('${post.id}')" title="Excluir">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                        ${post.status === 'published' ? 
+                            `<a href="noticia.html?id=${post.id}" target="_blank" class="text-purple-600 hover:text-purple-800 dark:text-purple-400 dark:hover:text-purple-300 p-2 rounded-lg hover:bg-purple-50 dark:hover:bg-purple-900/20 transition-colors" title="Ver">
+                                <i class="fas fa-eye"></i>
+                            </a>` : ''
+                        }
+                    </div>
+                </td>
+            </tr>
         `;
     }).join('');
     
@@ -236,17 +237,17 @@ function renderPostsList() {
 // Funções auxiliares para badges e formatação
 function getStatusBadge(status) {
     const badges = {
-        published: '<span class="badge badge-success">Publicado</span>',
-        draft: '<span class="badge badge-warning">Rascunho</span>'
+        published: '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800 dark:bg-green-900/20 dark:text-green-400">Publicado</span>',
+        draft: '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800 dark:bg-yellow-900/20 dark:text-yellow-400">Rascunho</span>'
     };
     return badges[status] || '';
 }
 
 function getPriorityBadge(priority) {
     const badges = {
-        high: '<span class="badge badge-danger">Alta Prioridade</span>',
-        normal: '<span class="badge badge-info">Normal</span>',
-        low: '<span class="badge badge-secondary">Baixa</span>'
+        high: '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-red-100 text-red-800 dark:bg-red-900/20 dark:text-red-400">Alta Prioridade</span>',
+        normal: '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/20 dark:text-blue-400">Normal</span>',
+        low: '<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800 dark:bg-gray-900/20 dark:text-gray-400">Baixa</span>'
     };
     return badges[priority] || '';
 }
@@ -778,29 +779,39 @@ function addCategoryChart() {
 
 // Sistema de notificações
 function showNotification(message, type = 'info') {
+    // Mapa de cores para cada tipo
+    const typeStyles = {
+        success: 'bg-green-500 text-white border-green-600',
+        error: 'bg-red-500 text-white border-red-600',
+        warning: 'bg-yellow-500 text-white border-yellow-600',
+        info: 'bg-blue-500 text-white border-blue-600'
+    };
+    
     // Criar elemento de notificação
     const notification = document.createElement('div');
-    notification.className = `notification notification-${type}`;
+    notification.className = `fixed top-4 right-4 z-50 max-w-sm w-full ${typeStyles[type]} border-l-4 p-4 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full`;
     notification.innerHTML = `
-        <div class="notification-content">
-            <span class="notification-message">${message}</span>
-            <button class="notification-close">&times;</button>
+        <div class="flex items-center justify-between">
+            <span class="font-medium">${message}</span>
+            <button class="ml-3 text-white hover:text-gray-200 focus:outline-none focus:text-gray-200 transition-colors" onclick="this.parentElement.parentElement.remove()">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
     `;
     
     // Adicionar ao DOM
     document.body.appendChild(notification);
     
-    // Fechar notificação
-    const closeBtn = notification.querySelector('.notification-close');
-    closeBtn.addEventListener('click', () => {
-        notification.remove();
-    });
+    // Animar entrada
+    setTimeout(() => {
+        notification.classList.remove('translate-x-full');
+    }, 100);
     
     // Auto-remover após 5 segundos
     setTimeout(() => {
         if (notification.parentNode) {
-            notification.remove();
+            notification.classList.add('translate-x-full');
+            setTimeout(() => notification.remove(), 300);
         }
     }, 5000);
 }
@@ -839,10 +850,10 @@ window.duplicatePost = async function(postId) {
 function renderFilteredPosts(filteredPosts) {
     if (filteredPosts.length === 0) {
         postsListElement.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-icon">🔍</div>
-                <h3>Nenhum resultado encontrado</h3>
-                <p>Tente ajustar os filtros ou o termo de busca.</p>
+            <div class="text-center py-16">
+                <div class="text-6xl mb-4">🔍</div>
+                <h3 class="text-xl font-semibold text-gray-900 dark:text-gray-100 mb-2">Nenhum resultado encontrado</h3>
+                <p class="text-gray-600 dark:text-gray-400">Tente ajustar os filtros ou o termo de busca.</p>
             </div>
         `;
         return;
@@ -901,22 +912,26 @@ function updateRecentPosts() {
     const recentPosts = posts.slice(0, 5);
     
     if (recentPosts.length === 0) {
-        recentPostsElement.innerHTML = '<p class="no-posts">Nenhuma publicação encontrada.</p>';
+        recentPostsElement.innerHTML = '<p class="text-gray-500 dark:text-gray-400 text-center py-8">Nenhuma publicação encontrada.</p>';
         return;
     }
     
     const recentPostsHTML = recentPosts.map(post => {
         const date = post.createdAt ? new Date(post.createdAt.seconds * 1000) : new Date();
         return `
-            <div class="recent-post-item">
-                <div class="recent-post-content">
-                    <h4 class="recent-post-title">${post.title}</h4>
-                    <div class="recent-post-meta">
-                        <span class="recent-post-category">${getCategoryLabel(post.category)}</span>
-                        <span class="recent-post-date">${formatDate(date)}</span>
+            <div class="bg-white dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                <div class="flex justify-between items-start">
+                    <div class="flex-1">
+                        <h4 class="font-medium text-gray-900 dark:text-gray-100 mb-2 line-clamp-2">${post.title}</h4>
+                        <div class="flex items-center space-x-3 text-sm text-gray-500 dark:text-gray-400">
+                            <span class="bg-gray-100 dark:bg-gray-700 px-2 py-1 rounded-full text-xs">${getCategoryLabel(post.category)}</span>
+                            <span>${formatDate(date)}</span>
+                        </div>
                     </div>
+                    <button class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300 p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors ml-3" onclick="editPost('${post.id}')" title="Editar">
+                        <i class="fas fa-edit"></i>
+                    </button>
                 </div>
-                <button class="recent-post-edit" onclick="editPost('${post.id}')">✏️</button>
             </div>
         `;
     }).join('');

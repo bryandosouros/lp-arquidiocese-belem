@@ -104,58 +104,104 @@ function renderPost(post) {
             featuredImage: post.featuredImage,
             category: post.category,
             tags: post.tags,
-            createdAt: post.createdAt,
-            updatedAt: post.updatedAt,
-            publishedAt: post.publishedAt || post.createdAt
+            // Usar campos compatíveis com posts migrados
+            createdAt: post.createdDate || post.publishedDate || post.createdAt,
+            updatedAt: post.updatedAt || post.createdDate || post.publishedDate,
+            publishedAt: post.publishedDate || post.createdDate || post.createdAt
         });
     }
 
     // Render post content
     const container = document.getElementById('post-container');
     container.innerHTML = `
-        <header class="post-header">
-            <div class="post-breadcrumb">
-                <a href="index.html">Início</a>
-                <span class="breadcrumb-separator">›</span>
-                <a href="index.html#noticias">Notícias</a>
-                <span class="breadcrumb-separator">›</span>
-                <span class="breadcrumb-current">${getCategoryLabel(post.category)}</span>
+        <header class="p-6 md:p-8 border-b border-gray-200 dark:border-gray-700">
+            <nav class="text-sm text-gray-500 dark:text-gray-400 mb-4">
+                <a href="index.html" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Início</a>
+                <span class="mx-2">›</span>
+                <a href="index.html#noticias" class="hover:text-blue-600 dark:hover:text-blue-400 transition-colors">Notícias</a>
+                <span class="mx-2">›</span>
+                <span class="text-gray-700 dark:text-gray-300">${getCategoryLabel(post.category)}</span>
+            </nav>
+            
+            <div class="flex flex-wrap items-center gap-3 mb-6">
+                <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 text-sm font-medium rounded-full">${getCategoryLabel(post.category)}</span>
+                <time class="text-gray-500 dark:text-gray-400 text-sm">${formatDate(post.createdAt)}</time>
+                ${post.priority && post.priority !== 'normal' ? `<span class="inline-block bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-200 px-3 py-1 text-sm font-medium rounded-full">${getPriorityLabel(post.priority)}</span>` : ''}
             </div>
             
-            <div class="post-meta">
-                <span class="post-category ${post.category}">${getCategoryLabel(post.category)}</span>
-                <time class="post-date">${formatDate(post.createdAt)}</time>
-                ${post.priority && post.priority !== 'normal' ? `<span class="post-priority ${post.priority}">${getPriorityLabel(post.priority)}</span>` : ''}
-            </div>
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-gray-100 leading-tight mb-4">${post.title}</h1>
             
-            <h1 class="post-title">${post.title}</h1>
-            
-            ${post.excerpt ? `<div class="post-excerpt">${post.excerpt}</div>` : ''}
+            ${post.excerpt ? `<div class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed mb-6">${post.excerpt}</div>` : ''}
             
             ${post.featuredImage ? `
-                <div class="post-featured-image">
-                    <img src="${post.featuredImage}" alt="${post.title}">
+                <div class="mb-6 rounded-lg overflow-hidden">
+                    <img src="${post.featuredImage}" alt="${post.title}" class="w-full h-64 md:h-80 object-cover">
                 </div>
             ` : ''}
         </header>
         
-        <div class="post-body">
-            ${post.content || '<p>Conteúdo não disponível.</p>'}
+        <div class="p-6 md:p-8">
+            <div class="prose prose-lg max-w-none dark:prose-invert prose-blue dark:prose-dark">
+                ${processPostContent(post.content) || '<p>Conteúdo não disponível.</p>'}
+            </div>
         </div>
         
         ${post.tags && post.tags.length > 0 ? `
-            <footer class="post-footer">
-                <div class="post-tags">
-                    <span class="tags-label">Tags:</span>
-                    ${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+            <footer class="p-6 md:p-8 border-t border-gray-200 dark:border-gray-700">
+                <div class="flex flex-wrap items-center gap-2">
+                    <span class="text-gray-700 dark:text-gray-300 font-medium text-sm">Tags:</span>
+                    ${post.tags.map(tag => `<span class="inline-block bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 px-3 py-1 text-sm rounded-full hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors">${tag}</span>`).join('')}
                 </div>
             </footer>
         ` : ''}
         
-        <div class="post-navigation">
-            <a href="index.html#noticias-recentes" class="btn-back">← Voltar às Notícias</a>
+        <div class="p-6 md:p-8 border-t border-gray-200 dark:border-gray-700">
+            <a href="index.html#noticias" class="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1">
+                <i class="fas fa-arrow-left"></i>
+                Voltar às Notícias
+            </a>
         </div>
     `;
+}
+
+function processPostContent(content) {
+    if (!content) return null;
+    
+    // Usar proxy de imagens para resolver CORS do Blogger
+    let processedContent = content.replace(
+        /src="([^"]*blogger\.googleusercontent\.com[^"]*)"/g,
+        (match, url) => {
+            // Usar proxy CORS para imagens do Blogger
+            const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(url)}&w=800&q=85&output=webp&fallback=jpg`;
+            return `src="${proxyUrl}" data-original="${url}" onerror="this.style.display='none'; console.log('Imagem proxy falhou:', this.src)"`;
+        }
+    );
+    
+    // Preservar estilos de centralização do Blogger
+    processedContent = processedContent.replace(
+        /<div class="separator" style="[^"]*text-align:\s*center[^"]*">/g,
+        '<div class="separator" style="clear: both; text-align: center; margin: 1rem 0;">'
+    );
+    
+    // Adicionar centralização para imagens órfãs sem div
+    processedContent = processedContent.replace(
+        /<img([^>]*)(style="[^"]*")/g,
+        (match, imgAttrs, style) => {
+            if (!style.includes('text-align')) {
+                const newStyle = style.replace('style="', 'style="display: block; margin: 0 auto; ');
+                return `<img${imgAttrs}${newStyle}`;
+            }
+            return match;
+        }
+    );
+    
+    // Para imagens sem style, adicionar centralização
+    processedContent = processedContent.replace(
+        /<img(?![^>]*style=)([^>]*)>/g,
+        '<img$1 style="display: block; margin: 0 auto; max-width: 100%; height: auto;">'
+    );
+    
+    return processedContent;
 }
 
 function updateFallbackMetaTags(post) {
@@ -208,11 +254,16 @@ function updateFallbackMetaTags(post) {
 function showError(message) {
     const container = document.getElementById('post-container');
     container.innerHTML = `
-        <div class="error-state">
-            <div class="error-icon">⚠️</div>
-            <h2>Oops! Algo deu errado</h2>
-            <p>${message}</p>
-            <a href="index.html" class="btn-primary">Voltar ao Início</a>
+        <div class="flex items-center justify-center p-12">
+            <div class="text-center max-w-md">
+                <div class="text-6xl mb-4">⚠️</div>
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-200 mb-4">Oops! Algo deu errado</h2>
+                <p class="text-gray-600 dark:text-gray-400 mb-6">${message}</p>
+                <a href="index.html" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 inline-flex items-center gap-2">
+                    <i class="fas fa-home"></i>
+                    Voltar ao Início
+                </a>
+            </div>
         </div>
     `;
 }

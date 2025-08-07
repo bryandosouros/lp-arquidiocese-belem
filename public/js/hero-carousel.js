@@ -64,16 +64,30 @@ class HeroCarousel {
     }
 
     goToSlide(slideIndex) {
-        // Remove active class from current slide and indicator
-        this.slides[this.currentSlide].classList.remove('slide-ativo');
-        this.indicators[this.currentSlide].classList.remove('ativo');
+        // Primeiro, esconde TODOS os slides removendo classes ativas e adicionando hidden
+        this.slides.forEach((slide, i) => {
+            slide.classList.remove('slide-ativo');
+            slide.classList.remove('active');
+            slide.classList.add('hidden');
+        });
+        
+        // Remove active class from all indicators
+        this.indicators.forEach(indicator => {
+            indicator.classList.remove('ativo');
+        });
         
         // Update current slide
         this.currentSlide = slideIndex;
         
-        // Add active class to new slide and indicator
+        // Apenas o slide ativo fica visível (remove hidden e adiciona classes ativas)
+        this.slides[this.currentSlide].classList.remove('hidden');
         this.slides[this.currentSlide].classList.add('slide-ativo');
-        this.indicators[this.currentSlide].classList.add('ativo');
+        this.slides[this.currentSlide].classList.add('active');
+        
+        // Add active class to current indicator
+        if (this.indicators[this.currentSlide]) {
+            this.indicators[this.currentSlide].classList.add('ativo');
+        }
         
         // Update background color
         this.updateBackgroundColor();

@@ -1,0 +1,79 @@
+<!-- Vela Branca Animada -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 180" width="120" height="180">
+  <defs>
+    <!-- Gradientes para a chama -->
+    <radialGradient id="flameWhite" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fff9c4" opacity="0.9"/>
+      <stop offset="30%" stop-color="#fbbf24" opacity="0.8"/>
+      <stop offset="60%" stop-color="#f59e0b" opacity="0.7"/>
+      <stop offset="100%" stop-color="#dc2626" opacity="0.6"/>
+    </radialGradient>
+    
+    <!-- Gradiente para a vela -->
+    <linearGradient id="candleWhite" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="50%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    
+    <!-- Gradiente para a cera derretida -->
+    <linearGradient id="waxWhite" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="100%" stop-color="#f1f5f9"/>
+    </linearGradient>
+    
+    <!-- Sombra -->
+    <filter id="shadow">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.3"/>
+    </filter>
+  </defs>
+  
+  <!-- Base/Prato da vela -->
+  <ellipse cx="60" cy="165" rx="25" ry="8" fill="#e2e8f0" opacity="0.7"/>
+  
+  <!-- Corpo da vela -->
+  <rect x="45" y="90" width="30" height="75" rx="2" fill="url(#candleWhite)" filter="url(#shadow)"/>
+  
+  <!-- Cera derretida -->
+  <path d="M 45 90 Q 40 95 42 100 Q 45 105 48 108 L 45 108 Z" fill="url(#waxWhite)" opacity="0.8">
+    <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="4s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 75 90 Q 80 95 78 100 Q 75 105 72 108 L 75 108 Z" fill="url(#waxWhite)" opacity="0.8">
+    <animateTransform attributeName="transform" type="scale" values="1;0.9;1" dur="3s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Pavio -->
+  <rect x="58" y="85" width="4" height="8" fill="#4a5568" rx="1"/>
+  
+  <!-- Chama principal -->
+  <ellipse cx="60" cy="65" rx="12" ry="25" fill="url(#flameWhite)">
+    <animateTransform attributeName="transform" type="scale" values="1;1.1;0.95;1.05;1" dur="2s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="65;62;68;63;65" dur="1.8s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- Núcleo da chama -->
+  <ellipse cx="60" cy="70" rx="6" ry="15" fill="#fbbf24" opacity="0.9">
+    <animateTransform attributeName="transform" type="scale" values="1;0.9;1.1;1" dur="1.5s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="70;68;72;69;70" dur="1.6s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- Brilho da chama -->
+  <ellipse cx="60" cy="75" rx="3" ry="8" fill="#fff9c4" opacity="0.8">
+    <animate attributeName="cy" values="75;73;77;74;75" dur="1.2s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="0.8;1;0.6;0.9;0.8" dur="1.4s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- Partículas de luz -->
+  <circle cx="45" cy="60" r="1" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;0.8;0" dur="3s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;-5,-10;-8,-20" dur="3s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="75" cy="65" r="1.5" fill="#f59e0b" opacity="0">
+    <animate attributeName="opacity" values="0;0.6;0" dur="4s" repeatCount="indefinite" begin="1s"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;8,-15;12,-25" dur="4s" repeatCount="indefinite" begin="1s"/>
+  </circle>
+  <circle cx="60" cy="50" r="0.8" fill="#fff9c4" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2.5s" repeatCount="indefinite" begin="0.5s"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,-20;0,-35" dur="2.5s" repeatCount="indefinite" begin="0.5s"/>
+  </circle>
+</svg>

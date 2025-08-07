@@ -129,8 +129,11 @@ document.addEventListener('DOMContentLoaded', function() {
         if (slides.length > 0) {
             // Função para mostrar o slide
             function mostrarSlide(index) {
+                // Primeiro, esconde TODOS os slides removendo classes ativas e adicionando hidden
                 slides.forEach((slide, i) => {
                     slide.classList.remove('slide-ativo');
+                    slide.classList.remove('active');
+                    slide.classList.add('hidden');
                     slide.setAttribute('aria-hidden', 'true');
                 });
                 
@@ -140,7 +143,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     indicator.setAttribute('aria-pressed', i === index ? 'true' : 'false');
                 });
                 
+                // Apenas o slide ativo fica visível (remove hidden e adiciona classes ativas)
+                slides[index].classList.remove('hidden');
                 slides[index].classList.add('slide-ativo');
+                slides[index].classList.add('active');
                 slides[index].setAttribute('aria-hidden', 'false');
                 currentSlide = index;
             }
@@ -228,6 +234,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Load dynamic news from Firestore
+    loadNews(); // Carregar as notícias dinâmicas do Firebase
     // Initialize Offline Manager
     const offlineManager = new OfflineCacheManager();
 
@@ -245,10 +252,10 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         try {
-            // Buscar posts ordenados por data de criação (compatível com admin.js atual)
+            // Buscar posts ordenados por data de publicação (compatível com posts migrados)
             const q = query(
                 collection(db, 'posts'),
-                orderBy('createdAt', 'desc'),
+                orderBy('publishedDate', 'desc'),
                 limit(6)
             );
             
@@ -260,7 +267,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 const data = doc.data();
                 console.log('📄 Post encontrado:', { id: doc.id, title: data.title, status: data.status });
                 // Incluir posts publicados ou que não tenham status definido (para compatibilidade)
-                if (!data.status || data.status === 'published') {
+                // Aceita 'published', 'LIVE' (posts migrados), ou sem status
+                if (!data.status || data.status === 'published' || data.status === 'LIVE') {
                     posts.push({ id: doc.id, ...data });
                 }
             });
@@ -291,6 +299,25 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
+    function extractFeaturedImage(content) {
+        if (!content) return null;
+        
+        // Regex para encontrar a primeira imagem no conteúdo
+        const imgMatch = content.match(/<img[^>]*src="([^"]*)"[^>]*>/i);
+        if (imgMatch && imgMatch[1]) {
+            let imageUrl = imgMatch[1];
+            
+            // Se for uma imagem do Blogger, usar o proxy
+            if (imageUrl.includes('blogger.googleusercontent.com')) {
+                imageUrl = `https://images.weserv.nl/?url=${encodeURIComponent(imageUrl)}&w=400&h=300&fit=cover&q=85&output=webp&fallback=jpg`;
+            }
+            
+            return imageUrl;
+        }
+        
+        return null;
+    }
+
     function renderNews(posts) {
         const newsGrid = document.querySelector('.news-grid') || document.getElementById('news-container');
         if (!newsGrid) return;
@@ -298,26 +325,31 @@ document.addEventListener('DOMContentLoaded', function() {
         // Limpar mensagem de loading
         newsGrid.innerHTML = '';
         
-        newsGrid.innerHTML = posts.map(post => `
-            <article class="news-card ${post.offline ? 'offline-card' : ''}">
-                ${post.offline ? '<div class="offline-badge">📴 Offline</div>' : ''}
-                <a href="post.html?id=${post.id}" class="card-link-area">
-                    ${post.featuredImage ? 
-                        `<img src="${post.featuredImage}" alt="${post.title}" class="news-card-image">` :
-                        `<div class="news-card-placeholder"></div>`
+        newsGrid.innerHTML = posts.map(post => {
+            const featuredImage = post.featuredImage || extractFeaturedImage(post.content);
+            
+            return `
+            <article class="bg-white dark:bg-gray-900 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 ${post.offline ? 'ring-2 ring-yellow-400' : ''}">
+                ${post.offline ? '<div class="bg-yellow-400 text-yellow-900 px-3 py-1 text-xs font-medium">📴 Offline</div>' : ''}
+                <a href="post.html?id=${post.id}" class="block">
+                    ${featuredImage ? 
+                        `<img src="${featuredImage}" alt="${post.title}" class="w-full h-48 object-cover" loading="lazy">` :
+                        `<div class="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
+                            <i class="fas fa-image text-gray-400 text-4xl"></i>
+                        </div>`
                     }
-                    <div class="news-content">
-                        <span class="news-category">${getCategoryLabel(post.category)}</span>
-                        <h3 class="news-title">${post.title}</h3>
-                        <p class="news-excerpt">${post.excerpt || extractExcerpt(post.content)}</p>
-                        <div class="news-date">${formatPostDate(post.createdAt)}</div>
+                    <div class="p-6">
+                        <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 text-xs font-medium rounded mb-3">${getCategoryLabel(post.category)}</span>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200 line-clamp-2">${post.title}</h3>
+                        <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">${post.excerpt || extractExcerpt(post.content)}</p>
+                        <div class="text-sm text-gray-500 dark:text-gray-500 mb-4">${formatPostDate(post.createdAt)}</div>
+                        <div class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition-colors duration-200 text-sm font-medium">
+                            Leia mais <i class="fas fa-arrow-right ml-1"></i>
+                        </div>
                     </div>
                 </a>
-                <div class="news-footer">
-                    <a href="post.html?id=${post.id}" class="news-link">Leia mais <i class="fas fa-arrow-right"></i></a>
-                </div>
-            </article>
-        `).join('');
+            </article>`;
+        }).join('');
         
         const totalPosts = posts.length;
         const offlinePosts = posts.filter(p => p.offline).length;
@@ -367,9 +399,6 @@ document.addEventListener('DOMContentLoaded', function() {
             year: 'numeric'
         });
     }
-
-    // Initialize news loading
-    loadNews();
 });
 
 // PWA Initialization Functions
@@ -487,6 +516,3 @@ function hideOfflineIndicator() {
         indicator.style.display = 'none';
     }
 }
-
-// Export for use in other modules
-export { db, pwaManager, notificationSystem, offlineCacheManager };

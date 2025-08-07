@@ -1,0 +1,360 @@
+/* Velas Virtuais - Estilos Específicos */
+
+/* Animação da chama */
+@keyframes flame-flicker {
+    0%, 100% { transform: scale(1) rotate(-1deg); opacity: 1; }
+    25% { transform: scale(1.05) rotate(1deg); opacity: 0.9; }
+    50% { transform: scale(0.95) rotate(-0.5deg); opacity: 1; }
+    75% { transform: scale(1.02) rotate(0.5deg); opacity: 0.95; }
+}
+
+.flame-animation {
+    animation: flame-flicker 2s ease-in-out infinite;
+    width: 80px;
+    height: 120px;
+}
+
+/* Containers das velas com cores temáticas */
+.vela-container {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.dark .vela-container {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+}
+
+.vela-branca {
+    border-image: linear-gradient(135deg, #f8fafc, #e2e8f0) 1;
+}
+
+.vela-branca:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(248, 250, 252, 0.3);
+}
+
+.vela-vermelha {
+    border-image: linear-gradient(135deg, #fecaca, #dc2626) 1;
+}
+
+.vela-vermelha:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(220, 38, 38, 0.3);
+}
+
+.vela-azul {
+    border-image: linear-gradient(135deg, #bfdbfe, #2563eb) 1;
+}
+
+.vela-azul:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(37, 99, 235, 0.3);
+}
+
+.vela-verde {
+    border-image: linear-gradient(135deg, #bbf7d0, #059669) 1;
+}
+
+.vela-verde:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(5, 150, 105, 0.3);
+}
+
+.vela-amarela {
+    border-image: linear-gradient(135deg, #fef3c7, #d97706) 1;
+}
+
+.vela-amarela:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(217, 119, 6, 0.3);
+}
+
+.vela-roxa {
+    border-image: linear-gradient(135deg, #e9d5ff, #7c3aed) 1;
+}
+
+.vela-roxa:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(124, 58, 237, 0.3);
+}
+
+/* Contador de velas */
+.contador-velas {
+    background: rgba(59, 130, 246, 0.1);
+    border-radius: 20px;
+    padding: 8px 16px;
+    font-weight: 600;
+    color: #1d4ed8;
+}
+
+.dark .contador-velas {
+    background: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+}
+
+/* Modal styles */
+#modal-vela {
+    backdrop-filter: blur(8px);
+    background: rgba(0, 0, 0, 0.7);
+}
+
+.modal-content {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.dark .modal-content {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+}
+
+/* Formulário */
+.form-group label {
+    font-weight: 600;
+    color: #374151;
+}
+
+.dark .form-group label {
+    color: #d1d5db;
+}
+
+.form-group input,
+.form-group textarea {
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+    background: #ffffff;
+}
+
+.dark .form-group input,
+.dark .form-group textarea {
+    border-color: #4b5563;
+    background: #374151;
+    color: #f9fafb;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #3b82f6;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+/* Botões */
+.btn-primary {
+    background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+}
+
+.btn-secondary {
+    background: #6b7280;
+    border: none;
+    color: white;
+    padding: 12px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: #4b5563;
+    transform: translateY(-1px);
+}
+
+/* Estatísticas */
+.estatistica-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 2px solid #e2e8f0;
+    border-radius: 16px;
+    padding: 24px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.dark .estatistica-card {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border-color: #374151;
+}
+
+.estatistica-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.estatistica-numero {
+    font-size: 3rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1;
+}
+
+/* Orações recentes */
+.oracao-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    transition: all 0.3s ease;
+}
+
+.dark .oracao-card {
+    background: linear-gradient(135deg, #1f2937 0%, #111827 100%);
+    border-color: #374151;
+}
+
+.oracao-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .flame-animation {
+        width: 60px;
+        height: 90px;
+    }
+    
+    .vela-container {
+        padding: 16px;
+    }
+    
+    .oracao-texto {
+        font-size: 13px;
+        min-height: 60px;
+    }
+    
+    .btn-acender,
+    .btn-ver-acesas {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    
+    .estatistica-numero {
+        font-size: 2rem;
+    }
+    
+    .modal-content {
+        margin: 20px;
+        max-height: calc(100vh - 40px);
+        overflow-y: auto;
+    }
+}
+
+/* Scroll suave */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading states */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin: -10px 0 0 -10px;
+    border: 2px solid #3b82f6;
+    border-radius: 50%;
+    border-top-color: transparent;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Efeitos especiais para velas acesas */
+.vela-acesa {
+    position: relative;
+    overflow: hidden;
+}
+
+.vela-acesa::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    animation: shine 3s ease-in-out infinite;
+}
+
+@keyframes shine {
+    0% { left: -100%; }
+    50% { left: 100%; }
+    100% { left: 100%; }
+}
+
+/* Animação de entrada */
+.fade-in {
+    animation: fadeIn 0.5s ease-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Estados de hover melhorados */
+.vela-container:hover .flame-animation {
+    animation-duration: 1.5s;
+    transform: scale(1.1);
+}
+
+.vela-container:hover .contador-velas {
+    background: rgba(59, 130, 246, 0.2);
+    transform: scale(1.05);
+}
+
+/* Notificações */
+.notification-success {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border-radius: 12px;
+    padding: 16px 24px;
+    color: white;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(16, 185, 129, 0.3);
+}
+
+/* Transições suaves para dark mode */
+* {
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}

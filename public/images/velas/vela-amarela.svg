@@ -1,0 +1,100 @@
+<!-- Vela Amarela Animada -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 180" width="120" height="180">
+  <defs>
+    <!-- Gradientes para a chama -->
+    <radialGradient id="flameYellow3" cx="50%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#fffbeb" opacity="0.9"/>
+      <stop offset="30%" stop-color="#fbbf24" opacity="0.9"/>
+      <stop offset="60%" stop-color="#d97706" opacity="0.8"/>
+      <stop offset="100%" stop-color="#92400e" opacity="0.7"/>
+    </radialGradient>
+    
+    <!-- Gradiente para a vela -->
+    <linearGradient id="candleYellow3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#d97706"/>
+      <stop offset="50%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#b45309"/>
+    </linearGradient>
+    
+    <!-- Gradiente para a cera derretida -->
+    <linearGradient id="waxYellow3" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+    
+    <!-- Sombra -->
+    <filter id="shadowYellow3">
+      <feDropShadow dx="2" dy="4" stdDeviation="3" flood-opacity="0.4"/>
+    </filter>
+  </defs>
+  
+  <!-- Base/Prato da vela -->
+  <ellipse cx="60" cy="165" rx="25" ry="8" fill="#92400e" opacity="0.6"/>
+  
+  <!-- Corpo da vela -->
+  <rect x="45" y="90" width="30" height="75" rx="2" fill="url(#candleYellow3)" filter="url(#shadowYellow3)"/>
+  
+  <!-- Cera derretida -->
+  <path d="M 45 90 Q 40 95 42 100 Q 45 105 48 108 L 45 108 Z" fill="url(#waxYellow3)" opacity="0.9">
+    <animateTransform attributeName="transform" type="scale" values="1;1.1;1" dur="4s" repeatCount="indefinite"/>
+  </path>
+  <path d="M 75 90 Q 80 95 78 100 Q 75 105 72 108 L 75 108 Z" fill="url(#waxYellow3)" opacity="0.9">
+    <animateTransform attributeName="transform" type="scale" values="1;0.9;1" dur="3s" repeatCount="indefinite"/>
+  </path>
+  
+  <!-- Pavio -->
+  <rect x="58" y="85" width="4" height="8" fill="#1f2937" rx="1"/>
+  
+  <!-- Chama principal com tons dourados intensos -->
+  <ellipse cx="60" cy="65" rx="13" ry="26" fill="url(#flameYellow3)">
+    <animateTransform attributeName="transform" type="scale" values="1;1.15;0.9;1.08;1" dur="1.7s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="65;61;69;62;65" dur="1.5s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- Núcleo da chama -->
+  <ellipse cx="60" cy="70" rx="7" ry="16" fill="#fbbf24" opacity="0.9">
+    <animateTransform attributeName="transform" type="scale" values="1;0.85;1.15;1" dur="1.3s" repeatCount="indefinite"/>
+    <animate attributeName="cy" values="70;67;73;68;70" dur="1.4s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- Brilho da chama -->
+  <ellipse cx="60" cy="75" rx="3.5" ry="9" fill="#fffbeb" opacity="1">
+    <animate attributeName="cy" values="75;72;78;73;75" dur="1.0s" repeatCount="indefinite"/>
+    <animate attributeName="opacity" values="1;0.8;1;0.9;1" dur="1.2s" repeatCount="indefinite"/>
+  </ellipse>
+  
+  <!-- Partículas de luz douradas -->
+  <circle cx="42" cy="57" r="1.3" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;0.9;0" dur="2.6s" repeatCount="indefinite"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;-7,-14;-12,-25" dur="2.6s" repeatCount="indefinite"/>
+  </circle>
+  <circle cx="78" cy="62" r="1.9" fill="#f59e0b" opacity="0">
+    <animate attributeName="opacity" values="0;0.8;0" dur="3.2s" repeatCount="indefinite" begin="0.9s"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;11,-19;16,-30" dur="3.2s" repeatCount="indefinite" begin="0.9s"/>
+  </circle>
+  <circle cx="60" cy="47" r="1.1" fill="#fffbeb" opacity="0">
+    <animate attributeName="opacity" values="0;1;0" dur="2.1s" repeatCount="indefinite" begin="0.4s"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;0,-23;0,-40" dur="2.1s" repeatCount="indefinite" begin="0.4s"/>
+  </circle>
+  
+  <!-- Reflexos na vela -->
+  <rect x="48" y="95" width="2" height="65" fill="#fde68a" opacity="0.5" rx="1">
+    <animate attributeName="opacity" values="0.5;0.7;0.5" dur="2.7s" repeatCount="indefinite"/>
+  </rect>
+  
+  <!-- Símbolo de São José (pequeno martelo de carpinteiro) -->
+  <g transform="translate(58,128) scale(0.25)" opacity="0.6">
+    <rect x="-1" y="-8" width="2" height="12" fill="#fde68a" rx="1"/>
+    <rect x="-6" y="-8" width="12" height="3" fill="#fde68a" rx="1"/>
+  </g>
+  
+  <!-- Partículas extras para efeito dourado -->
+  <circle cx="52" cy="52" r="0.7" fill="#fbbf24" opacity="0">
+    <animate attributeName="opacity" values="0;0.6;0" dur="3.8s" repeatCount="indefinite" begin="1.5s"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;-3,-15;-5,-28" dur="3.8s" repeatCount="indefinite" begin="1.5s"/>
+  </circle>
+  <circle cx="68" cy="55" r="0.8" fill="#d97706" opacity="0">
+    <animate attributeName="opacity" values="0;0.7;0" dur="4.1s" repeatCount="indefinite" begin="2.1s"/>
+    <animateTransform attributeName="transform" type="translate" values="0,0;5,-18;8,-32" dur="4.1s" repeatCount="indefinite" begin="2.1s"/>
+  </circle>
+</svg>

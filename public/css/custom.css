@@ -1,0 +1,461 @@
+/* 
+ * Arquidiocese de Belém - Estilos Customizados
+ * Estilos essenciais que complementam o Tailwind CSS
+ */
+
+/* ================================
+   VARIÁVEIS CSS
+   ================================ */
+:root {
+    /* Cores Marianas */
+    --azul-mariano: #0c4a6e;
+    --azul-claro: #0ea5e9;
+    --azul-escuro: #0369a1;
+    --dourado: #fbbf24;
+    --dourado-escuro: #d97706;
+    
+    /* Tipografia */
+    --font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    
+    /* Transições */
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s ease;
+    
+    /* Sombras */
+    --shadow-small: 0 2px 4px rgba(12, 74, 110, 0.1);
+    --shadow-medium: 0 4px 12px rgba(12, 74, 110, 0.15);
+    --shadow-large: 0 8px 24px rgba(12, 74, 110, 0.2);
+}
+
+/* ================================
+   ANIMAÇÕES KEYFRAMES
+   ================================ */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes gradientShift {
+    0%, 100% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+}
+
+@keyframes slideInRight {
+    0% { transform: translateX(100%); }
+    100% { transform: translateX(0); }
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+/* ================================
+   COMPONENTES ESPECÍFICOS
+   ================================ */
+
+/* Hero Carousel */
+.hero-slides-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    color: white;
+    text-align: center;
+    padding: 6rem 0;
+}
+
+/* Garantir que hidden tenha prioridade máxima */
+.hero-slide.hidden {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+.hero-slide.active,
+.hero-slide.slide-ativo {
+    opacity: 1;
+}
+
+.hero-slide.fade-in {
+    animation: fadeIn 1s ease-in-out;
+}
+
+/* Hero Indicators */
+.hero-indicator.active,
+.hero-indicator.ativo {
+    background-color: white !important;
+    transform: scale(1.2);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-btn span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: white;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.mobile-menu-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* Copy Button com Animação */
+.copy-line {
+    opacity: 0;
+    transition: var(--transition-fast);
+    transform: scale(0.8);
+}
+
+.prayer-line:hover .copy-line,
+.speech-line:hover .copy-line-individual {
+    opacity: 1;
+    transform: scale(1);
+}
+
+.copy-line:hover,
+.copy-line-individual:hover {
+    transform: scale(1.05);
+}
+
+.copy-line-individual {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    opacity: 0;
+    transition: var(--transition-fast);
+}
+
+.prayer-line-individual:hover .copy-line-individual {
+    opacity: 1;
+}
+
+.copy-line-individual:hover {
+    transform: translateY(-50%) scale(1.05);
+}
+
+/* Loading Spinner */
+.loading-spinner {
+    animation: spin 1s linear infinite;
+}
+
+/* Botões com Efeitos Hover Especiais */
+.btn-primary:hover {
+    transform: translateY(-2px);
+}
+
+.btn-secondary:hover {
+    transform: translateY(-1px);
+}
+
+/* Notificações com Animação */
+.notification {
+    transform: translateX(100%);
+    transition: var(--transition-medium);
+}
+
+.notification.show {
+    transform: translateX(0);
+    animation: slideInRight var(--transition-medium);
+}
+
+/* Cards com Hover Effect */
+.card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-large);
+    transition: all var(--transition-medium);
+}
+
+/* Logo com Efeito Hover */
+.logo:hover {
+    transform: scale(1.05);
+    transition: transform var(--transition-fast);
+}
+
+/* Navigation Links com Underline Effect */
+.nav-link {
+    position: relative;
+    transition: all var(--transition-fast);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: var(--dourado);
+    transition: all var(--transition-fast);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+.nav-link:hover {
+    color: var(--dourado);
+    transform: translateY(-2px);
+}
+
+/* Dropdown Menu */
+.dropdown-menu {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+}
+
+.dropdown:hover .dropdown-menu,
+.group:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* Gradientes Animados para Temas */
+.gradient-animated {
+    background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    background-size: 400% 400%;
+    animation: gradientShift 8s ease infinite;
+}
+
+/* RCC Theme Specific */
+.card-rcc {
+    transition: all 0.4s ease;
+}
+
+.card-rcc:hover {
+    transform: translateY(-8px) scale(1.02);
+}
+
+.btn-rcc-primary {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.btn-rcc-primary::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left 0.6s ease;
+}
+
+.btn-rcc-primary:hover::before {
+    left: 100%;
+}
+
+.btn-rcc-primary:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+.btn-rcc-secondary {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.btn-rcc-secondary::before {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ff6b6b, #4ecdc4);
+    transition: width 0.4s ease;
+}
+
+.btn-rcc-secondary:hover::before {
+    width: 100%;
+}
+
+.btn-rcc-secondary:hover {
+    transform: translateY(-3px) scale(1.05);
+}
+
+/* ================================
+   UTILIDADES ESPECIAIS
+   ================================ */
+
+/* Smooth Scroll */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus Styles */
+*:focus {
+    outline: 2px solid var(--dourado);
+    outline-offset: 2px;
+}
+
+/* Print Styles */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+}
+
+/* Dark Mode Support */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --azul-mariano: #0ea5e9;
+        --azul-escuro: #0c4a6e;
+    }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+    :root {
+        --shadow-small: 0 2px 4px rgba(0, 0, 0, 0.3);
+        --shadow-medium: 0 4px 12px rgba(0, 0, 0, 0.4);
+        --shadow-large: 0 8px 24px rgba(0, 0, 0, 0.5);
+    }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+/* Mobile Optimizations */
+@media (max-width: 768px) {
+    .hero-slide {
+        min-height: 400px;
+        padding: 4rem 0;
+    }
+    
+    .card-hover:hover {
+        transform: none;
+    }
+    
+    .nav-link:hover {
+        transform: none;
+    }
+}
+
+/* ================================
+   ADMIN SIDEBAR RESPONSIVO
+   ================================ */
+
+/* Admin Sidebar */
+.admin-sidebar {
+    transition: transform 0.3s ease;
+    z-index: 1000; /* Garante que a sidebar fique por cima */
+}
+
+.admin-sidebar.mobile-open {
+    transform: translateX(0);
+}
+
+/* Mobile Backdrop */
+.mobile-backdrop {
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    right: 0; 
+    bottom: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 999;
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.mobile-backdrop.active {
+    display: block;
+    opacity: 1;
+}
+
+/* Mobile Responsive - Sidebar Hidden by Default */
+@media (max-width: 1024px) {
+    .admin-sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: 280px;
+        transform: translateX(-100%);
+        background: white;
+        box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+        overflow-y: auto;
+    }
+    
+    .admin-sidebar.mobile-open {
+        transform: translateX(0);
+    }
+    
+    /* Hide mobile menu button on desktop */
+    .mobile-menu-toggle {
+        display: block;
+    }
+    
+    /* Adjust main content when sidebar is closed on mobile */
+    .admin-main {
+        margin-left: 0 !important;
+        width: 100% !important;
+        transition: margin-left 0.3s ease;
+    }
+}
+
+/* Desktop Styles - Sidebar Always Visible */
+@media (min-width: 1025px) {
+    .mobile-backdrop {
+        display: none !important;
+    }
+    
+    .admin-sidebar {
+        position: relative;
+        transform: translateX(0) !important;
+    }
+    
+    /* Hide mobile menu button on desktop */
+    .mobile-menu-toggle {
+        display: none;
+    }
+}

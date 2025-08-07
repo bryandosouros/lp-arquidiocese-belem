@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velas Virtuais - Arquidiocese de Belém do Pará</title>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Styles -->
+    <link href="/css/output.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
+    <link href="/css/velas-virtuais.css" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    
+    <!-- Meta Tags -->
+    <meta name="description" content="Acenda uma vela virtual na Arquidiocese de Belém do Pará. Faça sua oração com fé e devoção.">
+    <meta property="og:title" content="Velas Virtuais - Arquidiocese de Belém do Pará">
+    <meta property="og:description" content="Acenda uma vela virtual e faça sua oração com fé">
+    
+    <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
+    
+    <style>
+        .vela-container {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .vela-container:hover {
+            transform: translateY(-5px);
+        }
+        
+        .vela-gif {
+            width: 100%;
+            max-width: 200px;
+            height: auto;
+            filter: brightness(1.1);
+        }
+        
+        .vela-branca { background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); }
+        .vela-vermelha { background: linear-gradient(135deg, #ffe8e8 0%, #ffcdd2 100%); }
+        .vela-azul { background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); }
+        .vela-verde { background: linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%); }
+        .vela-amarela { background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%); }
+        .vela-roxa { background: linear-gradient(135deg, #f3e5f5 0%, #e1bee7 100%); }
+        
+        .contador-velas {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #d97706;
+        }
+        
+        .oracao-texto {
+            font-style: italic;
+            line-height: 1.6;
+            color: #6b7280;
+        }
+        
+        /* Animação da chama */
+        @keyframes flicker {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.8; }
+        }
+        
+        .flame-animation {
+            animation: flicker 2s infinite;
+        }
+        
+        /* Modal customizado */
+        .modal-overlay {
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(5px);
+        }
+    </style>
+</head>
+<body class="font-montserrat bg-gray-50 dark:bg-gray-900">
+    <!-- Header -->
+    <header class="bg-gradient-to-r from-blue-900 to-blue-800 text-white sticky top-0 z-50 shadow-lg border-b-4 border-yellow-400">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
+                <div class="logo flex items-center gap-4">
+                    <a href="index.html" class="flex items-center gap-3 text-white hover:opacity-90 transition-all duration-200">
+                        <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém" class="w-12 h-12 rounded-full border-2 border-yellow-400 p-1 bg-white object-contain">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold leading-tight">Arquidiocese de</span>
+                            <span class="text-lg font-bold leading-tight">Belém do Pará</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <nav class="nav" id="nav">
+                    <ul class="hidden lg:flex items-center gap-8">
+                        <li><a href="index.html" class="font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Início</a></li>
+                        <li class="dropdown relative group">
+                            <a href="#" class="font-medium hover:text-yellow-400 transition-all duration-200 flex items-center gap-1">
+                                Documentos <i class="fas fa-chevron-down text-sm"></i>
+                            </a>
+                            <ul class="dropdown-menu absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-lg py-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                                <li><a href="celebracao_da_palavra.html" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Celebração da Palavra</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Orientações Litúrgicas</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Cartas Pastorais</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="index.html#sobre" class="font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Sobre</a></li>
+                        <li><a href="index.html#contato" class="font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Contato</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions flex items-center gap-3">
+                    <!-- Dark Mode Toggle -->
+                    <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-blue-700 transition-colors duration-200" title="Alternar modo escuro">
+                        <i class="fas fa-moon text-lg"></i>
+                    </button>
+                    
+                    <a href="login.html" class="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-200 hover:shadow-md">
+                        <i class="fas fa-shield-alt"></i>
+                        <span class="font-medium">Cúria Digital</span>
+                    </a>
+                </div>
+                
+                <button class="mobile-menu-btn lg:hidden flex flex-col gap-1.5 p-2" id="mobile-menu-btn">
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="min-h-screen">
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-blue-900 via-blue-800 to-blue-900 text-white py-16">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <div class="mb-8">
+                    <span class="inline-block bg-yellow-400 text-blue-900 px-4 py-2 rounded-full text-sm font-medium mb-4">
+                        🕯️ Capela Virtual
+                    </span>
+                    <h1 class="text-4xl md:text-5xl font-bold mb-6">Velas Virtuais</h1>
+                    <p class="text-xl text-blue-100 max-w-3xl mx-auto leading-relaxed">
+                        Acenda com fé a sua vela virtual e eleve suas orações ao Sagrado Coração de Jesus e ao Imaculado Coração de Maria
+                    </p>
+                </div>
+                
+                <!-- Contador Total -->
+                <div class="bg-white bg-opacity-10 rounded-xl p-6 backdrop-blur-sm">
+                    <div class="flex items-center justify-center gap-4 flex-wrap">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-yellow-400" id="total-velas">0</div>
+                            <div class="text-sm text-blue-200">Total de Velas</div>
+                        </div>
+                        <div class="w-px h-12 bg-white bg-opacity-30 hidden md:block"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-green-400" id="velas-ativas">0</div>
+                            <div class="text-sm text-blue-200">Velas Ativas</div>
+                        </div>
+                        <div class="w-px h-12 bg-white bg-opacity-30 hidden md:block"></div>
+                        <div class="text-center">
+                            <div class="text-3xl font-bold text-orange-400" id="velas-hoje">0</div>
+                            <div class="text-sm text-blue-200">Acesas Hoje</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Velas Section -->
+        <section class="py-16 bg-white dark:bg-gray-800">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="velas-container">
+                    <!-- As velas serão carregadas dinamicamente -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Velas Ativas -->
+        <section class="py-16 bg-gray-50 dark:bg-gray-900">
+            <div class="max-w-6xl mx-auto px-6">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl md:text-4xl font-bold text-gray-800 dark:text-gray-200 mb-4">Velas Ativas</h2>
+                    <p class="text-xl text-gray-600 dark:text-gray-400">Velas ainda acesas com suas chamas de fé e esperança</p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="oracoes-recentes">
+                    <!-- Velas ativas serão carregadas dinamicamente -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese" class="w-12 h-12 rounded-full border-2 border-yellow-400 p-1 bg-white object-contain">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold">Arquidiocese de</span>
+                            <span class="text-lg font-bold">Belém do Pará</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Unidos na fé, acendemos velas virtuais como símbolo de nossa devoção e esperança.</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold text-yellow-400">Capela Virtual</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Velas Virtuais</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Pedidos de Oração</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Intenções de Missa</a></li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold text-yellow-400">Contato</h4>
+                    <div class="space-y-2 text-gray-400 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-envelope w-4"></i>
+                            <span>belemdopara.hb@gmail.com</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt w-4"></i>
+                            <span>Av. Nazaré, S/N - Nazaré</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 text-sm">&copy; 2025 Arquidiocese de Belém do Pará - Habbo Hotel. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Modal para Acender Vela -->
+    <div id="modal-vela" class="fixed inset-0 modal-overlay hidden z-50 flex items-center justify-center p-4">
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-2xl max-w-md w-full overflow-hidden">
+            <!-- Header do Modal -->
+            <div class="bg-gradient-to-r from-blue-600 to-blue-700 text-white p-6 text-center">
+                <h3 class="text-2xl font-bold mb-2" id="modal-titulo">Acender Vela</h3>
+                <p class="text-blue-100" id="modal-subtitulo">Faça sua oração com fé</p>
+            </div>
+            
+            <!-- Corpo do Modal -->
+            <div class="p-6">
+                <form id="form-vela">
+                    <div class="mb-6 text-center">
+                        <img id="modal-vela-img" src="" alt="Vela" class="w-32 mx-auto mb-4 flame-animation">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="nome" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Nome (opcional)</label>
+                        <input type="text" id="nome" name="nome" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white" placeholder="Seu nome">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="periodicidade" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Por quantos dias a vela ficará acesa?</label>
+                        <select id="periodicidade" name="periodicidade" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white">
+                            <option value="1">1 dia</option>
+                            <option value="3">3 dias</option>
+                            <option value="7" selected>7 dias (1 semana)</option>
+                            <option value="14">14 dias (2 semanas)</option>
+                            <option value="21">21 dias (3 semanas)</option>
+                            <option value="30">30 dias (1 mês)</option>
+                        </select>
+                        <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">Sua vela permanecerá acesa pelo período selecionado</p>
+                    </div>
+                    
+                    <div class="mb-6">
+                        <label for="oracao" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Sua Oração</label>
+                        <textarea id="oracao" name="oracao" rows="4" class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:text-white resize-none" placeholder="Escreva sua oração, pedido ou agradecimento..." required></textarea>
+                    </div>
+                    
+                    <div class="flex gap-4">
+                        <button type="button" id="btn-cancelar" class="flex-1 bg-gray-600 hover:bg-gray-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                            Cancelar
+                        </button>
+                        <button type="submit" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition-colors">
+                            🕯️ Acender Vela
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/velas-virtuais.js" type="module" defer></script>
+    <script src="js/darkmode.js" type="module" defer></script>
+    <script src="js/disclaimer-manager.js" type="module" defer></script>
+</body>
+</html>

@@ -7,6 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "scss:build": "sass src/scss/style.scss public/css/style.css",
     "scss:watch": "sass --watch src/scss/style.scss public/css/style.css",
+    "tailwind:build": "tailwindcss -i ./src/input.css -o ./public/css/output.css",
+    "tailwind:watch": "tailwindcss -i ./src/input.css -o ./public/css/output.css --watch",
     "dev": "npm run scss:watch",
     "build": "npm run scss:build",
     "clean": "rm -rf public/css/style.css public/css/style.css.map",
@@ -17,6 +19,13 @@
   "author": "Seu Nome ou Nome da Equipe Aqui",
   "license": "ISC",
   "devDependencies": {
-    "sass": "^1.77.4"
+    "sass": "^1.77.4",
+    "tailwindcss": "^3.4.0"
+  },
+  "dependencies": {
+    "firebase": "^12.0.0",
+    "firebase-admin": "^13.4.0",
+    "he": "^1.2.0",
+    "xml2js": "^0.6.2"
   }
 }

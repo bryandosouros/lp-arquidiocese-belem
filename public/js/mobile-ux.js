@@ -330,7 +330,9 @@ class MobileUXManager {
 }
 
 // Initialize and expose globally
-window.mobileUX = new MobileUXManager();
+if (!window.mobileUX) {
+    window.mobileUX = new MobileUXManager();
+}
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {

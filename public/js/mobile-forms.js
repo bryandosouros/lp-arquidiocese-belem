@@ -19,7 +19,7 @@ class MobileFormsManager {
         
         this.enhanceFormInputs();
         this.setupKeyboardHandling();
-        this.setupFormValidation();
+        // this.setupFormValidation(); // Temporariamente desabilitado
         this.setupFormNavigation();
         this.setupAutoFill();
         this.setupFormSubmission();
@@ -686,12 +686,17 @@ const formStyles = `
 `;
 
 // Inject form styles
-const styleSheet = document.createElement('style');
-styleSheet.textContent = formStyles;
-document.head.appendChild(styleSheet);
+if (!document.querySelector('#mobile-forms-styles')) {
+    const styleSheet = document.createElement('style');
+    styleSheet.id = 'mobile-forms-styles';
+    styleSheet.textContent = formStyles;
+    document.head.appendChild(styleSheet);
+}
 
 // Initialize mobile forms manager
-window.mobileForms = new MobileFormsManager();
+if (!window.mobileForms) {
+    window.mobileForms = new MobileFormsManager();
+}
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {

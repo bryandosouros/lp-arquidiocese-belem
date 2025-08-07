@@ -93,11 +93,11 @@ class SitemapGenerator {
         const dynamicPages = [];
         
         try {
-            // Get all published posts
+            // Get all published posts (including migrated posts with 'LIVE' status)
             const postsQuery = query(
                 collection(db, 'posts'),
-                where('status', '==', 'published'),
-                orderBy('createdAt', 'desc')
+                where('status', 'in', ['published', 'LIVE']),
+                orderBy('publishedDate', 'desc')
             );
             
             const postsSnapshot = await getDocs(postsQuery);
@@ -248,11 +248,11 @@ Allow: /pwa-demo.html
 
     async addDynamicPages() {
         try {
-            // Get all published posts
+            // Get all published posts (including migrated posts with 'LIVE' status)
             const postsQuery = query(
                 collection(this.db, 'posts'),
-                where('status', '==', 'published'),
-                orderBy('createdAt', 'desc')
+                where('status', 'in', ['published', 'LIVE']),
+                orderBy('publishedDate', 'desc')
             );
             
             const querySnapshot = await getDocs(postsQuery);

@@ -462,7 +462,9 @@ styleSheet.textContent = gestureStyles;
 document.head.appendChild(styleSheet);
 
 // Initialize gestures manager
-window.mobileGestures = new MobileGesturesManager();
+if (!window.mobileGestures) {
+    window.mobileGestures = new MobileGesturesManager();
+}
 
 // Export for module systems
 if (typeof module !== 'undefined' && module.exports) {

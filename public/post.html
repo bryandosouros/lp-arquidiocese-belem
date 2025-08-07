@@ -34,8 +34,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
     
     <!-- Styles -->
-    <link rel="stylesheet" href="css/header.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link href="/css/output.css" rel="stylesheet">
+    <link href="/css/custom.css" rel="stylesheet">
     
     <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -75,166 +75,178 @@
     </script>
     
     <link rel="icon" type="image/png" href="images/logo-arquidiocese-belem.png">
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="css/base.css">
-    
-    <!-- Dynamic JSON-LD Structured Data -->
-    <script type="application/ld+json" id="structured-data"></script>
 </head>
-<body>
+<body class="font-montserrat">
    <!-- Header -->
-    <header class="header">
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <a href="index.html">
-                        <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém">
-                        <div class="header-logo-texto">
-                            <span>Arquidiocese de<br></span>
-                            <span>Belém do Pará</span>
+    <header class="bg-gradient-to-r from-blue-900 to-blue-800 text-white sticky top-0 z-50 shadow-lg border-b-4 border-yellow-400">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
+                <div class="logo flex items-center gap-4">
+                    <a href="index.html" class="flex items-center gap-3 text-white hover:opacity-90 transition-all duration-200">
+                        <img src="images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém" class="w-12 h-12 rounded-full border-2 border-yellow-400 p-1 bg-white object-contain">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold leading-tight">Arquidiocese de</span>
+                            <span class="text-lg font-bold leading-tight">Belém do Pará</span>
                         </div>
                     </a>
                 </div>
                 
                 <nav class="nav" id="nav">
-                    <ul class="nav-list">
-                        <li><a href="index.html" class="active">Início</a></li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle">Documentos <i class="fas fa-chevron-down"></i></a>
-                            <ul class="dropdown-menu">
-                                <li><a href="celebracao_da_palavra.html">Celebração da Palavra</a></li>
-                                <li><a href="#">Orientações Litúrgicas</a></li>
-                                <li><a href="#">Cartas Pastorais</a></li>
+                    <ul class="hidden lg:flex items-center gap-8">
+                        <li><a href="index.html" class="font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Início</a></li>
+                        <li class="dropdown relative group">
+                            <a href="#" class="dropdown-toggle font-medium hover:text-yellow-400 transition-all duration-200 flex items-center gap-1">
+                                Documentos <i class="fas fa-chevron-down text-sm"></i>
+                            </a>
+                            <ul class="dropdown-menu absolute top-full left-0 bg-white text-gray-800 shadow-lg rounded-lg py-2 w-56 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                                <li><a href="celebracao_da_palavra.html" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Celebração da Palavra</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Orientações Litúrgicas</a></li>
+                                <li><a href="#" class="block px-4 py-2 hover:bg-blue-50 transition-colors">Cartas Pastorais</a></li>
                             </ul>
                         </li>
-                        <li><a href="#sobre">Sobre</a></li>
-                        <li><a href="#contato">Contato</a></li>
+                        <li><a href="index.html#sobre" class="font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Sobre</a></li>
+                        <li><a href="index.html#contato" class="font-medium hover:text-yellow-400 transition-all duration-200 relative pb-1">Contato</a></li>
                     </ul>
                 </nav>
                 
-                <div class="header-actions">
-                    <a href="login.html" class="curia-digital-btn">
+                <div class="header-actions flex items-center gap-3">
+                    <!-- Dark Mode Toggle -->
+                    <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-blue-700 transition-colors duration-200" title="Alternar modo escuro">
+                        <i class="fas fa-moon text-lg"></i>
+                    </button>
+                    
+                    <a href="login.html" class="bg-blue-700 hover:bg-blue-600 px-4 py-2 rounded-lg flex items-center gap-2 transition-all duration-200 hover:shadow-md">
                         <i class="fas fa-shield-alt"></i>
-                        <span>Cúria Digital</span>
+                        <span class="font-medium">Cúria Digital</span>
                     </a>
                 </div>
                 
-                <button class="mobile-menu-btn" id="mobile-menu-btn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
+                <button class="lg:hidden flex flex-col gap-1.5 p-2" id="mobile-menu-btn">
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
+                    <span class="w-6 h-0.5 bg-white transition-all duration-300"></span>
                 </button>
             </div>
         </div>
     </header>
 
-    <main id="conteudo-principal">
-        <div class="container">
-            <article class="post-content" id="post-container">
-                <div class="loading-state">
-                    <div class="loading-spinner"></div>
-                    <p>Carregando conteúdo...</p>
+    <main class="min-h-screen bg-gray-50 dark:bg-gray-900" id="conteudo-principal">
+        <div class="max-w-4xl mx-auto px-4 py-8">
+            <article class="bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden" id="post-container">
+                <div class="flex items-center justify-center p-12">
+                    <div class="text-center">
+                        <div class="animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent mx-auto mb-4"></div>
+                        <p class="text-gray-600 dark:text-gray-400">Carregando conteúdo...</p>
+                    </div>
                 </div>
             </article>
             
             <!-- Comments Section -->
-            <section id="comments-section" class="comments-section section-engagement">
-                <div class="comments-header">
-                    <h3 class="comments-title">
-                        <span class="comments-icon">💬</span>
+            <section id="comments-section" class="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="flex items-center justify-between mb-6">
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+                        <span class="text-2xl">💬</span>
                         Comentários
                     </h3>
-                    <div class="comments-stats">
+                    <div class="bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-3 py-1 rounded-full text-sm font-medium">
                         <span id="comments-count">0</span> comentários
                     </div>
                 </div>
                 
                 <!-- Comments Form Container -->
-                <div id="comments-form-container" class="comments-form-container">
+                <div id="comments-form-container" class="mb-8">
                     <!-- Form will be dynamically created by comment-system.js -->
                 </div>
                 
                 <!-- Comments List Container -->
-                <div id="comments-list-container" class="comments-list-container">
+                <div id="comments-list-container">
                     <!-- Comments will be dynamically loaded by comment-system.js -->
                 </div>
             </section>
             
             <!-- Social Share Section -->
-            <section id="post-share-section" class="post-share-section section-engagement">
-                <div class="share-header">
-                    <h3 class="share-title">Compartilhar este conteúdo</h3>
+            <section id="post-share-section" class="mt-8 bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="mb-6">
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200">Compartilhar este conteúdo</h3>
                 </div>
-                <div class="social-share-container">
-                    <button class="social-share-btn facebook share-btn" data-platform="facebook">
-                        <span>📘</span> Facebook
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-3">
+                    <button class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 flex items-center justify-center gap-2 share-btn" data-platform="facebook">
+                        <span>📘</span> <span class="hidden sm:inline">Facebook</span>
                     </button>
-                    <button class="social-share-btn twitter share-btn" data-platform="twitter">
-                        <span>🐦</span> Twitter
+                    <button class="bg-blue-400 hover:bg-blue-500 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 flex items-center justify-center gap-2 share-btn" data-platform="twitter">
+                        <span>🐦</span> <span class="hidden sm:inline">Twitter</span>
                     </button>
-                    <button class="social-share-btn whatsapp share-btn" data-platform="whatsapp">
-                        <span>💬</span> WhatsApp
+                    <button class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 flex items-center justify-center gap-2 share-btn" data-platform="discord">
+                        <i class="fab fa-discord"></i> <span class="hidden sm:inline">Discord</span>
                     </button>
-                    <button class="social-share-btn telegram share-btn" data-platform="telegram">
-                        <span>✈️</span> Telegram
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 flex items-center justify-center gap-2 share-btn" data-platform="telegram">
+                        <span>✈️</span> <span class="hidden sm:inline">Telegram</span>
                     </button>
-                    <button class="social-share-btn email share-btn" data-platform="email">
-                        <span>📧</span> Email
+                    <button class="bg-gray-600 hover:bg-gray-700 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 flex items-center justify-center gap-2 share-btn" data-platform="email">
+                        <span>📧</span> <span class="hidden sm:inline">Email</span>
                     </button>
-                    <button class="social-share-btn copy share-btn" data-platform="copy">
-                        <span>📋</span> Copiar Link
+                    <button class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-md hover:-translate-y-1 flex items-center justify-center gap-2 share-btn" data-platform="copy">
+                        <span>📋</span> <span class="hidden sm:inline">Copiar</span>
                     </button>
                 </div>
             </section>
         </div>
     </main>
 
-    <footer id="rodape-principal" class="site-footer footer-vatican-inspired">
-        <div class="container">
-            <div class="footer-conteudo">
-                <div class="footer-logo-area">
-                    <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese" class="footer-logo-imagem">
-                    <div class="footer-logo-texto">
-                        <span>Arquidiocese de</span>
-                        <span>Belém do Pará</span>
+    <footer class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-8 mb-8">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese" class="w-12 h-12 rounded-full border-2 border-yellow-400 p-1 bg-white object-contain">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold">Arquidiocese de</span>
+                            <span class="text-lg font-bold">Belém do Pará</span>
+                        </div>
                     </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Este é um projeto fictício para o jogo Habbo Hotel e não possui qualquer vínculo com a Arquidiocese de Belém da vida real.</p>
                 </div>
-                <div class="footer-info">
-                     <p>Este é um projeto fictício para o jogo Habbo Hotel e não possui qualquer vínculo com a Arquidiocese de Belém da vida real.</p>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold text-yellow-400">Links Úteis</h4>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors duration-200">Página Inicial</a></li>
+                        <li><a href="celebracao_da_palavra.html" class="text-gray-400 hover:text-white transition-colors duration-200">Celebração da Palavra</a></li>
+                        <li><a href="index.html#contato" class="text-gray-400 hover:text-white transition-colors duration-200">Contato</a></li>
+                    </ul>
                 </div>
             </div>
-            <div class="footer-copyright">
-                 <p>&copy; <span id="ano-atual"></span> Arquidiocese de Belém do Pará (Habbo). Todos os direitos reservados.</p>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 text-sm">&copy; <span id="ano-atual"></span> Arquidiocese de Belém do Pará (Habbo). Todos os direitos reservados.</p>
             </div>
         </div>
     </footer>
 
     <!-- Push Notification Modal -->
-    <div id="push-notification-modal" class="modal" style="display: none;">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3>🔔 Receber Notificações</h3>
-                <button class="modal-close" onclick="this.closest('.modal').style.display='none'">×</button>
+    <div id="push-notification-modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-xl max-w-md mx-4 overflow-hidden">
+            <div class="flex items-center justify-between p-6 border-b border-gray-200 dark:border-gray-700">
+                <h3 class="text-xl font-bold text-gray-800 dark:text-gray-200 flex items-center gap-2">
+                    🔔 Receber Notificações
+                </h3>
+                <button class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl" onclick="this.closest('.modal').style.display='none'">×</button>
             </div>
-            <div class="modal-body">
-                <p>Gostou deste conteúdo? Receba notificações sobre novos posts, eventos e comunicados da Arquidiocese.</p>
-                <div class="notification-benefits">
-                    <ul>
-                        <li>✅ Novos posts e artigos</li>
-                        <li>📅 Eventos importantes</li>
-                        <li>📋 Comunicados oficiais</li>
-                        <li>🙏 Momentos de oração</li>
+            <div class="p-6">
+                <p class="text-gray-600 dark:text-gray-400 mb-4">Gostou deste conteúdo? Receba notificações sobre novos posts, eventos e comunicados da Arquidiocese.</p>
+                <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4 mb-6">
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">✅ Novos posts e artigos</li>
+                        <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">📅 Eventos importantes</li>
+                        <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">📋 Comunicados oficiais</li>
+                        <li class="flex items-center gap-2 text-gray-700 dark:text-gray-300">🙏 Momentos de oração</li>
                     </ul>
                 </div>
-                <div class="notification-controls">
-                    <button id="enable-notifications" class="btn btn-primary">
+                <div class="flex gap-3">
+                    <button id="enable-notifications" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-colors duration-200">
                         Ativar Notificações
                     </button>
-                    <button class="btn btn-secondary" onclick="this.closest('.modal').style.display='none'">
+                    <button class="flex-1 bg-gray-300 hover:bg-gray-400 text-gray-700 px-4 py-2 rounded-lg font-medium transition-colors duration-200" onclick="this.closest('.modal').style.display='none'">
                         Talvez Depois
                     </button>
                 </div>
@@ -250,24 +262,24 @@
     <script src="js/mobile-gestures.js" defer></script>
     <script src="js/mobile-forms.js" defer></script>
     
-    <!-- Release 6B: Advanced PWA Features -->
+    <!-- PWA Features -->
     <script src="js/advanced-pwa-controller.js" defer></script>
-    <script src="js/pwa-performance-monitor.js" defer></script>
+    <script type="module" src="js/pwa-performance-monitor.js" defer></script>
     
-    <!-- Analytics & SEO Scripts -->
-    <script type="module" src="js/analytics-manager.js"></script>
-    <script type="module" src="js/seo-manager.js"></script>
-    <script type="module" src="js/sitemap-generator.js"></script>
+    <!-- Analytics & SEO -->
+    <script type="module" src="js/analytics-manager.js" defer></script>
+    <script type="module" src="js/seo-manager.js" defer></script>
     
-    <!-- Engagement & Interaction Scripts -->
-    <script type="module" src="js/comment-system.js"></script>
-    <script type="module" src="js/newsletter-system.js"></script>
-    <script type="module" src="js/whatsapp-integration.js"></script>
-    <script type="module" src="js/push-notification-manager.js"></script>
-    <script type="module" src="js/notification-system.js"></script>
+    <!-- Engagement & Interaction (essenciais para posts) -->
+    <script type="module" src="js/comment-system.js" defer></script>
+    <script type="module" src="js/newsletter-system.js" defer></script>
+    <script type="module" src="js/discord-integration.js" defer></script>
+    <script type="module" src="js/push-notification-manager.js" defer></script>
+    <script type="module" src="js/notification-system.js" defer></script>
     
-    <!-- Analytics Manager -->
-    <script src="js/analytics-manager.js"></script>
+    <!-- Core Post Functionality -->
+    <script type="module" src="js/post.js" defer></script>
+    
     <script>
         // Initialize post-specific analytics
         document.addEventListener('DOMContentLoaded', function() {
@@ -372,7 +384,12 @@
                 }
             };
             
-            document.getElementById('structured-data').textContent = JSON.stringify(structuredData);
+            const structuredDataElement = document.getElementById('structured-data');
+            if (structuredDataElement) {
+                structuredDataElement.textContent = JSON.stringify(structuredData);
+            } else {
+                console.warn('Elemento structured-data não encontrado no DOM');
+            }
             
             // Track updated post view with analytics
             if (window.analyticsManager) {
@@ -407,13 +424,13 @@
                 }
                 
                 // Initialize Social Sharing with post data
-                if (window.whatsappIntegration) {
-                    // Add WhatsApp share button specifically for this post
-                    const whatsappShareBtn = document.querySelector('.social-share-btn.whatsapp');
-                    if (whatsappShareBtn) {
-                        whatsappShareBtn.addEventListener('click', () => {
-                            const shareText = `${post.title}\n\n${post.excerpt || 'Confira este conteúdo da Arquidiocese de Belém do Pará'}\n\n${window.location.href}`;
-                            window.whatsappIntegration.sendWhatsAppMessage(shareText);
+                if (window.discordIntegration) {
+                    // Add Discord share button specifically for this post
+                    const discordShareBtn = document.querySelector('.share-btn[data-platform="discord"]');
+                    if (discordShareBtn) {
+                        discordShareBtn.addEventListener('click', () => {
+                            // Abrir Discord diretamente
+                            window.open('https://discord.gg/qzzJkpYH', '_blank');
                         });
                     }
                 }
@@ -450,8 +467,8 @@
                         case 'twitter':
                             window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(shareData.text)}&url=${encodeURIComponent(shareData.url)}`, '_blank');
                             break;
-                        case 'whatsapp':
-                            window.open(`https://wa.me/?text=${encodeURIComponent(shareData.text + ' ' + shareData.url)}`, '_blank');
+                        case 'discord':
+                            window.open('https://discord.gg/qzzJkpYH', '_blank');
                             break;
                         case 'telegram':
                             window.open(`https://t.me/share/url?url=${encodeURIComponent(shareData.url)}&text=${encodeURIComponent(shareData.text)}`, '_blank');
@@ -564,5 +581,6 @@
             }
         });
     </script>
+    <script src="js/disclaimer-manager.js" type="module" defer></script>
 </body>
 </html>

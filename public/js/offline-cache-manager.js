@@ -3,17 +3,27 @@
 
 class OfflineCacheManager {
     constructor() {
+        if (OfflineCacheManager.instance) {
+            return OfflineCacheManager.instance;
+        }
+        
         this.CACHE_VERSION = 'v1';
         this.OFFLINE_POSTS_KEY = 'offline_posts';
         this.PENDING_ACTIONS_KEY = 'pending_actions';
         this.LAST_SYNC_KEY = 'last_sync';
+        this.isInitialized = false;
+        
+        OfflineCacheManager.instance = this;
         this.init();
     }
 
     init() {
+        if (this.isInitialized) return;
+        
         console.log('📦 Offline Cache Manager initializing...');
         this.setupOfflineHandlers();
         this.setupSyncHandlers();
+        this.isInitialized = true;
     }
 
     // Gerenciamento de Posts Offline

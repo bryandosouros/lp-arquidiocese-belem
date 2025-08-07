@@ -12,6 +12,7 @@ class PWAManager {
         this.updateAvailable = false;
         this.lastSyncTime = localStorage.getItem('lastSyncTime') || 0;
         this.offlineManager = new OfflineCacheManager();
+        this.syncRegistered = false; // Controle para evitar registros excessivos de sync
         
         this.init();
     }
@@ -50,6 +51,14 @@ class PWAManager {
     async registerServiceWorker() {
         if ('serviceWorker' in navigator) {
             try {
+                // Verificar se já existe um service worker registrado
+                const existingRegistration = await navigator.serviceWorker.getRegistration('/');
+                if (existingRegistration) {
+                    console.log('✅ Service Worker already registered:', existingRegistration);
+                    this.registration = existingRegistration;
+                    return existingRegistration;
+                }
+
                 this.registration = await navigator.serviceWorker.register('/sw.js', {
                     scope: '/',
                     updateViaCache: 'none'
@@ -69,6 +78,11 @@ class PWAManager {
                 return this.registration;
             } catch (error) {
                 console.error('❌ Service Worker registration failed:', error);
+                console.error('❌ Error details:', {
+                    message: error.message,
+                    name: error.name,
+                    stack: error.stack
+                });
                 return null;
             }
         } else {
@@ -208,10 +222,15 @@ class PWAManager {
     async subscribeToPush() {
         if (this.registration) {
             try {
+                // Por enquanto, desabilitar push notifications até ter uma chave válida
+                console.log('🔔 Push notifications disabled - awaiting valid VAPID key');
+                return null;
+                
+                /* 
                 const subscription = await this.registration.pushManager.subscribe({
                     userVisibleOnly: true,
                     applicationServerKey: this.urlBase64ToUint8Array(
-                        'BMqz8gF-7KqcVCXpPpX8NKz8oEOHFwGfh1Q5T6nL5u_k8pS8r4MvXq8dVCQx7z1xKvyY8qHn1mQ7'
+                        'YOUR_VALID_VAPID_KEY_HERE'
                     )
                 });
                 
@@ -221,6 +240,7 @@ class PWAManager {
                 await this.sendSubscriptionToServer(subscription);
                 
                 return subscription;
+                */
             } catch (error) {
                 console.error('❌ Push subscription failed:', error);
                 return null;
@@ -258,7 +278,16 @@ class PWAManager {
     // Background Sync
     setupPeriodicSync() {
         if ('serviceWorker' in navigator && 'sync' in window.ServiceWorkerRegistration.prototype) {
-            this.scheduleBackgroundSync();
+            // Verificar se já foi registrado para evitar registros excessivos
+            if (!this.syncRegistered) {
+                this.scheduleBackgroundSync();
+                this.syncRegistered = true;
+                
+                // Re-registrar apenas a cada 30 minutos
+                setInterval(() => {
+                    this.scheduleBackgroundSync();
+                }, 30 * 60 * 1000); // 30 minutos
+            }
         }
     }
 

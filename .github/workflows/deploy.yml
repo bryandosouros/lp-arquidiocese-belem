@@ -26,20 +26,28 @@ jobs:
       - name: Build Tailwind
         run: npm run build
 
-      - name: Deploy to Firebase (PR Preview)
-        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && env.FIREBASE_SA_JSON != ''
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ env.FIREBASE_SA_JSON }}'
-          projectId: belem-hb
-          channelId: preview-${{ github.event.number }}
+      - name: Prepare Firebase credentials
+        if: env.FIREBASE_SA_JSON != ''
+        run: |
+          echo "$FIREBASE_SA_JSON" > $HOME/firebase-service-account.json
+          echo "GOOGLE_APPLICATION_CREDENTIALS=$HOME/firebase-service-account.json" >> $GITHUB_ENV
 
-      - name: Deploy to Firebase (Live)
+      - name: Install Firebase CLI
+        if: env.FIREBASE_SA_JSON != ''
+        run: |
+          npm i -g firebase-tools@latest
+          firebase --version
+
+      - name: Deploy Preview (PR)
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && env.FIREBASE_SA_JSON != ''
+        run: |
+          firebase hosting:channel:deploy preview-${{ github.event.number }} --project belem-hb --json
+
+      - name: Deploy Live (main)
         if: github.event_name == 'push' && env.FIREBASE_SA_JSON != ''
-        uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ env.FIREBASE_SA_JSON }}'
-          projectId: belem-hb
-          channelId: live
+        run: |
+          firebase deploy --only hosting --project belem-hb --json
+
+      - name: Skip Deploy (no credentials)
+        if: env.FIREBASE_SA_JSON == ''
+        run: echo "Skipping deploy: missing FIREBASE_SERVICE_ACCOUNT secret."

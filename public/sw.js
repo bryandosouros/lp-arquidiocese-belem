@@ -1,12 +1,12 @@
 // Enhanced Service Worker - Release 6B: PWA Avançado e Performance
 // Cache inteligente avançado, performance otimizada e sincronização robusta
 
-const SW_VERSION = '6B.1.0';
-const CACHE_NAME = 'arquidiocese-pwa-v6b';
-const CONTENT_CACHE = 'arquidiocese-content-v6b';
-const STATIC_CACHE = 'arquidiocese-static-v6b';
-const DYNAMIC_CACHE = 'arquidiocese-dynamic-v6b';
-const MOBILE_CACHE = 'arquidiocese-mobile-v6b';
+const SW_VERSION = '6B.1.1';
+const CACHE_NAME = 'arquidiocese-pwa-v6b-2';
+const CONTENT_CACHE = 'arquidiocese-content-v6b-2';
+const STATIC_CACHE = 'arquidiocese-static-v6b-2';
+const DYNAMIC_CACHE = 'arquidiocese-dynamic-v6b-2';
+const MOBILE_CACHE = 'arquidiocese-mobile-v6b-2';
 
 // API URLs for network detection
 const API_URLS = [
@@ -59,6 +59,7 @@ const STATIC_RESOURCES = [
     '/css/',
     '/js/',
     '/images/',
+    '/manifest.json',
     'https://fonts.googleapis.com/',
     'https://fonts.gstatic.com/',
     'https://www.gstatic.com/firebasejs/'

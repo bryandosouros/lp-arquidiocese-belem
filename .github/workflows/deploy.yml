@@ -9,6 +9,8 @@ on:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
+    env:
+      FIREBASE_SA_JSON: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_BELEM_HB != '' && secrets.FIREBASE_SERVICE_ACCOUNT_BELEM_HB || secrets.FIREBASE_SERVICE_ACCOUNT_ARQUIDIOCESE_BELEM_WEB_APP }}
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -25,19 +27,19 @@ jobs:
         run: npm run build
 
       - name: Deploy to Firebase (PR Preview)
-        if: github.event_name == 'pull_request'
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && env.FIREBASE_SA_JSON != ''
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BELEM_HB }}'
+          firebaseServiceAccount: '${{ env.FIREBASE_SA_JSON }}'
           projectId: belem-hb
           channelId: preview-${{ github.event.number }}
 
       - name: Deploy to Firebase (Live)
-        if: github.event_name == 'push'
+        if: github.event_name == 'push' && env.FIREBASE_SA_JSON != ''
         uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_BELEM_HB }}'
+          firebaseServiceAccount: '${{ env.FIREBASE_SA_JSON }}'
           projectId: belem-hb
           channelId: live

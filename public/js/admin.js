@@ -61,9 +61,12 @@ function initializeNavigation() {
         link.addEventListener('click', (e) => {
             e.preventDefault();
             
-            // Remove active class from all links and sections
+            // Remove active class from all links and hide all sections
             navLinks.forEach(l => l.classList.remove('active'));
-            sections.forEach(s => s.classList.remove('active'));
+            sections.forEach(s => {
+                s.classList.remove('active');
+                s.classList.add('hidden');
+            });
             
             // Add active class to clicked link
             link.classList.add('active');
@@ -73,6 +76,7 @@ function initializeNavigation() {
             const targetSection = document.getElementById(sectionId);
             if (targetSection) {
                 targetSection.classList.add('active');
+                targetSection.classList.remove('hidden');
             }
         });
     });
@@ -92,26 +96,30 @@ if (logoutBtn) {
 }
 
 // Navegação entre seções
-navLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const sectionName = link.dataset.section;
-        showSection(sectionName);
-        
-        // Atualizar navegação ativa
-        navLinks.forEach(nl => nl.classList.remove('active'));
-        link.classList.add('active');
-    });
-});
+// navLinks.forEach(link => {
+//     link.addEventListener('click', (e) => {
+//         e.preventDefault();
+//         const sectionName = link.dataset.section;
+//         showSection(sectionName);
+//         
+//         // Atualizar navegação ativa
+//         navLinks.forEach(nl => nl.classList.remove('active'));
+//         link.classList.add('active');
+//     });
+// });
 
 function showSection(sectionName) {
+    // Esconde todas as seções (Tailwind: display: none)
     sections.forEach(section => {
         section.classList.remove('active');
+        section.classList.add('hidden');
     });
-    
+
+    // Mostra a seção alvo
     const targetSection = document.getElementById(`${sectionName}-section`);
     if (targetSection) {
         targetSection.classList.add('active');
+        targetSection.classList.remove('hidden');
     }
     
     // Carregar dados específicos da seção

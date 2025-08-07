@@ -5,13 +5,11 @@
   "main": "public/index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "scss:build": "sass src/scss/style.scss public/css/style.css",
-    "scss:watch": "sass --watch src/scss/style.scss public/css/style.css",
-    "tailwind:build": "tailwindcss -i ./src/input.css -o ./public/css/output.css",
+    "tailwind:build": "tailwindcss -i ./src/input.css -o ./public/css/output.css --minify",
     "tailwind:watch": "tailwindcss -i ./src/input.css -o ./public/css/output.css --watch",
-    "dev": "npm run scss:watch",
-    "build": "npm run scss:build",
-    "clean": "rm -rf public/css/style.css public/css/style.css.map",
+    "dev": "npm run tailwind:watch",
+    "build": "npm run tailwind:build",
+    "clean": "rm -f public/css/output.css",
     "start": "npm run build && echo \"Build completed! Open public/index.html in your browser.\"",
     "serve": "npx serve public -p 3000",
     "deploy": "firebase deploy --only hosting"

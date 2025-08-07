@@ -173,7 +173,7 @@ function processPostContent(content) {
         (match, url) => {
             // Usar proxy CORS para imagens do Blogger
             const proxyUrl = `https://images.weserv.nl/?url=${encodeURIComponent(url)}&w=800&q=85&output=webp&fallback=jpg`;
-            return `src="${proxyUrl}" data-original="${url}" onerror="this.style.display='none'; console.log('Imagem proxy falhou:', this.src)"`;
+            return `src="${proxyUrl}" data-original="${url}" onerror="if(this.dataset.original && this.src!==this.dataset.original){this.src=this.dataset.original}else{this.style.display='none'}"`;
         }
     );
     

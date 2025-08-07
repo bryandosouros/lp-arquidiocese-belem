@@ -333,7 +333,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 ${post.offline ? '<div class="bg-yellow-400 text-yellow-900 px-3 py-1 text-xs font-medium">📴 Offline</div>' : ''}
                 <a href="post.html?id=${post.id}" class="block">
                     ${featuredImage ? 
-                        `<img src="${featuredImage}" alt="${post.title}" class="w-full h-48 object-cover" loading="lazy">` :
+                        `<img src="${featuredImage}" alt="${post.title}" class="w-full h-48 object-cover" loading="lazy" data-original="${(post.featuredImage || extractFeaturedImage(post.content) || '').replace('https://images.weserv.nl/?url=', '')}" onerror="if(this.dataset.original && this.src.indexOf('images.weserv.nl')>=0){this.src=this.dataset.original}else{this.style.display='none'}">` :
                         `<div class="w-full h-48 bg-gray-200 dark:bg-gray-700 flex items-center justify-center">
                             <i class="fas fa-image text-gray-400 text-4xl"></i>
                         </div>`

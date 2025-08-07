@@ -581,22 +581,32 @@ class NotificationSystem {
 
     setupNotificationSounds() {
         // Create audio elements for notification sounds
-        this.sounds = {
-            normal: new Audio('/sounds/notification.mp3'),
-            high: new Audio('/sounds/notification-urgent.mp3'),
-            low: new Audio('/sounds/notification-soft.mp3')
-        };
-        
-        // Set volume
-        Object.values(this.sounds).forEach(sound => {
-            sound.volume = 0.3;
-        });
+        try {
+            const normal = new Audio('/sounds/notification.mp3');
+            const high = new Audio('/sounds/notification-urgent.mp3');
+            const low = new Audio('/sounds/notification-soft.mp3');
+            
+            // Suppress network errors by handling onerror
+            ;[normal, high, low].forEach(a => {
+                if (a) {
+                    a.onerror = () => {
+                        // disable this sound silently if missing
+                        a.muted = true;
+                    };
+                    a.volume = 0.3;
+                }
+            });
+            
+            this.sounds = { normal, high, low };
+        } catch (e) {
+            this.sounds = {};
+        }
     }
 
     playNotificationSound(priority = 'normal') {
         if (this.soundEnabled && this.sounds[priority]) {
-            this.sounds[priority].play().catch(error => {
-                console.log('Could not play notification sound:', error);
+            this.sounds[priority].play().catch(() => {
+                // ignore playback errors silently
             });
         }
     }

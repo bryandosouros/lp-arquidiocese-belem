@@ -2,7 +2,7 @@
 // Sistema avançado de comentários moderados para a Arquidiocese
 
 import { db } from './firebase-config.js';
-import { collection, addDoc, query, where, orderBy, onSnapshot, updateDoc, doc, deleteDoc, getDocs, Timestamp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+import { collection, addDoc, query, where, orderBy, onSnapshot, updateDoc, doc, deleteDoc, getDocs, Timestamp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
 
 class CommentSystem {
     constructor() {

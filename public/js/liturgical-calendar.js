@@ -38,7 +38,7 @@ class LiturgicalCalendar {
         const today = new Date();
         this.updateDate(today);
         this.updateLiturgicalSeason(today);
-        this.updateDailyReadings(today);
+        this.updateDailyReadingsWithApiFallback(today);
         this.updateUpcomingCelebrations();
     }
 
@@ -64,7 +64,17 @@ class LiturgicalCalendar {
         }
 
         if (colorElement) {
-            colorElement.className = `liturgical-color ${season.color}`;
+            // Preserva o formato do ponto e aplica a cor litúrgica via Tailwind
+            const baseClasses = ['w-3', 'h-3', 'rounded-full', 'mr-2'];
+            const colorMap = {
+                green: 'bg-green-500',
+                purple: 'bg-purple-600',
+                red: 'bg-red-600',
+                white: 'bg-white border border-gray-300'
+            };
+            const colorClass = colorMap[season.color] || 'bg-green-500';
+
+            colorElement.className = `${baseClasses.join(' ')} ${colorClass}`;
         }
     }
 
@@ -161,6 +171,45 @@ class LiturgicalCalendar {
         if (psalmEl) psalmEl.textContent = readings.psalm;
         if (secondReadingEl) secondReadingEl.textContent = readings.secondReading || '-';
         if (gospelEl) gospelEl.textContent = readings.gospel;
+    }
+
+    async updateDailyReadingsWithApiFallback(date) {
+        try {
+            const y = date.getFullYear();
+            const m = date.getMonth() + 1;
+            const d = date.getDate();
+
+            // 1) Tentar LiturgicalCalendarAPI (melhor suporte e dados oficiais)
+            // Nação Brasil (BR) em português (PT). Caso haja indisponibilidade, usa general.
+            let res = await fetch(`https://litcal.johnromanodorazio.com/calendar/nation/BR/${y}?returntype=json&locale=pt`, { cache: 'no-store' });
+            if (!res.ok) {
+                // fallback para calendário geral
+                res = await fetch(`https://litcal.johnromanodorazio.com/calendar/${y}?returntype=json&locale=pt`, { cache: 'no-store' });
+            }
+            if (res.ok) {
+                const data = await res.json();
+                // O endpoint retorna o ano. Precisamos do dia corrente
+                const dayKey = `${y}-${String(m).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+                const day = Array.isArray(data?.festivities)
+                    ? data.festivities.find((f) => f.date === dayKey)
+                    : null;
+                if (day) {
+                    const colorMap = { GREEN: 'green', VIOLET: 'purple', WHITE: 'white', RED: 'red' };
+                    const seasonColor = colorMap[day.liturgical_color?.toUpperCase?.()] || this.getCurrentLiturgicalSeason(date).color;
+                    const seasonElement = document.getElementById('liturgical-season');
+                    if (seasonElement && day.title) seasonElement.textContent = day.title;
+                    const colorElement = document.getElementById('liturgical-color');
+                    if (colorElement) {
+                        const baseClasses = ['w-3', 'h-3', 'rounded-full', 'mr-2'];
+                        const tw = { green: 'bg-green-500', purple: 'bg-purple-600', white: 'bg-white border border-gray-300', red: 'bg-red-600' };
+                        colorElement.className = `${baseClasses.join(' ')} ${tw[seasonColor] || tw.green}`;
+                    }
+                }
+            }
+        } catch (_) {}
+        finally {
+            this.updateDailyReadings(date);
+        }
     }
 
     getSampleReadings(season, date) {

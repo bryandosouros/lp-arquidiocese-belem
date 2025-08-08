@@ -2,7 +2,7 @@
 // Manages real-time notifications, live updates, and user engagement
 
 import { db } from './firebase-config.js';
-import { collection, query, orderBy, onSnapshot, addDoc, updateDoc, doc, where, Timestamp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+import { collection, query, orderBy, onSnapshot, addDoc, updateDoc, doc, where, Timestamp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
 
 class NotificationSystem {
     constructor() {

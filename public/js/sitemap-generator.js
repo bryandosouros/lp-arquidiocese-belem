@@ -2,7 +2,7 @@
 // Sistema automático de geração de sitemap para SEO avançado
 
 import { db } from './firebase-config.js';
-import { collection, getDocs, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+import { collection, getDocs, query, where, orderBy } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
 
 class SitemapGenerator {
     constructor() {

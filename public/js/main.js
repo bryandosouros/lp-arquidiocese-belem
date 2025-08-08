@@ -1,23 +1,10 @@
 // public/js/main.js
 
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js';
-import { getFirestore, collection, getDocs, query, where, orderBy, limit } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
+import { db } from './firebase-config.js';
+import { collection, getDocs, query, where, orderBy, limit } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
 import OfflineCacheManager from './offline-cache-manager.js';
 
-// Firebase config
-const firebaseConfig = {
-    apiKey: "AIzaSyBUuKIfxUXGHIPH2eQBwUggWawexQ3-L5A",
-    authDomain: "belem-hb.firebaseapp.com",
-    projectId: "belem-hb",
-    storageBucket: "belem-hb.firebasestorage.app",
-    messagingSenderId: "669142237239",
-    appId: "1:669142237239:web:9fa0de02efe4da6865ffb2",
-    measurementId: "G-92E26Y6HB1"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Firebase já inicializado via firebase-config.js
 
 // PWA Integration
 let pwaManager = null;
@@ -339,7 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         </div>`
                     }
                     <div class="p-6">
-                        <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 text-xs font-medium rounded mb-3">${getCategoryLabel(post.category)}</span>
+                        <span class="inline-block bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-200 px-2 py-1 text-xs font-medium rounded mb-3">${getCategoryLabel(post)}</span>
                         <h3 class="text-xl font-semibold mb-3 text-gray-800 dark:text-gray-200 line-clamp-2">${post.title}</h3>
                         <p class="text-gray-600 dark:text-gray-400 mb-4 line-clamp-3">${post.excerpt || extractExcerpt(post.content)}</p>
                         <div class="text-sm text-gray-500 dark:text-gray-500 mb-4">${formatPostDate(post.createdAt)}</div>
@@ -361,14 +348,21 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    function getCategoryLabel(category) {
+    function getCategoryLabel(categoryOrPost) {
+        if (typeof categoryOrPost === 'object' && categoryOrPost !== null) {
+            const post = categoryOrPost;
+            if (Array.isArray(post.categories) && post.categories.length > 0) {
+                return post.categories[0];
+            }
+            return getCategoryLabel(post.category);
+        }
         const labels = {
             'decretos': 'Decretos',
             'comunicados': 'Comunicados', 
             'noticias': 'Notícias',
             'homilias': 'Homilias'
         };
-        return labels[category] || 'Notícias';
+        return labels[categoryOrPost] || (typeof categoryOrPost === 'string' ? categoryOrPost : 'Notícias');
     }
 
     function extractExcerpt(content) {

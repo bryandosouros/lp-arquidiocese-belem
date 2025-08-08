@@ -1,20 +1,7 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js';
-import { getFirestore, doc, getDoc } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
+import { db } from './firebase-config.js';
+import { doc, getDoc } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
 
-// Firebase config
-const firebaseConfig = {
-    apiKey: "AIzaSyBUuKIfxUXGHIPH2eQBwUggWawexQ3-L5A",
-    authDomain: "belem-hb.firebaseapp.com",
-    projectId: "belem-hb",
-    storageBucket: "belem-hb.firebasestorage.app",
-    messagingSenderId: "669142237239",
-    appId: "1:669142237239:web:9fa0de02efe4da6865ffb2",
-    measurementId: "G-92E26Y6HB1"
-};
-
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Firebase já inicializado via firebase-config.js
 
 // Get post ID from URL
 const urlParams = new URLSearchParams(window.location.search);

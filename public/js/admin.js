@@ -1,22 +1,8 @@
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js';
-import { getAuth, onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js';
-import { getFirestore, collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, where, Timestamp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
+import { auth, db, app } from './firebase-config.js';
+import { onAuthStateChanged, signOut } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js';
+import { collection, addDoc, getDocs, doc, updateDoc, deleteDoc, query, orderBy, where, Timestamp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
 
-// Configuração do Firebase (mesma do login.html)
-const firebaseConfig = {
-    apiKey: "AIzaSyBUuKIfxUXGHIPH2eQBwUggWawexQ3-L5A",
-    authDomain: "belem-hb.firebaseapp.com",
-    projectId: "belem-hb",
-    storageBucket: "belem-hb.firebasestorage.app",
-    messagingSenderId: "669142237239",
-    appId: "1:669142237239:web:9fa0de02efe4da6865ffb2",
-    measurementId: "G-92E26Y6HB1"
-};
-
-// Inicializar Firebase
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+// Firebase já inicializado via firebase-config.js
 
 // Estado da aplicação
 let currentUser = null;
@@ -44,6 +30,8 @@ onAuthStateChanged(auth, (user) => {
         if (userNameElement) {
             userNameElement.textContent = user.email;
         }
+        const userEmailElement = document.getElementById('user-email');
+        if (userEmailElement) userEmailElement.textContent = user.email;
         initializeAdmin();
         initializeNavigation();
     } else {
@@ -56,6 +44,9 @@ onAuthStateChanged(auth, (user) => {
 function initializeNavigation() {
     const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('.admin-section');
+    const sidebar = document.querySelector('.admin-sidebar');
+    const overlay = document.getElementById('sidebar-overlay');
+    const toggleBtn = document.getElementById('mobile-menu-toggle');
     
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -78,8 +69,26 @@ function initializeNavigation() {
                 targetSection.classList.add('active');
                 targetSection.classList.remove('hidden');
             }
+
+            // Fechar menu mobile ao navegar
+            if (sidebar && overlay) {
+                sidebar.classList.add('hidden');
+                overlay.classList.add('hidden');
+            }
         });
     });
+
+    // Toggle mobile
+    if (toggleBtn && sidebar && overlay) {
+        toggleBtn.addEventListener('click', () => {
+            sidebar.classList.toggle('hidden');
+            overlay.classList.toggle('hidden');
+        });
+        overlay.addEventListener('click', () => {
+            sidebar.classList.add('hidden');
+            overlay.classList.add('hidden');
+        });
+    }
 }
 
 // Função de logout
@@ -127,6 +136,8 @@ function showSection(sectionName) {
         loadPosts();
     } else if (sectionName === 'dashboard') {
         loadDashboardData();
+    } else if (sectionName === 'taxonomy') {
+        loadCategories?.();
     }
 }
 
@@ -138,9 +149,123 @@ async function initializeAdmin() {
     updateTodayDate();
     updateCalendar();
     initializeTags();
+    initializeTaxonomy?.();
     await loadPosts();
     updateDashboardStats();
 }
+
+// =====================
+// Taxonomy (Categorias & Tags)
+// =====================
+
+window.initializeTaxonomy = function initializeTaxonomy() {
+    const labelInput = document.getElementById('category-label');
+    const slugInput = document.getElementById('category-slug');
+    const form = document.getElementById('category-form');
+    const resetBtn = document.getElementById('reset-category');
+    const reloadBtn = document.getElementById('reload-categories');
+    const tableBody = document.getElementById('categories-table-body');
+
+    if (!form || !tableBody) return;
+
+    // Gerar slug automaticamente
+    labelInput?.addEventListener('input', () => {
+        if (!slugInput) return;
+        const slug = (labelInput.value || '')
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/\p{Diacritic}/gu, '')
+            .replace(/[^a-z0-9\s-]/g, '')
+            .trim()
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-');
+        slugInput.value = slug;
+    });
+
+    resetBtn?.addEventListener('click', () => {
+        if (form) form.reset();
+        if (slugInput) slugInput.value = '';
+    });
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const label = labelInput?.value.trim();
+        const slug = slugInput?.value.trim();
+        if (!label || !slug) return;
+        try {
+            // evitar duplicados (por slug)
+            const qy = query(collection(db, 'categories'), where('slug', '==', slug));
+            const snap = await getDocs(qy);
+            if (!snap.empty) {
+                showNotification('Já existe uma categoria com esse slug.', 'warning');
+                return;
+            }
+            await addDoc(collection(db, 'categories'), {
+                label,
+                slug,
+                createdAt: Timestamp.now(),
+                updatedAt: Timestamp.now()
+            });
+            showNotification('Categoria salva com sucesso!', 'success');
+            form.reset();
+            if (slugInput) slugInput.value = '';
+            await loadCategories();
+        } catch (err) {
+            console.error(err);
+            showNotification('Erro ao salvar categoria', 'error');
+        }
+    });
+
+    reloadBtn?.addEventListener('click', () => loadCategories());
+    loadCategories();
+};
+
+window.loadCategories = async function loadCategories() {
+    const tableBody = document.getElementById('categories-table-body');
+    if (!tableBody) return;
+    tableBody.innerHTML = '<tr><td class="px-3 py-3 text-gray-500" colspan="3">Carregando...</td></tr>';
+    try {
+        const qy = query(collection(db, 'categories'), orderBy('label', 'asc'));
+        const snap = await getDocs(qy);
+        if (snap.empty) {
+            tableBody.innerHTML = '<tr><td class="px-3 py-6 text-gray-500" colspan="3">Nenhuma categoria cadastrada.</td></tr>';
+            return;
+        }
+        const rows = [];
+        snap.forEach((docRef) => {
+            const c = docRef.data();
+            rows.push(`
+                <tr class="border-b border-gray-100 dark:border-gray-700">
+                    <td class="px-3 py-2">${c.label}</td>
+                    <td class="px-3 py-2 text-gray-500">${c.slug}</td>
+                    <td class="px-3 py-2">
+                        <button class="text-red-600 hover:text-red-800 dark:text-red-400" data-id="${docRef.id}" data-action="delete">Excluir</button>
+                    </td>
+                </tr>
+            `);
+        });
+        tableBody.innerHTML = rows.join('');
+        // bind delete
+        tableBody.querySelectorAll('button[data-action="delete"]').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const id = btn.getAttribute('data-id');
+                if (!id) return;
+                if (!confirm('Tem certeza que deseja excluir esta categoria?')) return;
+                try {
+                    await deleteDoc(doc(db, 'categories', id));
+                    showNotification('Categoria excluída!', 'success');
+                    await loadCategories();
+                } catch (err) {
+                    console.error(err);
+                    showNotification('Erro ao excluir categoria', 'error');
+                }
+            });
+        });
+    } catch (err) {
+        console.error(err);
+        tableBody.innerHTML = '<tr><td class="px-3 py-6 text-red-500" colspan="3">Erro ao carregar categorias.</td></tr>';
+    }
+};
 
 // Carregar dados do dashboard
 async function loadDashboardData() {
@@ -148,6 +273,7 @@ async function loadDashboardData() {
         await loadPosts();
         updateDashboardStats();
         updateRecentPosts();
+        renderSparklines();
     } catch (error) {
         console.error('Erro ao carregar dashboard:', error);
     }
@@ -206,7 +332,7 @@ function renderPostsList() {
                     </div>
                 </td>
                 <td class="px-6 py-4">
-                    <span class="text-sm text-gray-600 dark:text-gray-400">${getCategoryLabel(post.category)}</span>
+                    <span class="text-sm text-gray-600 dark:text-gray-400">${getPrimaryCategoryLabel(post)}</span>
                 </td>
                 <td class="px-6 py-4">
                     <div class="flex flex-col space-y-1">
@@ -260,14 +386,34 @@ function getPriorityBadge(priority) {
     return badges[priority] || '';
 }
 
+const CATEGORY_SLUG_TO_LABEL = {
+    decretos: 'Decretos',
+    comunicados: 'Comunicados',
+    noticias: 'Notícias',
+    homilias: 'Homilias'
+};
+
+const CATEGORY_LABEL_TO_SLUG = Object.fromEntries(
+    Object.entries(CATEGORY_SLUG_TO_LABEL).map(([slug, label]) => [label.toLowerCase(), slug])
+);
+
+function getPrimaryCategoryLabel(post) {
+    if (!post) return 'Geral';
+    // Prefer array categories if present
+    if (Array.isArray(post.categories) && post.categories.length > 0) {
+        return post.categories[0];
+    }
+    if (post.category && CATEGORY_SLUG_TO_LABEL[post.category]) {
+        return CATEGORY_SLUG_TO_LABEL[post.category];
+    }
+    if (typeof post.category === 'string') {
+        return post.category;
+    }
+    return 'Geral';
+}
+
 function getCategoryLabel(category) {
-    const labels = {
-        decretos: 'Decretos',
-        comunicados: 'Comunicados',
-        noticias: 'Notícias',
-        homilias: 'Homilias'
-    };
-    return labels[category] || category;
+    return CATEGORY_SLUG_TO_LABEL[category] || category || 'Geral';
 }
 
 function formatDate(date) {
@@ -302,8 +448,8 @@ function setupPostEditor() {
     // Submissão do formulário
     postForm.addEventListener('submit', handlePostSubmit);
     
-    // Configurar toolbar do editor
-    setupEditorToolbar();
+    // Inicializar editor Quill
+    initializeQuillEditor();
     
     // Configurar sistema de tags
     setupTagsSystem();
@@ -313,17 +459,39 @@ function setupPostEditor() {
 }
 
 // Configurar toolbar do editor
-function setupEditorToolbar() {
-    const toolbarBtns = document.querySelectorAll('.toolbar-btn');
+let quill = null;
+function initializeQuillEditor() {
     const contentEditor = document.getElementById('post-content');
-    
-    toolbarBtns.forEach(btn => {
-        btn.addEventListener('click', (e) => {
-            e.preventDefault();
-            const command = btn.dataset.command;
-            document.execCommand(command, false, null);
-            contentEditor.focus();
-        });
+    const toolbar = document.getElementById('quill-toolbar');
+    if (!contentEditor || !toolbar || typeof Quill === 'undefined') return;
+
+    // Toolbar completo
+    const toolbarOptions = [
+        [{ header: [1, 2, 3, 4, 5, 6, false] }],
+        [{ font: [] }],
+        [{ size: ['small', false, 'large', 'huge'] }],
+        ['bold', 'italic', 'underline', 'strike'],
+        [{ color: [] }, { background: [] }],
+        [{ script: 'sub' }, { script: 'super' }],
+        [{ header: 1 }, { header: 2 }],
+        [{ list: 'ordered' }, { list: 'bullet' }],
+        [{ indent: '-1' }, { indent: '+1' }],
+        [{ direction: 'rtl' }],
+        [{ align: [] }],
+        ['blockquote', 'code-block'],
+        ['link', 'image', 'video'],
+        ['clean']
+    ];
+
+    quill = new Quill(contentEditor, {
+        theme: 'snow',
+        placeholder: 'Digite o conteúdo do decreto aqui...',
+        modules: {
+            toolbar: {
+                container: toolbar,
+                handlers: {}
+            }
+        }
     });
 }
 
@@ -340,7 +508,11 @@ function openPostEditor(postId = null) {
             document.getElementById('post-title').value = post.title;
             document.getElementById('post-category').value = post.category;
             document.getElementById('post-excerpt').value = post.excerpt || '';
-            document.getElementById('post-content').innerHTML = post.content || '';
+            if (quill) {
+                quill.root.innerHTML = post.content || '';
+            } else {
+                document.getElementById('post-content').innerHTML = post.content || '';
+            }
             document.getElementById('post-status').value = post.status;
             document.getElementById('post-priority').value = post.priority || 'normal';
             document.getElementById('featured-image-url').value = post.featuredImage || '';
@@ -358,7 +530,11 @@ function openPostEditor(postId = null) {
         // Novo post
         document.getElementById('editor-title').textContent = 'Novo Decreto';
         postForm.reset();
-        document.getElementById('post-content').innerHTML = '';
+        if (quill) {
+            quill.setText('');
+        } else {
+            document.getElementById('post-content').innerHTML = '';
+        }
         document.getElementById('post-date').value = new Date().toISOString().slice(0, 16);
         renderTags();
     }
@@ -401,7 +577,7 @@ async function handlePostSubmit(e) {
             title: formData.get('title'),
             category: formData.get('category'),
             excerpt: formData.get('excerpt'),
-            content: document.getElementById('post-content').innerHTML,
+            content: quill ? quill.root.innerHTML : document.getElementById('post-content').innerHTML,
             status: formData.get('status'),
             priority: formData.get('priority'),
             featuredImage: formData.get('featuredImage'),
@@ -460,11 +636,54 @@ function setupFilters() {
     const filters = ['category-filter', 'status-filter', 'date-filter', 'priority-filter'];
     const searchInput = document.getElementById('search-posts');
     
+    const saveFiltersToLocalStorage = () => {
+        try {
+            const payload = {
+                category: document.getElementById('category-filter')?.value || '',
+                status: document.getElementById('status-filter')?.value || '',
+                priority: document.getElementById('priority-filter')?.value || '',
+                date: document.getElementById('date-filter')?.value || '',
+                search: document.getElementById('search-posts')?.value || ''
+            };
+            localStorage.setItem('adminPostsFilters', JSON.stringify(payload));
+        } catch (_) {}
+    };
+
+    const restoreFiltersFromLocalStorage = () => {
+        try {
+            const raw = localStorage.getItem('adminPostsFilters');
+            if (!raw) return;
+            const data = JSON.parse(raw);
+            if (data && typeof data === 'object') {
+                if (document.getElementById('category-filter') && data.category !== undefined) document.getElementById('category-filter').value = data.category;
+                if (document.getElementById('status-filter') && data.status !== undefined) document.getElementById('status-filter').value = data.status;
+                if (document.getElementById('priority-filter') && data.priority !== undefined) document.getElementById('priority-filter').value = data.priority;
+                if (document.getElementById('date-filter') && data.date !== undefined) document.getElementById('date-filter').value = data.date;
+                if (document.getElementById('search-posts') && data.search !== undefined) document.getElementById('search-posts').value = data.search;
+            }
+        } catch (_) {}
+    };
+
     filters.forEach(filterId => {
-        document.getElementById(filterId).addEventListener('change', applyFilters);
+        const el = document.getElementById(filterId);
+        if (el) {
+            el.addEventListener('change', () => {
+                applyFilters();
+                saveFiltersToLocalStorage();
+            });
+        }
     });
     
-    searchInput.addEventListener('input', applyFilters);
+    if (searchInput) {
+        searchInput.addEventListener('input', () => {
+            applyFilters();
+            saveFiltersToLocalStorage();
+        });
+    }
+    
+    // Restaurar filtros salvos
+    restoreFiltersFromLocalStorage();
+    applyFilters();
 }
 
 // Aplicar filtros
@@ -497,19 +716,26 @@ function initializeTags() {
 // Carregar tags existentes
 async function loadExistingTags() {
     try {
+        // Preferir a coleção "categories" para sugestões de categorias e tags futuras
+        const tagsSet = new Set();
+        // 1) tags consolidadas a partir dos posts (legado)
         const postsQuery = query(collection(db, 'posts'));
-        const querySnapshot = await getDocs(postsQuery);
-        
-        const allTags = new Set();
-        querySnapshot.forEach((doc) => {
-            const post = doc.data();
-            if (post.tags && Array.isArray(post.tags)) {
-                post.tags.forEach(tag => allTags.add(tag));
-            }
+        const postsSnap = await getDocs(postsQuery);
+        postsSnap.forEach((d) => {
+            const p = d.data();
+            if (Array.isArray(p.tags)) p.tags.forEach(t => tagsSet.add(t));
         });
-        
-        // Armazenar para autocomplete
-        window.availableTags = Array.from(allTags);
+        // 2) categorias como sugestões de tags também
+        try {
+            const catSnap = await getDocs(collection(db, 'categories'));
+            catSnap.forEach((cd) => {
+                const c = cd.data();
+                if (c?.label) tagsSet.add(c.label);
+                if (c?.slug) tagsSet.add(c.slug);
+            });
+        } catch (_) {}
+
+        window.availableTags = Array.from(tagsSet);
         
     } catch (error) {
         console.error('Erro ao carregar tags:', error);
@@ -627,6 +853,7 @@ window.clearAllFilters = function() {
     
     renderPostsList();
     updateFilterStats(posts);
+    try { localStorage.removeItem('adminPostsFilters'); } catch (_) {}
 };
 
 // Melhorar o sistema de tags com autocomplete
@@ -653,6 +880,13 @@ function setupTagsSystem() {
         
         if (e.key === 'Escape') {
             hideSuggestions();
+        }
+
+        // Backspace remove a última tag quando o input está vazio
+        if (e.key === 'Backspace' && tagsInput.value.trim() === '' && currentTags.length > 0) {
+            e.preventDefault();
+            currentTags.pop();
+            renderTags();
         }
     });
     
@@ -707,6 +941,24 @@ function setupTagsSystem() {
         hideSuggestions();
         tagsInput.focus();
     };
+
+    // Drag & Drop para reordenar tags
+    if (tagsContainer) {
+        tagsContainer.addEventListener('dragover', (e) => {
+            e.preventDefault();
+        });
+        tagsContainer.addEventListener('drop', (e) => {
+            e.preventDefault();
+            const fromIndex = Number(e.dataTransfer.getData('text/plain'));
+            const targetChip = e.target.closest('.tag-item');
+            const toIndex = targetChip ? Number(targetChip.dataset.index) : currentTags.length - 1;
+            if (Number.isInteger(fromIndex) && Number.isInteger(toIndex) && fromIndex !== toIndex) {
+                const [moved] = currentTags.splice(fromIndex, 1);
+                currentTags.splice(toIndex, 0, moved);
+                renderTags();
+            }
+        });
+    }
 }
 
 // Função para obter estatísticas por categoria
@@ -785,23 +1037,69 @@ function addCategoryChart() {
     chartContainer.innerHTML = chartHTML;
 }
 
+// Render sparklines (mini gráficos) simples usando canvas
+function renderSparklines() {
+    const datasets = {
+        'spark-posts': posts.map((_, idx) => 5 + ((idx * 13) % 20)).slice(0, 30),
+        'spark-month': posts.map((_, idx) => 3 + ((idx * 7) % 15)).slice(0, 30),
+        'spark-comments': posts.map((_, idx) => 2 + ((idx * 5) % 12)).slice(0, 30),
+        'spark-push': posts.map((_, idx) => 1 + ((idx * 9) % 10)).slice(0, 30)
+    };
+    Object.keys(datasets).forEach((id) => {
+        const canvas = document.getElementById(id);
+        if (!canvas) return;
+        const ctx = canvas.getContext('2d');
+        const values = datasets[id];
+        const w = canvas.width = canvas.offsetWidth || 200;
+        const h = canvas.height = canvas.offsetHeight || 56;
+        const min = Math.min(...values);
+        const max = Math.max(...values);
+        const pad = 6;
+        ctx.clearRect(0, 0, w, h);
+        ctx.lineWidth = 2;
+        ctx.strokeStyle = 'rgba(255,255,255,0.9)';
+        values.forEach((v, i) => {
+            const x = pad + (i * (w - pad * 2)) / (values.length - 1);
+            const y = h - pad - ((v - min) / Math.max(1, (max - min))) * (h - pad * 2);
+            if (i === 0) ctx.beginPath();
+            ctx.lineTo(x, y);
+        });
+        ctx.stroke();
+        // gradient fill under line
+        const gradient = ctx.createLinearGradient(0, 0, 0, h);
+        gradient.addColorStop(0, 'rgba(255,255,255,0.25)');
+        gradient.addColorStop(1, 'rgba(255,255,255,0)');
+        ctx.lineTo(w - pad, h - pad);
+        ctx.lineTo(pad, h - pad);
+        ctx.closePath();
+        ctx.fillStyle = gradient;
+        ctx.fill();
+    });
+}
+
 // Sistema de notificações
 function showNotification(message, type = 'info') {
     // Mapa de cores para cada tipo
     const typeStyles = {
-        success: 'bg-green-500 text-white border-green-600',
-        error: 'bg-red-500 text-white border-red-600',
+        success: 'bg-green-600 text-white border-green-700',
+        error: 'bg-red-600 text-white border-red-700',
         warning: 'bg-yellow-500 text-white border-yellow-600',
-        info: 'bg-blue-500 text-white border-blue-600'
+        info: 'bg-blue-600 text-white border-blue-700'
     };
     
     // Criar elemento de notificação
     const notification = document.createElement('div');
-    notification.className = `fixed top-4 right-4 z-50 max-w-sm w-full ${typeStyles[type]} border-l-4 p-4 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full`;
+    notification.className = `fixed top-5 right-5 z-50 max-w-sm w-full ${typeStyles[type]} border-l-4 p-4 rounded-lg shadow-lg transform transition-all duration-300 translate-x-full`;
+    notification.setAttribute('role', 'alert');
+    notification.setAttribute('aria-live', 'assertive');
+    const icons = { success: 'fa-check-circle', error: 'fa-times-circle', warning: 'fa-exclamation-triangle', info: 'fa-info-circle' };
     notification.innerHTML = `
-        <div class="flex items-center justify-between">
-            <span class="font-medium">${message}</span>
-            <button class="ml-3 text-white hover:text-gray-200 focus:outline-none focus:text-gray-200 transition-colors" onclick="this.parentElement.parentElement.remove()">
+        <div class="flex items-start gap-3">
+            <i class="fas ${icons[type] || icons.info} mt-0.5"></i>
+            <div class="flex-1">
+                <span class="font-medium">${message}</span>
+            </div>
+            <button class="ml-3 text-white/90 hover:text-white focus:outline-none transition-colors" aria-label="Fechar notificação" onclick="this.closest('div[role=\\'alert\\']')?.remove()">
                 <i class="fas fa-times"></i>
             </button>
         </div>
@@ -904,13 +1202,29 @@ function renderTags() {
     const tagsContainer = document.getElementById('post-tags-container');
     if (!tagsContainer) return;
     
-    const tagsHTML = currentTags.map(tag => `
-        <span class="tag-item">
-            ${tag}
-            <button type="button" class="tag-remove" onclick="removeTag('${tag}')">&times;</button>
-        </span>
-    `).join('');
-    tagsContainer.innerHTML = tagsHTML;
+    tagsContainer.innerHTML = '';
+    currentTags.forEach((tag, index) => {
+        const chip = document.createElement('span');
+        chip.className = 'tag-item';
+        chip.textContent = tag;
+        chip.setAttribute('draggable', 'true');
+        chip.dataset.index = String(index);
+
+        chip.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', String(index));
+            chip.classList.add('dragging');
+        });
+        chip.addEventListener('dragend', () => chip.classList.remove('dragging'));
+
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'tag-remove';
+        btn.innerHTML = '&times;';
+        btn.addEventListener('click', () => removeTag(tag));
+
+        chip.appendChild(btn);
+        tagsContainer.appendChild(chip);
+    });
 }
 
 // Atualizar posts recentes no dashboard

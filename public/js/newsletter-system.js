@@ -2,7 +2,7 @@
 // Sistema avançado de newsletter e subscrições para a Arquidiocese
 
 import { db } from './firebase-config.js';
-import { collection, addDoc, query, where, getDocs, updateDoc, doc, deleteDoc, Timestamp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+import { collection, addDoc, query, where, getDocs, updateDoc, doc, deleteDoc, Timestamp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
 
 class NewsletterSystem {
     constructor() {

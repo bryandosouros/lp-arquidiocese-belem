@@ -1,9 +1,8 @@
-// Este arquivo centraliza a configuração do Firebase para ser usada em todo o site.
-// Substitua pelas suas credenciais reais, que você já tem.
-
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js';
-import { getFirestore } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
-import { getAnalytics } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-analytics.js';
+// Central de configuração do Firebase (versão 11.8.1)
+import { initializeApp, getApps, getApp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js';
+import { getAuth } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js';
+import { getFirestore } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
+import { getAnalytics } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-analytics.js';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyBUuKIfxUXGHIPH2eQBwUggWawexQ3-L5A",
@@ -15,9 +14,11 @@ export const firebaseConfig = {
     measurementId: "G-92E26Y6HB1"
 };
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
+// Initialize Firebase (evita múltiplas inicializações)
+const app = getApps().length ? getApp() : initializeApp(firebaseConfig);
 
-// Initialize Firestore and Analytics
+// Serviços
+export const auth = getAuth(app);
 export const db = getFirestore(app);
 export const analytics = getAnalytics(app);
+export { app };

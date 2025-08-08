@@ -34,42 +34,47 @@
     
     <link href="/css/output.css" rel="stylesheet">
 <link href="/css/custom.css" rel="stylesheet">
+        <!-- Quill Editor (CDN) -->
+        <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="admin-body font-montserrat bg-gray-50 dark:bg-gray-900">
-    <!-- Header da Cúria -->
-    <header class="bg-gradient-to-r from-blue-900 to-blue-800 text-white shadow-lg border-b-4 border-yellow-400">
-        <div class="max-w-7xl mx-auto px-6 py-4">
-            <div class="flex justify-between items-center">
+    <!-- Header unificado (baseado no index) -->
+    <header class="bg-gradient-to-r from-blue-900 to-blue-800 text-white sticky top-0 z-50 shadow-lg border-b-4 border-yellow-400">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="flex justify-between items-center py-4">
                 <div class="flex items-center gap-4">
-                    <button class="lg:hidden text-white hover:bg-blue-700 p-2 rounded-lg transition-colors" id="mobile-menu-toggle">
+                    <button class="lg:hidden text-white hover:bg-blue-700 p-2 rounded-lg transition-colors" id="mobile-menu-toggle" aria-label="Abrir menu">
                         <i class="fas fa-bars text-xl"></i>
                     </button>
-                    <img src="/images/logo-arquidiocese-belem.png" alt="Logo" class="w-12 h-12 rounded-full border-2 border-yellow-400 p-1 bg-white object-contain">
-                    <div>
-                        <h1 class="text-xl font-bold">Cúria Digital</h1>
-                        <p class="text-sm opacity-90">Painel Administrativo da Arquidiocese</p>
-                    </div>
+                    <a href="/" class="flex items-center gap-3 text-white hover:opacity-90 transition-all duration-200">
+                        <img src="/images/logo-arquidiocese-belem.png" alt="Arquidiocese de Belém" class="w-12 h-12 rounded-full border-2 border-yellow-400 p-1 bg-white object-contain">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold leading-tight">Cúria Digital</span>
+                            <span class="text-sm opacity-90">Painel Administrativo</span>
+                        </div>
+                    </a>
                 </div>
-                
-                <div class="flex items-center gap-4">
+
+                <!-- Navegação removida do header (fica só no sidebar) -->
+
+                <div class="flex items-center gap-3">
                     <!-- Dark Mode Toggle -->
                     <button id="dark-mode-toggle" class="p-2 rounded-lg hover:bg-blue-700 transition-colors duration-200" title="Alternar modo escuro">
                         <i class="fas fa-moon text-lg"></i>
                     </button>
-                    
-                    <div class="flex items-center gap-3">
+                    <div class="hidden md:flex items-center gap-3">
                         <div class="w-10 h-10 bg-blue-700 rounded-full flex items-center justify-center">
                             <i class="fas fa-user text-white"></i>
                         </div>
-                        <div class="hidden md:block">
+                        <div>
                             <span class="block font-medium" id="user-name">Carregando...</span>
-                            <span class="text-sm opacity-75">Administrador</span>
+                            <span class="text-xs opacity-80" id="user-email"></span>
                         </div>
                     </div>
-                    <button class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg flex items-center gap-2 transition-colors" id="logout-btn">
+                    <button class="bg-red-600 hover:bg-red-700 px-4 py-2 rounded-lg flex items-center gap-2 transition-all" id="logout-btn">
                         <i class="fas fa-sign-out-alt"></i>
                         <span class="hidden md:inline">Sair</span>
                     </button>
@@ -80,65 +85,65 @@
     
     <div class="flex">
         <!-- Sidebar de Navegação -->
-        <aside class="admin-sidebar w-64 bg-white dark:bg-gray-800 shadow-lg h-screen sticky top-0 hidden lg:block">
+        <aside class="admin-sidebar w-72 bg-white/80 dark:bg-gray-800/80 backdrop-blur-md border-r border-gray-200 dark:border-gray-700 shadow-xl h-screen sticky top-0 hidden lg:block">
             <nav class="p-6">
                 <ul class="space-y-2">
                     <li>
-                        <a href="#dashboard" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors active" data-section="dashboard">
+                        <a href="#dashboard" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50/70 dark:hover:bg-gray-700 rounded-xl transition-colors active" data-section="dashboard">
                             <i class="fas fa-chart-line text-blue-600"></i>
                             <span>Painel Geral</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#posts" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors" data-section="posts">
+                        <a href="#posts" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50/70 dark:hover:bg-gray-700 rounded-xl transition-colors" data-section="posts">
                             <i class="fas fa-file-alt text-green-600"></i>
                             <span>Decretos & Notícias</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#media" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors" data-section="media">
+                        <a href="#media" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50/70 dark:hover:bg-gray-700 rounded-xl transition-colors" data-section="media">
                             <i class="fas fa-images text-purple-600"></i>
                             <span>Biblioteca de Mídia</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#pages" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors" data-section="pages">
+                        <a href="#pages" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50/70 dark:hover:bg-gray-700 rounded-xl transition-colors" data-section="pages">
                             <i class="fas fa-file text-indigo-600"></i>
                             <span>Páginas Institucionais</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#settings" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors" data-section="settings">
+                        <a href="#settings" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50/70 dark:hover:bg-gray-700 rounded-xl transition-colors" data-section="settings">
                             <i class="fas fa-cog text-gray-600"></i>
                             <span>Configurações</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#engagement" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors" data-section="engagement">
+                        <a href="#engagement" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50/70 dark:hover:bg-gray-700 rounded-xl transition-colors" data-section="engagement">
                             <i class="fas fa-heart text-red-600"></i>
                             <span>Engajamento</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#comments" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors" data-section="comments">
+                        <a href="#comments" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50/70 dark:hover:bg-gray-700 rounded-xl transition-colors" data-section="comments">
                             <i class="fas fa-comments text-orange-600"></i>
                             <span>Comentários</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#newsletter" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors" data-section="newsletter">
+                        <a href="#newsletter" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50/70 dark:hover:bg-gray-700 rounded-xl transition-colors" data-section="newsletter">
                             <i class="fas fa-envelope text-blue-600"></i>
                             <span>Newsletter</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#notifications" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors" data-section="notifications">
+                        <a href="#notifications" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50/70 dark:hover:bg-gray-700 rounded-xl transition-colors" data-section="notifications">
                             <i class="fas fa-bell text-yellow-600"></i>
                             <span>Notificações</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#users" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-gray-700 rounded-lg transition-colors" data-section="users">
+                        <a href="#users" class="nav-link flex items-center gap-3 px-4 py-3 text-gray-700 dark:text-gray-200 hover:bg-blue-50/70 dark:hover:bg-gray-700 rounded-xl transition-colors" data-section="users">
                             <i class="fas fa-users text-purple-600"></i>
                             <span>Gerenciar Usuários</span>
                         </a>
@@ -160,6 +165,7 @@
                 </div>
             </nav>
         </aside>
+        <div id="sidebar-overlay" class="fixed inset-0 bg-black/30 z-40 hidden"></div>
         
         <!-- Área Principal de Conteúdo -->
         <main class="flex-1 p-6 overflow-x-auto">
@@ -171,28 +177,46 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                        <div class="flex items-center">
-                            <div class="text-4xl mr-4">📄</div>
+                    <div class="kpi-card kpi-blue">
+                        <div class="flex items-start justify-between">
                             <div>
-                                <div class="text-2xl font-bold text-gray-900 dark:text-gray-100" id="total-posts">0</div>
-                                <div class="text-gray-600 dark:text-gray-400">Decretos Publicados</div>
+                                <div class="kpi-value" id="total-posts">0</div>
+                                <div class="kpi-label">Decretos Publicados</div>
                             </div>
+                            <canvas class="sparkline" id="spark-posts"></canvas>
                         </div>
                     </div>
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-                        <div class="flex items-center">
-                            <div class="text-4xl mr-4">📅</div>
+                    <div class="kpi-card kpi-green">
+                        <div class="flex items-start justify-between">
                             <div>
-                                <div class="text-2xl font-bold text-gray-900 dark:text-gray-100" id="posts-this-month">0</div>
-                                <div class="text-gray-600 dark:text-gray-400">Publicações Este Mês</div>
+                                <div class="kpi-value" id="posts-this-month">0</div>
+                                <div class="kpi-label">Este Mês</div>
                             </div>
+                            <canvas class="sparkline" id="spark-month"></canvas>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-purple">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <div class="kpi-value" id="total-comments">0</div>
+                                <div class="kpi-label">Comentários</div>
+                            </div>
+                            <canvas class="sparkline" id="spark-comments"></canvas>
+                        </div>
+                    </div>
+                    <div class="kpi-card kpi-orange">
+                        <div class="flex items-start justify-between">
+                            <div>
+                                <div class="kpi-value" id="push-subscribers">0</div>
+                                <div class="kpi-label">Push Subs.</div>
+                            </div>
+                            <canvas class="sparkline" id="spark-push"></canvas>
                         </div>
                     </div>
                 </div>
                 
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                    <div class="glass-card p-6 card-hover">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Últimas Publicações</h3>
                         <div class="space-y-4" id="recent-posts">
                             <div class="flex items-center justify-center py-8">
@@ -202,7 +226,7 @@
                         </div>
                     </div>
                     
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                    <div class="glass-card p-6 card-hover">
                         <h3 class="text-lg font-semibold text-gray-900 dark:text-gray-100 mb-4">Calendário Litúrgico</h3>
                         <div class="space-y-6">
                             <div>
@@ -280,7 +304,7 @@
                     </button>
                 </div>
                 
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="glass-card p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 mb-6">
                         <select class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200" id="category-filter">
                             <option value="">Todas as Categorias</option>
@@ -320,6 +344,51 @@
                 </div>
             </section>
             
+            <!-- Taxonomy (Categorias & Tags) -->
+            <section id="taxonomy-section" class="admin-section hidden">
+                <div class="mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Categorias & Tags</h2>
+                    <p class="text-gray-600 dark:text-gray-400">Gerencie categorias padronizadas do site e mantenha consistência nas publicações.</p>
+                </div>
+                <div class="grid lg:grid-cols-3 gap-6">
+                    <div class="glass-card p-6 lg:col-span-1">
+                        <h3 class="text-lg font-semibold mb-4">Nova Categoria</h3>
+                        <form id="category-form" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Nome da categoria</label>
+                                <input type="text" id="category-label" class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" placeholder="Ex.: Decretos" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium mb-1">Slug (automático)</label>
+                                <input type="text" id="category-slug" class="w-full px-3 py-2 border rounded-lg dark:bg-gray-700 dark:border-gray-600" placeholder="decretos" disabled>
+                            </div>
+                            <div class="flex justify-end gap-2">
+                                <button type="button" id="reset-category" class="px-4 py-2 rounded-lg border dark:border-gray-600">Limpar</button>
+                                <button type="submit" class="px-4 py-2 rounded-lg bg-blue-600 text-white">Salvar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="glass-card p-6 lg:col-span-2">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-lg font-semibold">Categorias</h3>
+                            <button id="reload-categories" class="px-3 py-2 rounded-lg border dark:border-gray-600">Recarregar</button>
+                        </div>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full text-sm">
+                                <thead>
+                                    <tr class="text-left text-gray-600 dark:text-gray-300">
+                                        <th class="px-3 py-2">Nome</th>
+                                        <th class="px-3 py-2">Slug</th>
+                                        <th class="px-3 py-2 w-28">Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="categories-table-body" class="text-gray-800 dark:text-gray-200"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             <!-- Engagement Section -->
             <section id="engagement-section" class="admin-section hidden">
                 <div class="mb-6">
@@ -415,7 +484,7 @@
                     </div>
                 </div>
                 
-                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="glass-card p-6">
                     <div class="flex flex-col md:flex-row gap-4 mb-6">
                         <select class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200" id="comment-status-filter">
                             <option value="pending">Pendentes</option>
@@ -505,7 +574,7 @@
 
                 <div class="space-y-6">
                     <!-- Filtros -->
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                    <div class="glass-card p-6">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <select class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200" id="role-filter">
                                 <option value="">Todas as Funções</option>
@@ -627,7 +696,7 @@
 
                 <div class="space-y-6">
                     <!-- Filtros -->
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                    <div class="glass-card p-6">
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             <select class="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent dark:bg-gray-700 dark:text-gray-200" id="media-type-filter">
                                 <option value="">Todos os Tipos</option>
@@ -649,7 +718,7 @@
 
                     <!-- Estatísticas -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="glass-card p-6">
                             <div class="flex items-center">
                                 <div class="text-4xl mr-4">🖼️</div>
                                 <div>
@@ -658,7 +727,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="glass-card p-6">
                             <div class="flex items-center">
                                 <div class="text-4xl mr-4">📄</div>
                                 <div>
@@ -667,7 +736,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                <div class="glass-card p-6">
                             <div class="flex items-center">
                                 <div class="text-4xl mr-4">💾</div>
                                 <div>
@@ -717,7 +786,7 @@
                 <div class="space-y-6">
                     <!-- Estatísticas -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                        <div class="glass-card p-6">
                             <div class="flex items-center">
                                 <div class="text-4xl mr-4">📄</div>
                                 <div>
@@ -726,7 +795,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                        <div class="glass-card p-6">
                             <div class="flex items-center">
                                 <div class="text-4xl mr-4">📝</div>
                                 <div>
@@ -735,7 +804,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                        <div class="glass-card p-6">
                             <div class="flex items-center">
                                 <div class="text-4xl mr-4">👁️</div>
                                 <div>
@@ -747,7 +816,7 @@
                     </div>
 
                     <!-- Lista de Páginas -->
-                    <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
+                    <div class="glass-card p-6">
                         <div class="space-y-4">
                             <div class="flex items-center justify-between p-4 border border-gray-200 dark:border-gray-700 rounded-lg hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors">
                                 <div class="flex-1">
@@ -824,120 +893,82 @@
 
             <!-- Settings Section -->
             <section id="settings-section" class="admin-section">
-                <div class="section-header">
-                    <h2 class="section-title">Configurações do Sistema</h2>
-                    <div class="section-actions">
-                        <button class="btn btn-primary" id="save-settings-btn">
-                            💾 Salvar Configurações
-                        </button>
-                        <button class="btn btn-secondary" id="backup-btn">
-                            📦 Backup
-                        </button>
+                <div class="flex items-center justify-between mb-6">
+                    <h2 class="text-2xl font-bold text-gray-900 dark:text-gray-100">Configurações do Sistema</h2>
+                    <div class="flex gap-2">
+                        <button class="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg" id="save-settings-btn">💾 Salvar Configurações</button>
+                        <button class="px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-700" id="backup-btn">📦 Backup</button>
                     </div>
                 </div>
 
-                <div class="settings-tabs">
-                    <div class="tab-buttons">
-                        <button class="tab-btn active" data-tab="general">Geral</button>
-                        <button class="tab-btn" data-tab="appearance">Aparência</button>
-                        <button class="tab-btn" data-tab="notifications">Notificações</button>
-                        <button class="tab-btn" data-tab="security">Segurança</button>
-                        <button class="tab-btn" data-tab="advanced">Avançado</button>
+                <div class="glass-card p-6">
+                    <div class="mb-4 flex flex-wrap gap-2">
+                        <button class="tab-btn active px-4 py-2 rounded-lg bg-blue-600 text-white" data-tab="general">Geral</button>
+                        <button class="tab-btn px-4 py-2 rounded-lg border dark:border-gray-600" data-tab="appearance">Aparência</button>
+                        <button class="tab-btn px-4 py-2 rounded-lg border dark:border-gray-600" data-tab="notifications">Notificações</button>
+                        <button class="tab-btn px-4 py-2 rounded-lg border dark:border-gray-600" data-tab="security">Segurança</button>
+                        <button class="tab-btn px-4 py-2 rounded-lg border dark:border-gray-600" data-tab="advanced">Avançado</button>
                     </div>
 
                     <div class="tab-content active" id="general-tab">
-                        <div class="settings-group">
-                            <h3>Informações Gerais</h3>
-                            <div class="form-group">
-                                <label for="site-title">Título do Site</label>
-                                <input type="text" id="site-title" class="form-input" value="Arquidiocese de Belém do Pará">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label for="site-title" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Título do Site</label>
+                                <input type="text" id="site-title" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-200" value="Arquidiocese de Belém do Pará">
                             </div>
-                            <div class="form-group">
-                                <label for="site-description">Descrição do Site</label>
-                                <textarea id="site-description" class="form-textarea" rows="3">Igreja Católica Apostólica Romana - Arquidiocese de Belém do Pará</textarea>
+                            <div>
+                                <label for="admin-email" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">E-mail do Administrador</label>
+                                <input type="email" id="admin-email" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-200" value="admin@arquidiocesebelem.org.br">
                             </div>
-                            <div class="form-group">
-                                <label for="admin-email">E-mail do Administrador</label>
-                                <input type="email" id="admin-email" class="form-input" value="admin@arquidiocesebelem.org.br">
+                            <div class="md:col-span-2">
+                                <label for="site-description" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Descrição do Site</label>
+                                <textarea id="site-description" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-200" rows="3">Igreja Católica Apostólica Romana - Arquidiocese de Belém do Pará</textarea>
                             </div>
                         </div>
 
-                        <div class="settings-group">
-                            <h3>Configurações de Conteúdo</h3>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" checked> Permitir comentários nos decretos
-                                </label>
+                        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <label class="flex items-center gap-2 text-gray-700 dark:text-gray-300"><input type="checkbox" checked> Permitir comentários nos decretos</label>
+                            <label class="flex items-center gap-2 text-gray-700 dark:text-gray-300"><input type="checkbox" checked> Moderar comentários antes da publicação</label>
+                            <label class="flex items-center gap-2 text-gray-700 dark:text-gray-300"><input type="checkbox" checked> Ativar sistema de newsletter</label>
+                        </div>
+                    </div>
+
+                    <div class="tab-content hidden" id="appearance-tab">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="primary-color">Cor Primária</label>
+                                <input type="color" id="primary-color" value="#2563eb" class="w-16 h-10 rounded border border-gray-300 dark:border-gray-600 bg-transparent">
                             </div>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" checked> Moderar comentários antes da publicação
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" checked> Ativar sistema de newsletter
-                                </label>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2" for="secondary-color">Cor Secundária</label>
+                                <input type="color" id="secondary-color" value="#dc2626" class="w-16 h-10 rounded border border-gray-300 dark:border-gray-600 bg-transparent">
                             </div>
                         </div>
                     </div>
 
-                    <div class="tab-content" id="appearance-tab">
-                        <div class="settings-group">
-                            <h3>Tema e Cores</h3>
-                            <div class="form-group">
-                                <label for="primary-color">Cor Primária</label>
-                                <input type="color" id="primary-color" value="#2563eb">
-                            </div>
-                            <div class="form-group">
-                                <label for="secondary-color">Cor Secundária</label>
-                                <input type="color" id="secondary-color" value="#dc2626">
+                    <div class="tab-content hidden" id="notifications-tab">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <label class="flex items-center gap-2 text-gray-700 dark:text-gray-300"><input type="checkbox" checked> Enviar notificações para novos decretos</label>
+                            <label class="flex items-center gap-2 text-gray-700 dark:text-gray-300"><input type="checkbox"> Notificar sobre novos comentários</label>
+                        </div>
+                    </div>
+
+                    <div class="tab-content hidden" id="security-tab">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <label class="flex items-center gap-2 text-gray-700 dark:text-gray-300"><input type="checkbox" checked> Autenticação de dois fatores obrigatória</label>
+                            <div>
+                                <label for="session-timeout" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Timeout de Sessão (minutos)</label>
+                                <input type="number" id="session-timeout" class="w-40 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-200" value="60">
                             </div>
                         </div>
                     </div>
 
-                    <div class="tab-content" id="notifications-tab">
-                        <div class="settings-group">
-                            <h3>Notificações Push</h3>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" checked> Enviar notificações para novos decretos
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox"> Notificar sobre novos comentários
-                                </label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-content" id="security-tab">
-                        <div class="settings-group">
-                            <h3>Segurança</h3>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox" checked> Autenticação de dois fatores obrigatória
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="session-timeout">Timeout de Sessão (minutos)</label>
-                                <input type="number" id="session-timeout" class="form-input" value="60">
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="tab-content" id="advanced-tab">
-                        <div class="settings-group">
-                            <h3>Configurações Avançadas</h3>
-                            <div class="form-group">
-                                <label>
-                                    <input type="checkbox"> Modo de debug
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label for="cache-duration">Duração do Cache (horas)</label>
-                                <input type="number" id="cache-duration" class="form-input" value="24">
+                    <div class="tab-content hidden" id="advanced-tab">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <label class="flex items-center gap-2 text-gray-700 dark:text-gray-300"><input type="checkbox"> Modo de debug</label>
+                            <div>
+                                <label for="cache-duration" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">Duração do Cache (horas)</label>
+                                <input type="number" id="cache-duration" class="w-40 px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg dark:bg-gray-700 dark:text-gray-200" value="24">
                             </div>
                         </div>
                     </div>
@@ -947,6 +978,52 @@
             <!-- Outras sections serão adicionadas posteriormente -->
         </main>
     </div>
+
+    <!-- Footer (unificado com index) -->
+    <footer id="rodape-principal" class="bg-gray-900 text-white py-12">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="grid md:grid-cols-3 gap-8 mb-8">
+                <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                        <img src="/images/logo-arquidiocese-belem.png" alt="Logo da Arquidiocese" class="w-12 h-12 rounded-full border-2 border-yellow-400 p-1 bg-white object-contain">
+                        <div class="flex flex-col">
+                            <span class="text-lg font-bold">Arquidiocese de</span>
+                            <span class="text-lg font-bold">Belém do Pará</span>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed">Este é um projeto fictício para o jogo Habbo Hotel e não possui qualquer vínculo com a Arquidiocese de Belém da vida real.</p>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold text-yellow-400">Links Úteis</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">Perguntas Frequentes</a></li>
+                        <li><a href="#contato" class="text-gray-400 hover:text-white transition-colors duration-200">Contato</a></li>
+                        <li><a href="#privacy" class="text-gray-400 hover:text-white transition-colors duration-200">Política de Privacidade</a></li>
+                        <li><a href="celebracao_da_palavra.html" class="text-gray-400 hover:text-white transition-colors duration-200">Celebração da Palavra</a></li>
+                    </ul>
+                </div>
+                
+                <div class="space-y-4">
+                    <h4 class="text-lg font-bold text-yellow-400">Contato</h4>
+                    <div class="space-y-2 text-gray-400 text-sm">
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-envelope w-4"></i>
+                            <span>belemdopara.hb@gmail.com</span>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <i class="fas fa-map-marker-alt w-4"></i>
+                            <span>Av. Nazaré, S/N - Nazaré</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 text-center">
+                <p class="text-gray-400 text-sm">&copy; <span id="ano-atual"></span> Arquidiocese de Belém do Pará - Habbo Hotel. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
     
     <!-- Modal para Criar/Editar Usuário -->
     <div id="user-editor-modal" class="modal-overlay" style="display: none;">
@@ -1108,7 +1185,10 @@
                                 <i class="fas fa-list-ol"></i>
                             </button>
                         </div>
-                        <div id="post-content" class="min-h-[300px] p-4 focus:outline-none dark:bg-gray-700 dark:text-gray-200" contenteditable="true" data-placeholder="Digite o conteúdo do decreto aqui..."></div>
+                        <div>
+                            <div id="quill-toolbar" class="mb-2"></div>
+                            <div id="post-content" class="min-h-[300px] bg-white dark:bg-gray-700 dark:text-gray-200"></div>
+                        </div>
                     </div>
                 </div>
                 
@@ -1185,6 +1265,8 @@
     <script src="js/advanced-pwa-controller.js" defer></script>
     <script src="js/pwa-performance-monitor.js" type="module" defer></script>
     <script type="module" src="js/pwa-manager.js" defer></script>
+    <!-- Quill JS (CDN) -->
+    <script src="https://cdn.quilljs.com/1.3.7/quill.min.js" defer></script>
     
     <!-- Engagement Systems -->
     <script type="module" src="js/comment-system.js" defer></script>

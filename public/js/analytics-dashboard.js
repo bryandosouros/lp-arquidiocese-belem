@@ -180,7 +180,7 @@ class AnalyticsDashboard {
         `;
 
         // Insert into admin panel
-        const adminContent = document.querySelector('.admin-content');
+        const adminContent = document.querySelector('main');
         if (adminContent) {
             const dashboardTab = document.createElement('div');
             dashboardTab.className = 'admin-section';

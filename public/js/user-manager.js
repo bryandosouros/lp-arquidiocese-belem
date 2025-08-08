@@ -3,45 +3,30 @@
  * Integração com Firebase Auth e Firestore para gerenciamento de usuários
  */
 
-import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js';
-import { 
-    getAuth, 
-    createUserWithEmailAndPassword, 
+import { app, auth, db } from './firebase-config.js';
+import {
+    createUserWithEmailAndPassword,
     updateProfile,
     sendEmailVerification,
     sendPasswordResetEmail,
     deleteUser,
     updatePassword
 } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-auth.js';
-import { 
-    getFirestore, 
-    collection, 
-    addDoc, 
-    getDocs, 
-    doc, 
-    updateDoc, 
-    deleteDoc, 
-    query, 
-    orderBy, 
-    where, 
+import {
+    collection,
+    addDoc,
+    getDocs,
+    doc,
+    updateDoc,
+    deleteDoc,
+    query,
+    orderBy,
+    where,
     Timestamp,
-    setDoc 
+    setDoc
 } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
 
-// Configuração do Firebase
-const firebaseConfig = {
-    apiKey: "AIzaSyBUuKIfxUXGHIPH2eQBwUggWawexQ3-L5A",
-    authDomain: "belem-hb.firebaseapp.com",
-    projectId: "belem-hb",
-    storageBucket: "belem-hb.firebasestorage.app",
-    messagingSenderId: "669142237239",
-    appId: "1:669142237239:web:9fa0de02efe4da6865ffb2",
-    measurementId: "G-92E26Y6HB1"
-};
-
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
-const db = getFirestore(app);
+// Firebase já inicializado via firebase-config.js
 
 // User Management Class
 class UserManager {
@@ -102,7 +87,26 @@ class UserManager {
 
     async loadUsers() {
         try {
-            // First try to load from Firebase
+            // Leitura condicionada às regras: só permitir se o usuário autenticado puder
+            const current = auth.currentUser;
+            if (!current) throw new Error('Usuário não autenticado');
+
+            // Verificar role do usuário nas regras (coleção roles)
+            let role = 'user';
+            try {
+                const rolesQuery = query(collection(db, 'roles'), where('__name__', '==', current.uid));
+                const rolesSnap = await getDocs(rolesQuery);
+                if (!rolesSnap.empty) {
+                    role = rolesSnap.docs[0].data().role || 'user';
+                }
+            } catch (_) {}
+
+            // Apenas admins/moderators/editors podem listar usuários por regras típicas
+            const allowed = ['superAdmin', 'siteAdmin', 'admin', 'moderator'].includes(role);
+            if (!allowed) {
+                throw new Error('Missing or insufficient permissions.');
+            }
+
             const usersQuery = query(collection(db, 'users'), orderBy('createdAt', 'desc'));
             const querySnapshot = await getDocs(usersQuery);
             
@@ -137,7 +141,7 @@ class UserManager {
             console.log('Users loaded from Firebase:', this.users.length);
         } catch (error) {
             console.error('Error loading users from Firebase:', error);
-            // Only fallback to mock data if Firebase is completely unavailable
+            // Fallback visual sem quebrar UI quando as regras negarem
             this.loadMockUsersAsFallback();
         }
     }

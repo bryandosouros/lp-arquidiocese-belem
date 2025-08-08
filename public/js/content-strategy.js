@@ -2,7 +2,7 @@
 // Multi-Site Content Management and Strategy
 
 import { db } from './firebase-config.js';
-import { collection, doc, addDoc, updateDoc, getDocs, query, where, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+import { collection, doc, addDoc, updateDoc, getDocs, query, where, orderBy, onSnapshot } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
 
 class ContentStrategy {
     constructor() {

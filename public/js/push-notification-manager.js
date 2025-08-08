@@ -2,7 +2,7 @@
 // Sistema avançado de push notifications para a Arquidiocese
 
 import { db } from './firebase-config.js';
-import { collection, addDoc, query, where, getDocs, updateDoc, doc, deleteDoc, Timestamp, orderBy, limit } from 'https://www.gstatic.com/firebasejs/9.15.0/firebase-firestore.js';
+import { collection, addDoc, query, where, getDocs, updateDoc, doc, deleteDoc, Timestamp, orderBy, limit } from 'https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js';
 
 class PushNotificationManager {
     constructor() {
